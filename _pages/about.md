@@ -27,7 +27,7 @@ permalink: /about/
     <div class="col-md-5 text-center">
 
       <img
-        src="{{ '/assets/img/about/main_profile.jpg' | relative_url }}"
+        src="{{ '/assets/img/about/profile_img1.jpg' | relative_url }}"
         alt="Profile photo"
         class="img-fluid rounded mb-2"
         style="max-height: 380px; object-fit: cover;"
@@ -59,7 +59,7 @@ permalink: /about/
     <div class="col-md-5">
 
       <img
-        src="{{ '/assets/img/about/image2.jpg' | relative_url }}"
+        src="{{ '/assets/img/about/quote_img2.jpg' | relative_url }}"
         alt="Second image"
         class="img-fluid rounded mb-4"
         style="max-height: 240px; object-fit: cover; width: 100%;"
@@ -100,16 +100,16 @@ permalink: /about/
   <!-- Gallery row -->
   <div class="row text-center">
     <div class="col-6 col-md-3 mb-3">
-      <img src="{{ '/assets/img/about/volley.jpg' | relative_url }}" class="img-fluid rounded" alt="Volleyball" />
+      <img src="{{ '/assets/img/about/marathon.jpg' | relative_url }}" class="img-fluid rounded" alt="Volleyball" />
     </div>
     <div class="col-6 col-md-3 mb-3">
-      <img src="{{ '/assets/img/about/marathon.jpg' | relative_url }}" class="img-fluid rounded" alt="Marathon" />
+      <img src="{{ '/assets/img/about/marathon_2025.jpg' | relative_url }}" class="img-fluid rounded" alt="Marathon" />
     </div>
     <div class="col-6 col-md-3 mb-3">
-      <img src="{{ '/assets/img/about/rowing.jpg' | relative_url }}" class="img-fluid rounded" alt="Rowing" />
+      <img src="{{ '/assets/img/about/rowing_2024.jpg' | relative_url }}" class="img-fluid rounded" alt="Rowing" />
     </div>
     <div class="col-6 col-md-3 mb-3">
-      <img src="{{ '/assets/img/about/other.jpg' | relative_url }}" class="img-fluid rounded" alt="Other" />
+      <img src="{{ '/assets/img/about/volley_2024.jpg' | relative_url }}" class="img-fluid rounded" alt="Other" />
     </div>
   </div>
 
