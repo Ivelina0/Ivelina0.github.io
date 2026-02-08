@@ -1,53 +1,57 @@
-# al-folio
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[maintainers]: https://img.shields.io/badge/maintainers-4-success.svg 'Number of maintainers'
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+# Academic Portfolio Website
 
-[![deploy](https://github.com/alshedivat/al-folio/actions/workflows/deploy.yml/badge.svg)](https://github.com/alshedivat/al-folio/actions/workflows/deploy.yml)
-[![demo](https://img.shields.io/badge/theme-demo-brightgreen.svg)](https://alshedivat.github.io/al-folio/)
-[![GitHub contributors](https://img.shields.io/github/contributors/alshedivat/al-folio.svg)](https://github.com/alshedivat/al-folio/graphs/contributors/)
-[![Maintainers][maintainers]](#maintainers)
-[![GitHub release](https://img.shields.io/github/v/release/alshedivat/al-folio)](https://github.com/alshedivat/al-folio/releases/latest)
-[![GitHub license](https://img.shields.io/github/license/alshedivat/al-folio?color=blue)](https://github.com/alshedivat/al-folio/blob/master/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/alshedivat/al-folio)](https://github.com/alshedivat/al-folio)
-[![GitHub forks](https://img.shields.io/github/forks/alshedivat/al-folio)](https://github.com/alshedivat/al-folio/fork)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-brightgreen)](https://ivelina0.github.io/)
+[![Jekyll](https://img.shields.io/badge/Jekyll-al--folio-purple)](https://github.com/alshedivat/al-folio)
 
-[![Docker Image Version](https://img.shields.io/docker/v/amirpourmand/al-folio?sort=semver&label=docker%20image&color=blueviolet)](https://hub.docker.com/r/amirpourmand/al-folio)
-[![Docker Image Size](https://img.shields.io/docker/image-size/amirpourmand/al-folio?sort=date&label=docker%20image%20size&color=blueviolet)](https://hub.docker.com/r/amirpourmand/al-folio)
-[![Docker Pulls](https://img.shields.io/docker/pulls/amirpourmand/al-folio?color=blueviolet)](https://hub.docker.com/r/amirpourmand/al-folio)
+A clean, professional academic portfolio website built with Jekyll and the al-folio theme. Designed for researchers, academics, and quantitative professionals.
 
-A simple, clean, and responsive [Jekyll](https://jekyllrb.com/) theme for academics.
-If you like the theme, give it a star!
+## 🌐 Live Site
 
-[![Preview](https://raw.githubusercontent.com/alshedivat/al-folio/master/assets/img/al-folio-preview.png)](https://alshedivat.github.io/al-folio/)
+Visit the site at: [https://ivelina0.github.io/](https://ivelina0.github.io/)
 
-## User community
+## ✨ Features
 
-The vibrant community of **al-folio** users is growing!
-Academics around the world use this theme for their homepages, blogs, lab pages, as well as webpages for courses, workshops, conferences, meetups, and more.
-Check out the community webpages below.
-Feel free to add your own page(s) by sending a PR.
+- **Clean, minimal design** with dark mode support
+- **Purple accent color** for academic/professional styling
+- **Responsive layout** optimized for all devices
+- **GitHub Pages compatible** - easy deployment
+- **Organized pages** for academic portfolio:
+  - Home (index.md)
+  - About
+  - Research
+  - Work Experience
+  - Presentations
+  - Hackathons & Conferences
+  - Blog (external link)
+  - Contact
 
-<table>
-<tr>
-<td>Academics</td>
-<td>
-<a href="https://maruan.alshedivat.com" target="_blank">★</a>
-<a href="https://www.cs.columbia.edu/~chen1ru/" target="_blank">★</a>
-<a href="https://maithraraghu.com" target="_blank">★</a>
-<a href="https://platanios.org" target="_blank">★</a>
-<a href="https://otiliastr.github.io" target="_blank">★</a>
-<a href="https://www.maths.dur.ac.uk/~sxwc62/" target="_blank">★</a>
-<a href="https://jessachandler.com/" target="_blank">★</a>
-<a href="https://mayankm96.github.io/" target="_blank">★</a>
-<a href="https://markdean.info/" target="_blank">★</a>
-<a href="https://kakodkar.github.io/" target="_blank">★</a>
-<a href="https://sahirbhatnagar.com/" target="_blank">★</a>
-<a href="https://spd.gr/" target="_blank">★</a>
-<a href="https://jay-sarkar.github.io/" target="_blank">★</a>
-<a href="https://aborowska.github.io/" target="_blank">★</a>
-<a href="https://aditisgh.github.io/" target="_blank">★</a>
-<a href="https://alexhaydock.co.uk/" target="_blank">★</a>
+## 🚀 Quick Start
+
+### Customize Your Site
+
+1. **Update `_config.yml`** with your personal information:
+   - Name, email, description
+   - Social media links (GitHub, LinkedIn, Google Scholar, etc.)
+   - Site URL
+
+2. **Add your content** to the pages in `_pages/`:
+   - `about.md` - Your biography and background
+   - `research.md` - Research projects and publications
+   - `experience.md` - Work history and positions
+   - `presentations.md` - Conference talks and presentations
+   - `hackathons.md` - Hackathons and competitions
+   - `contact.md` - Contact information
+
+3. **Update homepage** (`index.md`):
+   - Add your professional subtitle
+   - List research interests
+   - Describe current work
+
+4. **Add profile picture**:
+   - Place your photo in `assets/img/`
+   - Update the `image:` field in `index.md` and `_pages/about.md`
+
+### Local Development
 <a href="https://alixkeener.net/" target="_blank">★</a>
 <a href="https://andreea7b.github.io/" target="_blank">★</a>
 <a href="https://rishabhjoshi.github.io/" target="_blank">★</a>
@@ -642,3 +646,123 @@ The theme is available as open source under the terms of the [MIT License](https
 
 Originally, **al-folio** was based on the [\*folio theme](https://github.com/bogoli/-folio) (published by [Lia Bogoev](https://liabogoev.com) and under the MIT license).
 Since then, it got a full re-write of the styles and many additional cool features.
+
+```bash
+# Install Ruby and Bundler if not already installed
+# Then install dependencies
+bundle install
+
+# Run the site locally
+bundle exec jekyll serve
+
+# View at http://localhost:4000
+```
+
+### Deploy to GitHub Pages
+
+This site is configured for automatic deployment via GitHub Pages. Simply push to the main branch, and GitHub will build and deploy your site.
+
+## 📝 Page Structure
+
+All pages are located in `_pages/` as Markdown files:
+
+- `about.md` - Biography, education, skills
+- `research.md` - Research projects, publications, interests
+- `experience.md` - Professional and academic positions
+- `presentations.md` - Conference presentations and talks
+- `hackathons.md` - Hackathons, competitions, conferences attended
+- `blog.md` - External blog link placeholder
+- `contact.md` - Contact information and office hours
+
+Homepage is `index.md` at the root.
+
+## 🎨 Customization
+
+### Theme Colors
+
+The site uses a purple accent color defined in `_sass/_variables.scss`. To change:
+
+```scss
+$purple-color: #B509AC !default;  // Adjust this hex value
+```
+
+### Navigation
+
+Page order in navigation is controlled by the `nav_order` field in each page's front matter:
+
+```yaml
+---
+title: Page Title
+nav: true
+nav_order: 1  # Lower numbers appear first
+---
+```
+
+### Social Links
+
+Update social media links in `_config.yml`:
+
+```yaml
+github_username: your-username
+linkedin_username: your-username
+scholar_userid: your-google-scholar-id
+# etc.
+```
+
+## 📂 Directory Structure
+
+```
+.
+├── _config.yml          # Main configuration file
+├── _pages/              # All site pages
+├── _layouts/            # HTML templates
+├── _includes/           # Reusable HTML components
+├── _sass/               # SCSS stylesheets
+├── assets/              # Images, CSS, JS
+├── _bibliography/       # BibTeX files (optional)
+├── _news/               # News items (optional)
+├── _posts/              # Blog posts (optional)
+├── _projects/           # Project pages (optional)
+└── index.md             # Homepage
+```
+
+## 🔧 Configuration
+
+Key settings in `_config.yml`:
+
+- **Personal info**: name, email, description
+- **URL**: Update to your GitHub Pages URL
+- **Theme settings**: Dark mode, colors, features
+- **Social links**: All major academic/professional networks
+- **Plugins**: Jekyll plugins (GitHub Pages compatible)
+
+## 📦 GitHub Pages Compatibility
+
+This site uses only GitHub Pages-compatible plugins:
+
+- jekyll-email-protect
+- jekyll-feed
+- jekyll-paginate-v2
+- jekyll-sitemap
+- jemoji
+
+## 📖 Resources
+
+- [Jekyll Documentation](https://jekyllrb.com/docs/)
+- [al-folio Theme](https://github.com/alshedivat/al-folio)
+- [GitHub Pages](https://pages.github.com/)
+- [Markdown Guide](https://www.markdownguide.org/)
+
+## 🤝 Contributing
+
+Feel free to customize this template for your own use. This is based on the excellent [al-folio](https://github.com/alshedivat/al-folio) theme.
+
+## 📄 License
+
+This project uses the MIT License. See LICENSE file for details.
+
+The al-folio theme is licensed under MIT License. Copyright (c) 2023 Maruan Al-Shedivat.
+
+---
+
+**Built with** ❤️ **using Jekyll and al-folio theme**
