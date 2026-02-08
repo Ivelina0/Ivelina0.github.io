@@ -29,24 +29,43 @@ I’m a final-year PhD student at **QMUL**, researching deep learning methods fo
 - **Monte Carlo, Fourier pricing, and PDE methods**;
 - **Neural approaches**: PINNs, DeepONets, operator learning.
 
+---
+### Groups I take part of are:
+- [Math4DL](https://maths4dl.ac.uk/)
+- [DERI](https://www.qmul.ac.uk/deri/)
+- [Phi-ML meets Engineering](https://www.turing.ac.uk/events/phi-ml-meets-engineering)
+- [London Mathematical Finance Group](https://www.londonmathfinance.org.uk/)
+- QMUL internal groups: Probability and Applications & Stats & Data Science. 
+
+
+### Leadership:
+- Part of [Piscopia's](https://piscopia.co.uk/queen-mary-university-of-london-committee/) Local Committee.
+- QMUL PhD Rep since Nov 2022.
+- Lead the *Laws, Limits, and Randomness* contribution to the [History of Maths QMUL](https://www.seresearch.qmul.ac.uk/content/pce/ediresources/files/History_of_Maths_QMUL_2025.pdf).
+- Various miscellaneous activities: organise christmas dinners, social sec of rowing, helping organise the QMUL Undergraduate Research Seminars.  
+
+---
 
 ### Beyond the PhD
 I also like to answer random behavioural and economics questions through data-science projects and write about them on my blog.
 
 Sometimes I write **sci-fi stories**, and I might post those too. Who knows.
 
+---
+
 #### Books, learning, and hobbies.
 Beyond the realm of Mathematics textbooks, I like to read non-fiction, econ, politics and behavioural science books. I also love philosophy, sci-fi and classic novels but time seems to be such a scarce resource these days... 
 
-At the moment, my top 5 favourites are: 
-- **Against the Gods**: The Remarkable Story of Risk by Peter L. Bernstein
-- **Thinking, Fast and Slow** by Daniel Kahneman
-- **Seven and a Half Lessons About the Brain** by Lisa Feldman Barrett
-- **The (Mis)Behaviour of Markets** by (the legend) Benoit Mandelbrot and Richard L. Hudson
-- **Notes from Underground** by Fyodor Dostoevsky.
+**My current top 5 favourites:**
+- [**Against the Gods**](https://www.goodreads.com/book/show/128429.Against_the_Gods): The Remarkable Story of Risk by Peter L. Bernstein
+- [**Thinking, Fast and Slow**](https://www.goodreads.com/book/show/11468377-thinking-fast-and-slow?from_search=true&from_srp=true&qid=s4YJFNSE1v&rank=1) by Daniel Kahneman
+- [**Seven and a Half Lessons About the Brain**](https://www.goodreads.com/book/show/48930266-seven-and-a-half-lessons-about-the-brain?from_search=true&from_srp=true&qid=NHBaFWZy7U&rank=1) by Lisa Feldman Barrett
+- [**The (Mis)Behaviour of Markets**](https://www.goodreads.com/book/show/6046141-the-mis-behaviour-of-markets?ref=nav_sb_ss_1_29) by (the legend) Benoit Mandelbrot and Richard L. Hudson
+- [**Notes from Underground**](https://www.goodreads.com/book/show/49455.Notes_from_Underground?from_search=true&from_srp=true&qid=cAbCQNjj2v&rank=2) by Fyodor Dostoevsky.
 
 I also quite enjoy the contrast between the dark, existential focus of Russian classic literature and the class-conscious, conversational tone of English classics. Reading literature feels like immersing myself in the history, culture, and emotional world of the people of that time — something you can never fully find in history books. BUT, as I’m climbing the career ladder and working long hours, reading these books is currently on hold.
 
+---
 
 #### Sports
 I’m a lifelong learner, and that curiosity extends well beyond academics. I genuinely love picking up new sports and physical skills!
@@ -66,5 +85,5 @@ More recently, I’ve been tackling **yoga** and it has quickly become one of my
 
 
 <!-- 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them. 
 -->
