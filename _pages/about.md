@@ -19,8 +19,20 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+Hi you! I’m **Ivelina**, but most people call me **Eve**.  
+I’m a final-year PhD student at **QMUL**, researching deep learning for **high-dimensional option pricing** (not just Black–Scholes all day, promise!).
 
-Put your address / P.O. box / other info right below your picture. You can also disable any these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+### What I have specialised in so far is:
+- **Probability & stochastic processes** (I do prefer the heavenly world of simulated data over messy real-world datasets. But we live in a non-simulation. Or do we?);
+- **Stochastic volatility**: Heston & Wishart models;
+- **Monte Carlo, Fourier pricing, and PDE methods**;
+- **Neural approaches**: PINNs, DeepONets, operator learning.
+
+### Beyond the PhD
+I also answer random behavioural and economics questions through data-science projects  
+(Python / SQL / HPC) and write about them on my blog.
+
+Sometimes I write **sci-fi stories**, and I might post those too. Who knows.
+
 
 Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
