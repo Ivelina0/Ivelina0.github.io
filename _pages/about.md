@@ -82,7 +82,7 @@ While curiosity is what draws me to new sports, many of these pursuits have been
 
 These experiences have shaped how I approach sport (and life): with commitment, discipline, and a genuine enjoyment of long-term progression.
 
-More recently, I’ve been tackling **yoga** and it has quickly become one of my favourite things to do in between work breaks.
+More recently, I’ve been tackling **yoga** and it has quickly become one of my favourite things to do during work breaks.
 
 
 
