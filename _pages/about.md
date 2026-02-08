@@ -33,7 +33,7 @@ permalink: /about/
 
   <div class="col-md-5 text-center">
     <img
-      src="{{ '/assets/img/about/profile_img1.jpg' | relative_url }}"
+      src="{{ '/assets/img/profile_img1.jpg' | relative_url }}"
       alt="Profile photo"
       class="img-fluid rounded mb-2"
       style="max-height: 380px; width: 100%; object-fit: cover;"
