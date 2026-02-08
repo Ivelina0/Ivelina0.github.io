@@ -125,60 +125,102 @@
 
     <!-- Content -->
     <div class="container mt-5">
-      <!-- page.html -->
-        <div class="post">
+      <!-- about.html -->
+      <div class="post">
+        <header class="post-header">
+          <h1 class="post-title">
+           <span class="font-weight-bold">Ivelina</span>  Mladenova
+          </h1>
+          <p class="desc"></p>
+        </header>
 
-          <header class="post-header">
-            <h1 class="post-title">About</h1>
-            <p class="post-description"></p>
-          </header>
+        <article>
+          <div class="profile float-right">
 
-          <article>
-            <div class="container">
+              <figure>
 
-<!-- Top: About + Main Profile -->
-<div class="row align-items-start">
-  <div class="col-md-7">
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/profile_img1-480.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/profile_img1-800.webp"></source>
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/profile_img1-1400.webp"></source>
+    
 
-    <div class="card mb-4">
-      <div class="card-body">
-        <h3 class="card-title mb-3">About me</h3>
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/profile_img1.jpg" class="img-fluid z-depth-1 rounded" width="auto" height="auto" alt="profile_img1.jpg" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
 
-        <p class="mb-3">
-          Hi you! I’m Ivelina, but most people call me Eve. I’m a final-year PhD student at QMUL researching deep learning
-          for high-dimensional option pricing (not just Black–Scholes all day, promise!).
-        </p>
+  </picture>
 
-        <ul class="mb-0">
-          <li>I like Probability &amp; Stochastic Processes. I prefer the heavenly world of simulated data over messy real-world datasets.</li>
-          <li>I love learning about maths through its history: what problems people were trying to solve, and how ideas evolved.</li>
-          <li>My PhD combines stochastic volatility (Heston/Wishart), Monte Carlo, Fourier pricing, PDEs, and neural nets (PINNs/DeepONets).</li>
-          <li>I also answer random behavioural/econ questions with data science projects (Python/SQL/HPC) and write about it on my blog.</li>
-          <li>Sometimes I write sci-fi stories, and I might also post those too. Who knows.</li>
-        </ul>
-      </div>
-    </div>
+</figure>
 
-  </div>
+            <div class="address">
+              <p>PhD Student, Mathematics</p> <p>Queen Mary University of London</p>
 
-  <div class="col-md-5 text-center">
-    <img src="/assets/img/profile_img1.jpg" alt="Profile photo" class="img-fluid rounded mb-2" style="max-height: 380px; width: 100%; object-fit: cover;" loading="lazy">
-    <h4 class="mt-2 mb-0">Ivelina Mladenova</h4>
-  </div>
+            </div>
+          </div>
+
+          <div class="clearfix">
+            <!-- Intro paragraph -->
+<p>Hi you! I’m <strong>Ivelina</strong>, but most people call me <strong>Eve</strong>.<br>
+I’m a final-year PhD student at <strong>QMUL</strong>, researching deep learning for <strong>high-dimensional option pricing</strong>
+(not just Black–Scholes all day, promise!).</p>
+
+<!-- Research interests -->
+<h3 id="what-i-have-specialised-in-so-far-is">What I have specialised in so far is:</h3>
+<ul>
+  <li>
+<strong>Probability &amp; stochastic processes</strong> (I do prefer the heavenly world of simulated data over messy real-world datasets. But we live in a non-simulation. Or do we?);</li>
+  <li>
+<strong>Stochastic volatility</strong>: Heston &amp; Wishart models;</li>
+  <li>
+<strong>Monte Carlo, Fourier pricing, and PDE methods</strong>;</li>
+  <li>
+<strong>Neural approaches</strong>: PINNs, DeepONets, operator learning.</li>
+</ul>
+
+<!-- Non-Research but still technical interests -->
+<h3 id="beyond-the-phd">Beyond the PhD</h3>
+<p>I also answer random behavioural and economics questions through data-science projects<br>
+(Python / SQL / HPC) and write about them on my blog.</p>
+
+<p>Sometimes I write <strong>sci-fi stories</strong>, and I might post those too. Who knows.</p>
+
+<!-- TODO: Replace this other academic details of GROUPS I FOLLOW AND I AM IN -->
+
+<!-- TODO: ADD sport hobbies -->
+
+<!-- TODO: ADD images -->
+
+          </div>
+
+          <!-- News -->
+          
+
+          <!-- Latest posts -->
+          
+
+          <!-- Selected papers -->
+          
+
+          <!-- Social -->
+            <div class="social">
+              <div class="contact-icons">
+                <a href="mailto:%61%68%77%38%36%34@%71%6D%75%6C.%61%63.%75%6B" title="email"><i class="fas fa-envelope"></i></a>
+            <a href="https://github.com/Ivelina0" title="GitHub" rel="external nofollow noopener" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="/feed.xml" title="RSS Feed"><i class="fas fa-rss-square"></i></a>
+            
+
+              </div>
+
+              <div class="contact-note">
+                You can even add a little note about which of these is the best way to reach you.
+
+              </div>
+
+            </div>
+        </article>
+
 </div>
-
-<!-- TODO: Replace this other academic details -->
-  <!-- Middle: Groups + second image -->
-
-
-  <!-- TODO: ADD sport hobbies -->
-
-  <!-- TODO: ADD images -->
-</div>
-
-          </article>
-
-        </div>
 
     </div>
 
