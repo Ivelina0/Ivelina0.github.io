@@ -29,12 +29,11 @@ I’m a final-year PhD student at **QMUL**, researching deep learning methods fo
 - **Monte Carlo, Fourier pricing, and PDE methods**;
 - **Neural approaches**: PINNs, DeepONets, operator learning.
 
-
+<!-- 
 ### Beyond the PhD
 I also like to answer random behavioural and economics questions through data-science projects and write about them on my blog.
 
 Sometimes I write **sci-fi stories**, and I might post those too. Who knows.
-
 
 ### Books, learning, and hobbies
 - Against the Gods
@@ -44,7 +43,5 @@ Sometimes I write **sci-fi stories**, and I might post those too. Who knows.
 - Notes from Underground
 
 
-
-<!-- 
 Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
 -->
