@@ -3,6 +3,8 @@ layout: about
 title: About
 permalink: /about/
 subtitle: Background & Biography
+nav: true
+nav_order: 1
 
 profile:
   align: right
