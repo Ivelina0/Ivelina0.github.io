@@ -22,12 +22,13 @@ Hi you! I’m **Ivelina**, but most people call me **Eve**.
 
 I’m a final-year PhD student at **QMUL**, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. (not just Black–Scholes all day, promise!).
 
+---
 
 ### What I have specialised in so far is:
-- **Probability & Stochastic Processes** (I do prefer the heavenly world of simulated data over messy real-world datasets. But we live in a non-simulation. Or do we?);
-- **Stochastic Volatility**: Heston & Wishart models;
-- **Monte Carlo, Fourier pricing, and PDE methods**;
-- **Neural approaches**: PINNs, DeepONets, operator learning.
+- **Probability & Stochastic Processes**. I prefer the heavenly world of simulated data over messy real-world datasets. But we live in a non-simulation. Or do we?
+- **Stochastic Volatility**: Heston & Wishart models
+- **Monte Carlo, Fourier pricing, and PDE methods**
+- **Neural approaches**: [PINNs](https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125), [DGM](https://arxiv.org/abs/2305.06000), [DeepONets](https://arxiv.org/abs/1910.03193). Basically anything that [Steve Brunton](https://youtu.be/JoFW2uSd3Uo?si=zGf7Pws30vOg64rf) has posted about.
 
 ---
 ### Groups I take part of are:
@@ -68,6 +69,11 @@ I also quite enjoy the contrast between the dark, existential focus of Russian c
 ---
 
 #### Sports
+
+<div class="float-right ml-3 mb-3" style="max-width: 40%;">
+  {% include figure.html path="assets/img/marathon.jpg" class="img-fluid rounded z-depth-1" alt="Marathon, Malta 2025" %}
+</div>
+
 I’m a lifelong learner, and that curiosity extends well beyond academics. I genuinely love picking up new sports and physical skills!
 
 My personal rule is to take on a new sport every one to two years and stick with it long enough to become “not too bad” at it. For me, that means learning the fundamentals properly and building consistency, until my brain doesn't overthink every move my body has to make. 
@@ -81,8 +87,21 @@ More recently, I’ve been tackling **yoga** and it has quickly become one of my
 
 
 
-### A few snapshots
+### More moments
 
+<div class="row">
+  <div class="col-sm-4">
+    {% include figure.html path="marathon_malta_2025.jpg" alt="Marathon, Malta 2025" %}
+  </div>
+  <div class="col-sm-4">
+    {% include figure.html path="rowing_nottingham_2024.jpg" alt="Regatta 2024, Nottingham" %}
+  </div>
+  <div class="col-sm-4">
+    {% include figure.html path="yoga.jpg" alt="Yoga" %}
+  </div>
+</div>
+
+<!--
 <div class="row">
   <div class="col-sm-6">
     {% include figure.html path="assets/img/marathon.jpg" class="img-fluid rounded z-depth-1" alt="Marathon, Malta 2025" %}
@@ -100,7 +119,7 @@ More recently, I’ve been tackling **yoga** and it has quickly become one of my
     {% include figure.html path="assets/img/volley_2024.jpg" class="img-fluid rounded z-depth-1" alt="Volleyball 2024, London" %}
   </div>
 </div>
-
+--> 
 
 <!-- 
 Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them. 
