@@ -91,7 +91,7 @@ More recently, I’ve been tackling **yoga** and it has quickly become one of my
 
 <div class="row">
   <div class="col-sm-4 mb-3">
-    {% include figure.html path="assets/img/marathon.jpg" class="img-fluid rounded z-depth-1" alt="Marathon, Malta 2025" %}
+    {% include figure.html path="assets/img/marathon_2025.jpg" class="img-fluid rounded z-depth-1" alt="Marathon, Malta 2025" %}
   </div>
 
   <div class="col-sm-4 mb-3">
