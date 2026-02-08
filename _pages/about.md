@@ -55,7 +55,7 @@ Sometimes I write **sci-fi stories**, and I might post those too. Who knows.
 ---
 
 #### Books, learning, and hobbies.
-Beyond the realm of Mathematics textbooks, I like to read non-fiction, econ, politics and behavioural science books. I also love philosophy, sci-fi and classic novels but time seems to be such a scarce resource these days... 
+Beyond the realm of Mathematics textbooks, I like to read non-fiction, econ, politics and behavioural science books.  
 
 **My current top 5 favourites:**
 - [**Against the Gods**](https://www.goodreads.com/book/show/128429.Against_the_Gods): The Remarkable Story of Risk by Peter L. Bernstein
@@ -64,7 +64,7 @@ Beyond the realm of Mathematics textbooks, I like to read non-fiction, econ, pol
 - [**The (Mis)Behaviour of Markets**](https://www.goodreads.com/book/show/6046141-the-mis-behaviour-of-markets?ref=nav_sb_ss_1_29) by (the legend) Benoit Mandelbrot and Richard L. Hudson
 - [**Notes from Underground**](https://www.goodreads.com/book/show/49455.Notes_from_Underground?from_search=true&from_srp=true&qid=cAbCQNjj2v&rank=2) by Fyodor Dostoevsky.
 
-I also quite enjoy the contrast between the dark, existential focus of Russian classic literature and the class-conscious, conversational tone of English classics. Reading literature feels like immersing myself in the history, culture, and emotional world of the people of that time — something you can never fully find in history books. 
+I also love philosophy, sci-fi and classic novels. What draws me most is the contrast between the dark, existential focus of Russian classic literature and the class-conscious, conversational tone of English classics. Reading literature feels like immersing myself in the history, culture, and emotional world of the people of that time — something you can never fully find in history books. However, as time has felt like a scarce resource these days, I've put these aon hold for now.
 
 ---
 
