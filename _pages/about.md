@@ -63,7 +63,7 @@ Beyond the realm of Mathematics textbooks, I like to read non-fiction, econ, pol
 - [**The (Mis)Behaviour of Markets**](https://www.goodreads.com/book/show/6046141-the-mis-behaviour-of-markets?ref=nav_sb_ss_1_29) by (the legend) Benoit Mandelbrot and Richard L. Hudson
 - [**Notes from Underground**](https://www.goodreads.com/book/show/49455.Notes_from_Underground?from_search=true&from_srp=true&qid=cAbCQNjj2v&rank=2) by Fyodor Dostoevsky.
 
-I also quite enjoy the contrast between the dark, existential focus of Russian classic literature and the class-conscious, conversational tone of English classics. Reading literature feels like immersing myself in the history, culture, and emotional world of the people of that time — something you can never fully find in history books. BUT, as I’m climbing the career ladder and working long hours, reading these books is currently on hold.
+I also quite enjoy the contrast between the dark, existential focus of Russian classic literature and the class-conscious, conversational tone of English classics. Reading literature feels like immersing myself in the history, culture, and emotional world of the people of that time — something you can never fully find in history books. 
 
 ---
 
