@@ -1,52 +1,44 @@
 ---
-layout: page
+layout: about
 title: About
 permalink: /about/
+
+profile:
+  align: right
+  image: profile_img1.jpg   # put this in assets/img/
+  image_circular: false
+  address: >
+    <p>PhD Student, Mathematics</p>
+    <p>Queen Mary University of London</p>
+
+news: false
+latest_posts: false
+selected_papers: false
+social: true
 ---
 
-<div class="container">
 
-<!-- Top: About + Main Profile -->
-<div class="row align-items-start">
-  <div class="col-md-7">
+<!-- Intro paragraph -->
+Hi you! I’m **Ivelina**, but most people call me **Eve**.  
+I’m a final-year PhD student at **QMUL**, researching deep learning for **high-dimensional option pricing**
+(not just Black–Scholes all day, promise!).
 
-    <div class="card mb-4">
-      <div class="card-body">
-        <h3 class="card-title mb-3">About me</h3>
+<!-- Research interests -->
+### What I have specialised in so far is:
+- **Probability & stochastic processes** (I do prefer the heavenly world of simulated data over messy real-world datasets. But we live in a non-simulation. Or do we?);
+- **Stochastic volatility**: Heston & Wishart models;
+- **Monte Carlo, Fourier pricing, and PDE methods**;
+- **Neural approaches**: PINNs, DeepONets, operator learning.
 
-        <p class="mb-3">
-          Hi you! I’m Ivelina, but most people call me Eve. I’m a final-year PhD student at QMUL researching deep learning
-          for high-dimensional option pricing (not just Black–Scholes all day, promise!).
-        </p>
+<!-- Non-Research but still technical interests -->
+### Beyond the PhD
+I also answer random behavioural and economics questions through data-science projects  
+(Python / SQL / HPC) and write about them on my blog.
 
-        <ul class="mb-0">
-          <li>I like Probability & Stochastic Processes. I prefer the heavenly world of simulated data over messy real-world datasets.</li>
-          <li>I love learning about maths through its history: what problems people were trying to solve, and how ideas evolved.</li>
-          <li>My PhD combines stochastic volatility (Heston/Wishart), Monte Carlo, Fourier pricing, PDEs, and neural nets (PINNs/DeepONets).</li>
-          <li>I also answer random behavioural/econ questions with data science projects (Python/SQL/HPC) and write about it on my blog.</li>
-          <li>Sometimes I write sci-fi stories, and I might also post those too. Who knows.</li>
-        </ul>
-      </div>
-    </div>
+Sometimes I write **sci-fi stories**, and I might post those too. Who knows.
 
-  </div>
+<!-- TODO: Replace this other academic details of GROUPS I FOLLOW AND I AM IN -->
 
-  <div class="col-md-5 text-center">
-    <img
-      src="{{ '/assets/img/profile_img1.jpg' | relative_url }}"
-      alt="Profile photo"
-      class="img-fluid rounded mb-2"
-      style="max-height: 380px; width: 100%; object-fit: cover;"
-      loading="lazy"
-    />
-    <h4 class="mt-2 mb-0">Ivelina Mladenova</h4>
-  </div>
-</div>
+<!-- TODO: ADD sport hobbies -->
 
-<!-- TODO: Replace this other academic details -->
-  <!-- Middle: Groups + second image -->
-
-
-  <!-- TODO: ADD sport hobbies -->
-
-  <!-- TODO: ADD images -->
+<!-- TODO: ADD images -->
