@@ -62,7 +62,7 @@ Beyond the realm of Mathematics textbooks, I like to read non-fiction, econ, pol
 - [**Thinking, Fast and Slow**](https://www.goodreads.com/book/show/11468377-thinking-fast-and-slow?from_search=true&from_srp=true&qid=s4YJFNSE1v&rank=1) by Daniel Kahneman
 - [**Seven and a Half Lessons About the Brain**](https://www.goodreads.com/book/show/48930266-seven-and-a-half-lessons-about-the-brain?from_search=true&from_srp=true&qid=NHBaFWZy7U&rank=1) by Lisa Feldman Barrett
 - [**The (Mis)Behaviour of Markets**](https://www.goodreads.com/book/show/6046141-the-mis-behaviour-of-markets?ref=nav_sb_ss_1_29) by (the legend) Benoit Mandelbrot and Richard L. Hudson
-- [**Notes from Underground**](https://www.goodreads.com/book/show/49455.Notes_from_Underground?from_search=true&from_srp=true&qid=cAbCQNjj2v&rank=2) by Fyodor Dostoevsky.
+- [**Notes from Underground**](https://www.goodreads.com/book/show/49455.Notes_from_Underground?from_search=true&from_srp=true&qid=cAbCQNjj2v&rank=2) by Fyodor Dostoevsky (another legend!).
 
 I also love philosophy, sci-fi and classic novels. What draws me most is the contrast between the dark, existential focus of Russian classic literature and the class-conscious, conversational tone of English classics. Reading literature feels like immersing myself in the history, culture, and emotional world of the people of that time — something you can never fully find in history books. However, as time has felt like a scarce resource these days, I've put these aon hold for now.
 
