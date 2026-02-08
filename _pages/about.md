@@ -101,26 +101,3 @@ More recently, I’ve been tackling **yoga** and it has quickly become one of my
   </div>
 </div>
 
-<!--
-<div class="row">
-  <div class="col-sm-6">
-    {% include figure.html path="assets/img/marathon.jpg" class="img-fluid rounded z-depth-1" alt="Marathon, Malta 2025" %}
-  </div>
-  <div class="col-sm-6">
-    {% include figure.html path="assets/img/marathon_2025.jpg" class="img-fluid rounded z-depth-1" alt="Marathon, Malta 2025" %}
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-6">
-    {% include figure.html path="assets/img/rowing_2024.jpg" class="img-fluid rounded z-depth-1" alt="Regatta 2024, Nottingham " %}
-  </div>
-  <div class="col-sm-6">
-    {% include figure.html path="assets/img/volley_2024.jpg" class="img-fluid rounded z-depth-1" alt="Volleyball 2024, London" %}
-  </div>
-</div>
---> 
-
-<!-- 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them. 
--->
