@@ -64,7 +64,7 @@ Beyond the realm of Mathematics textbooks, I like to read non-fiction, econ, pol
 - [**The (Mis)Behaviour of Markets**](https://www.goodreads.com/book/show/6046141-the-mis-behaviour-of-markets?ref=nav_sb_ss_1_29) by (the legend) Benoit Mandelbrot and Richard L. Hudson
 - [**Notes from Underground**](https://www.goodreads.com/book/show/49455.Notes_from_Underground?from_search=true&from_srp=true&qid=cAbCQNjj2v&rank=2) by Fyodor Dostoevsky (another legend!).
 
-I also love philosophy, sci-fi and classic novels. What draws me most is the contrast between the dark, existential focus of Russian classic literature and the class-conscious, conversational tone of English classics. Reading literature feels like immersing myself in the history, culture, and emotional world of the people of that time — something you can never fully find in history books. However, as time has felt like a scarce resource these days, I've put these aon hold for now.
+I also love philosophy, sci-fi and classic novels. What draws me in the most is the contrast between the dark, existential focus of Russian classic literature and the class-conscious, conversational tone of English classics. Reading literature feels like immersing myself in the history, culture, and emotional world of the people of that time — something you can never fully find in history books. However, as time has felt like a scarce resource these days, I've put these on hold for now.
 
 ---
 
@@ -80,11 +80,11 @@ My personal rule is to take on a new sport every one to two years and stick with
 
 While curiosity is what draws me to new sports, many of these pursuits have also been competitive rather than purely recreational - not because I "have to win", but because I enjoy the challenge. You will never see me sulk after a bad game! 
 
-Over the years, I’ve competed for multiple **volleyball** teams, **rowed** for QMUL — including racing at HORR 2024 (not WeHORR, but HORR), **ran a marathon** in 2025, won first place in regional **high jump** and a **gymnastics** competition in Bulgaria before moving to the UK, and performed as part of a **dance** crew at the Paralympic Games through a youth centre I attended growing up.
+Over the years, I’ve competed for multiple **volleyball** teams, **rowed** for QMUL — including racing at HORR 2024 (not WeHORR, but HORR), **ran a marathon** in 2025, won first place in regional **high jump** and a **gymnastics** competition in Bulgaria before moving to the UK, and performed as part of a **dance** crew at the London Paralympic Games (2012).
 
 These experiences have shaped how I approach life and education: with commitment, discipline, and a genuine enjoyment of long-term progression.
 
-More recently, I’ve been tackling **yoga** and it has quickly become one of my favourite things to do during work breaks.
+More recently, I’ve been tackling **Yoga** and it has quickly become one of my favourite things to do during work breaks.
 
 
 
