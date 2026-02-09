@@ -20,18 +20,18 @@ social: false  # includes social icons at the bottom of the page
 
 Hi you! I’m **Ivelina**, but most people call me **Eve**.  
 
-I’m a final-year PhD student at **QMUL**, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. (not just Black–Scholes all day, promise!).
+I’m a final-year PhD student at **QMUL**, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. I not solving  Black–Scholes all day, promise!.
 
 ---
 
-### What I have specialised in so far is:
+### What I have specialised in:
 - **Probability & Stochastic Processes**. I prefer the heavenly world of simulated data over messy real-world datasets. But we live in a non-simulation. Or do we?
 - **Stochastic Volatility**: Heston & Wishart models
 - **Monte Carlo, Fourier pricing, and PDE methods**
 - **Neural approaches**: [PINNs](https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125), [DGM](https://arxiv.org/abs/2305.06000), [DeepONets](https://arxiv.org/abs/1910.03193). Basically anything that [Steve Brunton](https://youtu.be/JoFW2uSd3Uo?si=zGf7Pws30vOg64rf) has posted about.
 
 ---
-### Groups I take part of are:
+### Groups I take part of:
 - [Math4DL](https://maths4dl.ac.uk/)
 - [DERI](https://www.qmul.ac.uk/deri/)
 - [Phi-ML meets Engineering](https://www.turing.ac.uk/events/phi-ml-meets-engineering)
@@ -43,12 +43,12 @@ I’m a final-year PhD student at **QMUL**, researching deep learning methods fo
 - Part of [Piscopia's](https://piscopia.co.uk/queen-mary-university-of-london-committee/) Local Committee.
 - QMUL PhD Rep since Nov 2022.
 - Lead the *Laws, Limits, and Randomness* contribution to the [History of Maths QMUL](https://www.seresearch.qmul.ac.uk/content/pce/ediresources/files/History_of_Maths_QMUL_2025.pdf).
-- Various miscellaneous activities: organise christmas dinners, social sec of rowing, helping organise the QMUL Undergraduate Research Seminars.  
+- Various miscellaneous activities: organise Christmas dinners, social sec of rowing, helping organise the [QMUL Undergraduate Research Seminars](https://www.qmul.ac.uk/maths/undergraduate/ugresearchseminar/ugresearchseminar).
 
 ---
 
 ### Beyond the PhD
-I also like to answer random behavioural and economics questions through data-science projects and write about them on my blog.
+I also like to ponder random behavioural and economics questions about human decision-making. I then try to answer them through data-science projects and write about them on my blog. 
 
 Sometimes I write **sci-fi stories**, and I might post those too. Who knows.
 
@@ -64,7 +64,7 @@ Beyond the realm of Mathematics textbooks, I like to read non-fiction, econ, pol
 - [**The (Mis)Behaviour of Markets**](https://www.goodreads.com/book/show/6046141-the-mis-behaviour-of-markets?ref=nav_sb_ss_1_29) by (the legend) Benoit Mandelbrot and Richard L. Hudson
 - [**Notes from Underground**](https://www.goodreads.com/book/show/49455.Notes_from_Underground?from_search=true&from_srp=true&qid=cAbCQNjj2v&rank=2) by Fyodor Dostoevsky (another legend!).
 
-I also love philosophy, sci-fi and classic novels. What draws me in the most is the contrast between the dark, existential focus of Russian classic literature and the class-conscious, conversational tone of English classics. Reading literature feels like immersing myself in the history, culture, and emotional world of the people of that time — something you can never fully find in history books. However, as time has felt like a scarce resource these days, I've put these on hold for now.
+I also love philosophy, sci-fi and classic novels. What draws me in the most is the contrast between the dark, existential focus of Russian classic literature and the class-conscious, conversational tone of English classics. Reading literature feels like immersing myself in the history, culture, and emotional world of the people of that time — something you can never fully find in history books. However, as time is a scarce resource, I've put these on hold until we get through the PhD.
 
 ---
 
