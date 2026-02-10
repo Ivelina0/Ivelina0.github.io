@@ -54,7 +54,7 @@ Sometimes I write **sci-fi stories**, and I might post those too. Who knows.
 
 ---
 
-#### Books, learning, and hobbies.
+#### Books.
 Beyond the realm of Mathematics textbooks, I like to read non-fiction, econ, politics and behavioural science books.  
 
 **My current top 5 favourites:**
