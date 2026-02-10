@@ -3,7 +3,7 @@ layout: page
 permalink: /Tutoring/
 title: Tutoring
 description: Teaching Assistant and IT Lab Assistant,
-nav: true
+nav: false
 nav_order: 5
 ---
 
