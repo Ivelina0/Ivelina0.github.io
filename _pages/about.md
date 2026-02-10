@@ -84,7 +84,7 @@ Over the years, I’ve competed for multiple **volleyball** teams, **rowed** for
 
 These experiences have shaped how I approach life and education: with commitment, discipline, and a genuine enjoyment of long-term progression.
 
-More recently, I’ve been tackling **Yoga** and it has quickly become one of my favourite things to do during work breaks.
+More recently, I’ve been tackling **Yoga** and **Wild Thing** has quickly become one of my favourite things to do during work breaks.
 
 
 
