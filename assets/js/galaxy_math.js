@@ -20,11 +20,11 @@
     function createStars() {
       const count = Math.max(130, Math.floor((state.width * state.height) / 9000));
       const shades = [
-        [128, 0, 64],
-        [128, 0, 128],
-        [64, 0, 128],
-        [172, 92, 220],
-        [198, 126, 232],
+        [132, 142, 194],
+        [116, 124, 176],
+        [94, 106, 164],
+        [170, 176, 214],
+        [206, 210, 236],
       ];
       const shapes = ['dot', 'diamond', 'cross', 'ring'];
       stars = Array.from({ length: count }, () => ({
@@ -39,7 +39,6 @@
         pulseSpeed: Math.random() * 0.03 + 0.006,
         color: shades[Math.floor(Math.random() * shades.length)],
         shape: shapes[Math.floor(Math.random() * shapes.length)],
-        glow: Math.random() < 0.22,
       }));
     }
 
@@ -48,13 +47,8 @@
       const pulseScale = 0.7 + 0.45 * Math.sin(s.pulse);
       const radius = Math.max(0.22, s.r * pulseScale);
 
-      if (s.glow) {
-        ctx.shadowBlur = 2.5 + radius * 2;
-        ctx.shadowColor = `rgba(198, 126, 232, ${Math.min(0.35, s.alpha + 0.05)})`;
-      } else {
-        ctx.shadowBlur = 0;
-        ctx.shadowColor = 'transparent';
-      }
+      ctx.shadowBlur = 0;
+      ctx.shadowColor = 'transparent';
 
       if (s.shape === 'diamond') {
         ctx.beginPath();

@@ -869,40 +869,40 @@ body.galaxy-math {
 }
 
 html[data-theme='dark'] body.galaxy-math {
-  --global-theme-color: #ff42d0;
-  --global-hover-color: #ff7ee3;
-  --global-card-bg-color: rgba(25, 15, 34, 0.8);
-  --global-divider-color: rgba(255, 66, 208, 0.22);
+  --global-theme-color: #9ea9dd;
+  --global-hover-color: #c3cbef;
+  --global-card-bg-color: rgba(20, 18, 30, 0.82);
+  --global-divider-color: rgba(146, 154, 196, 0.2);
 
   background:
-    linear-gradient(25deg, transparent 35%, rgba(198, 184, 226, 0.08) 50%, rgba(160, 136, 202, 0.06) 56%, transparent 70%),
-    radial-gradient(130% 80% at 18% 10%, rgba(128, 0, 64, 0.065), transparent 52%),
-    radial-gradient(110% 70% at 78% 16%, rgba(64, 0, 128, 0.06), transparent 56%),
-    radial-gradient(120% 95% at 50% 108%, rgba(128, 0, 128, 0.05), transparent 60%),
-    radial-gradient(70% 14% at 56% 46%, rgba(128, 128, 0, 0.03), transparent 72%),
-    linear-gradient(160deg, rgba(26, 0, 26, 1) 0%, rgba(18, 0, 28, 1) 48%, rgba(16, 0, 24, 1) 100%);
+    linear-gradient(24deg, transparent 34%, rgba(188, 192, 222, 0.07) 49%, rgba(132, 142, 194, 0.055) 57%, transparent 72%),
+    radial-gradient(130% 80% at 18% 10%, rgba(64, 52, 112, 0.07), transparent 52%),
+    radial-gradient(110% 70% at 78% 16%, rgba(48, 66, 128, 0.06), transparent 56%),
+    radial-gradient(120% 95% at 50% 108%, rgba(72, 56, 128, 0.05), transparent 60%),
+    radial-gradient(70% 14% at 56% 46%, rgba(128, 128, 0, 0.025), transparent 72%),
+    linear-gradient(160deg, rgba(16, 12, 26, 1) 0%, rgba(13, 11, 22, 1) 48%, rgba(10, 9, 18, 1) 100%);
 }
 
 html[data-theme='dark'] body.galaxy-math .post-title,
 html[data-theme='dark'] body.galaxy-math h1,
 html[data-theme='dark'] body.galaxy-math h2 {
-  text-shadow: 0 0 10px rgba(255, 66, 208, 0.28);
+  text-shadow: none;
 }
 
 html[data-theme='dark'] body.galaxy-math .card {
-  border: 1px solid rgba(255, 66, 208, 0.16);
-  box-shadow: 0 0 18px rgba(255, 66, 208, 0.12);
+  border: 1px solid rgba(146, 154, 196, 0.16);
+  box-shadow: 0 0 14px rgba(80, 90, 130, 0.1);
   backdrop-filter: blur(2px);
 }
 
 html[data-theme='dark'] body.galaxy-math .navbar,
 html[data-theme='dark'] body.galaxy-math .navbar .dropdown-menu {
-  background-color: rgba(7, 4, 11, 0.78);
-  border-color: rgba(255, 66, 208, 0.18);
+  background-color: rgba(10, 9, 18, 0.8);
+  border-color: rgba(132, 142, 194, 0.16);
 }
 
 html[data-theme='dark'] body.galaxy-math a:hover {
-  text-shadow: 0 0 8px rgba(255, 126, 227, 0.5);
+  text-shadow: none;
 }
 
 #sparkle-overlay {
