@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Beyond the Academia
+title: Beyond Academia
 permalink: /beyond-the-academia/
 description: Interests and activities beyond my PhD research.
 nav: true
