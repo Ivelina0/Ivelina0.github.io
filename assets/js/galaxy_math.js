@@ -18,15 +18,74 @@
     let stars = [];
 
     function createStars() {
-      const count = Math.max(45, Math.floor((state.width * state.height) / 18000));
+      const count = Math.max(130, Math.floor((state.width * state.height) / 8500));
+      const shades = [
+        [255, 66, 208],
+        [255, 92, 222],
+        [255, 126, 227],
+        [215, 92, 255],
+      ];
+      const shapes = ['dot', 'diamond', 'cross', 'ring'];
       stars = Array.from({ length: count }, () => ({
         x: Math.random() * state.width,
         y: Math.random() * state.height,
-        r: Math.random() * 1.5 + 0.35,
-        alpha: Math.random() * 0.5 + 0.2,
-        twinkle: Math.random() * 0.02 + 0.004,
-        drift: (Math.random() - 0.5) * 0.04,
+        r: Math.random() * 1.7 + 0.3,
+        alpha: Math.random() * 0.55 + 0.2,
+        twinkle: Math.random() * 0.03 + 0.006,
+        driftX: (Math.random() - 0.5) * 0.05,
+        driftY: (Math.random() - 0.5) * 0.06,
+        pulse: Math.random() * Math.PI * 2,
+        pulseSpeed: Math.random() * 0.045 + 0.01,
+        color: shades[Math.floor(Math.random() * shades.length)],
+        shape: shapes[Math.floor(Math.random() * shapes.length)],
       }));
+    }
+
+    function drawSparkle(ctx, s) {
+      const [r, g, b] = s.color;
+      const pulseScale = 0.7 + 0.45 * Math.sin(s.pulse);
+      const radius = Math.max(0.22, s.r * pulseScale);
+
+      ctx.shadowBlur = 7 + radius * 5;
+      ctx.shadowColor = `rgba(255, 66, 208, ${Math.min(0.95, s.alpha + 0.15)})`;
+
+      if (s.shape === 'diamond') {
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${s.alpha})`;
+        ctx.moveTo(s.x, s.y - radius);
+        ctx.lineTo(s.x + radius, s.y);
+        ctx.lineTo(s.x, s.y + radius);
+        ctx.lineTo(s.x - radius, s.y);
+        ctx.closePath();
+        ctx.fill();
+        return;
+      }
+
+      if (s.shape === 'cross') {
+        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${s.alpha})`;
+        ctx.lineWidth = Math.max(0.6, radius * 0.55);
+        ctx.beginPath();
+        ctx.moveTo(s.x - radius, s.y);
+        ctx.lineTo(s.x + radius, s.y);
+        ctx.moveTo(s.x, s.y - radius);
+        ctx.lineTo(s.x, s.y + radius);
+        ctx.stroke();
+        return;
+      }
+
+      if (s.shape === 'ring') {
+        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${Math.max(0.15, s.alpha - 0.1)})`;
+        ctx.lineWidth = Math.max(0.6, radius * 0.4);
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, radius, 0, Math.PI * 2);
+        ctx.stroke();
+        return;
+      }
+
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${s.alpha})`;
+      ctx.arc(s.x, s.y, radius, 0, Math.PI * 2);
+      ctx.fill();
     }
 
     function draw() {
@@ -35,18 +94,17 @@
 
       for (const s of stars) {
         s.alpha += s.twinkle * (Math.random() > 0.5 ? 1 : -1);
-        s.alpha = Math.max(0.08, Math.min(0.9, s.alpha));
-        s.y += s.drift;
+        s.alpha = Math.max(0.06, Math.min(0.96, s.alpha));
+        s.pulse += s.pulseSpeed;
+        s.x += s.driftX;
+        s.y += s.driftY;
 
+        if (s.x < -6) s.x = state.width + 6;
+        if (s.x > state.width + 6) s.x = -6;
         if (s.y < -5) s.y = state.height + 5;
         if (s.y > state.height + 5) s.y = -5;
 
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(255, 120, 230, ${s.alpha})`;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = 'rgba(255, 66, 208, 0.8)';
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fill();
+        drawSparkle(ctx, s);
       }
 
       requestAnimationFrame(draw);
@@ -68,9 +126,9 @@
     let state = fitCanvas(canvas);
     const walkers = [];
     const isOverlay = canvas.id === 'brownian-overlay';
-    const nWalkers = isOverlay ? 44 : 26;
+    const nWalkers = isOverlay ? 120 : 26;
     const dt = 1;
-    const sigma = isOverlay ? 1.35 : 1.75;
+    const sigma = isOverlay ? 1.1 : 1.75;
 
     for (let i = 0; i < nWalkers; i++) {
       walkers.push({
@@ -97,21 +155,28 @@
         if (w.y < 0 || w.y > state.height) w.y = Math.max(0, Math.min(state.height, w.y));
 
         w.trail.push({ x: w.x, y: w.y });
-        if (w.trail.length > (isOverlay ? 42 : 34)) w.trail.shift();
+        if (w.trail.length > (isOverlay ? 20 : 34)) w.trail.shift();
 
         for (let i = 1; i < w.trail.length; i++) {
           const p0 = w.trail[i - 1];
           const p1 = w.trail[i];
           const alpha = i / w.trail.length;
-          ctx.strokeStyle = `rgba(${255}, ${70 + w.hueShift}, ${205 + w.hueShift / 2}, ${0.05 + alpha * 0.45})`;
-          ctx.lineWidth = isOverlay ? 1.0 : 1.2;
-          ctx.shadowBlur = isOverlay ? 7 : 9;
+          ctx.strokeStyle = `rgba(${255}, ${70 + w.hueShift}, ${205 + w.hueShift / 2}, ${isOverlay ? 0.03 + alpha * 0.2 : 0.05 + alpha * 0.45})`;
+          ctx.lineWidth = isOverlay ? 0.72 : 1.2;
+          ctx.shadowBlur = isOverlay ? 5 : 9;
           ctx.shadowColor = 'rgba(255, 66, 208, 0.5)';
           ctx.beginPath();
           ctx.moveTo(p0.x, p0.y);
           ctx.lineTo(p1.x, p1.y);
           ctx.stroke();
         }
+
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255, ${85 + w.hueShift * 0.6}, ${220 + w.hueShift * 0.2}, ${isOverlay ? 0.8 : 0.9})`;
+        ctx.shadowBlur = isOverlay ? 8 : 10;
+        ctx.shadowColor = 'rgba(255, 66, 208, 0.7)';
+        ctx.arc(w.x, w.y, isOverlay ? 0.9 : 1.35, 0, Math.PI * 2);
+        ctx.fill();
       });
 
       requestAnimationFrame(step);
@@ -131,8 +196,52 @@
     step();
   }
 
+  function initFloatingBrownianCaption() {
+    const caption = document.getElementById('brownian-floating-caption');
+    if (!caption) return;
+
+    let x = Math.max(20, Math.random() * (window.innerWidth - 280));
+    let y = Math.max(20, Math.random() * (window.innerHeight - 80));
+    let vx = 0.45;
+    let vy = 0.3;
+
+    function tick() {
+      vx += (Math.random() - 0.5) * 0.06;
+      vy += (Math.random() - 0.5) * 0.06;
+
+      vx = Math.max(-1.25, Math.min(1.25, vx));
+      vy = Math.max(-1.05, Math.min(1.05, vy));
+
+      x += vx;
+      y += vy;
+
+      const maxX = Math.max(12, window.innerWidth - caption.offsetWidth - 12);
+      const maxY = Math.max(12, window.innerHeight - caption.offsetHeight - 12);
+
+      if (x < 12 || x > maxX) {
+        vx *= -0.92;
+        x = Math.max(12, Math.min(maxX, x));
+      }
+      if (y < 12 || y > maxY) {
+        vy *= -0.92;
+        y = Math.max(12, Math.min(maxY, y));
+      }
+
+      caption.style.transform = `translate(${x}px, ${y}px)`;
+      requestAnimationFrame(tick);
+    }
+
+    window.addEventListener('resize', () => {
+      x = Math.max(12, Math.min(window.innerWidth - caption.offsetWidth - 12, x));
+      y = Math.max(12, Math.min(window.innerHeight - caption.offsetHeight - 12, y));
+    });
+
+    tick();
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initSparkleOverlay();
     initBrownianLayer();
+    initFloatingBrownianCaption();
   });
 })();

@@ -21,6 +21,9 @@
     {% if page.brownian_background and site.enable_brownian_about %}
     <canvas id="brownian-overlay" aria-hidden="true"></canvas>
     {% endif %}
+    {% if page.brownian_caption_moving and page.brownian_background and site.enable_brownian_about %}
+    <div id="brownian-floating-caption" aria-hidden="true">Brownian motion playground: stochastic paths dancing in magenta.</div>
+    {% endif %}
 
     <!-- Content -->
     <div class="container mt-5">

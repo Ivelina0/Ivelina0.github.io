@@ -6,6 +6,7 @@ description: Interests and activities beyond my PhD research.
 nav: true
 nav_order: 5
 brownian_background: true
+hide_footer: true
 ---
 
 I also like to ponder random behavioural and economics questions about human decision-making. I then try to answer them through data-science projects and write about them on my blog. 
