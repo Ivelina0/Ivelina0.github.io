@@ -13,6 +13,8 @@ magenta_starfield: true
 
 *"We need to understand, in much closer fidelity to reality, how different kinds of prices move, how risk is measured and how money is made and lost. Without that knowledge, we are doomerd to crashes, again and again."* 
 
+---
+
 Use your mouse wheel to zoom, drag to pan, and switch between Mandelbrot/Julia sets.
 
 <div class="fractal-lab">
