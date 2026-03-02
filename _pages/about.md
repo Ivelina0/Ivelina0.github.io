@@ -15,24 +15,26 @@ hide_footer: true
 Hi you! I’m **Ivelina**, but most people call me **Eve**.  
 
 <div class="about-intro-box mt-3 mb-3">
-I’m a final-year PhD student at **QMUL**, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. I not solving  Black–Scholes all day, promise!.
+I’m a final-year PhD student at **QMUL**, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. I am not experimenting with Black–Scholes all day, I promise!.
 </div>
 
 ---
 
-### What I have specialised in:
+### Interested in:
 - **Probability & Stochastic Processes**. I prefer the heavenly world of simulated data over messy real-world datasets. But we live in a non-simulation. Or do we?
 - **Stochastic Volatility**: Heston & Wishart models
 - **Monte Carlo, Fourier pricing, and PDE methods**
 - **Neural approaches**: [PINNs](https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125), [DGM](https://arxiv.org/abs/2305.06000), [DeepONets](https://arxiv.org/abs/1910.03193). Basically anything that [Steve Brunton](https://youtu.be/JoFW2uSd3Uo?si=zGf7Pws30vOg64rf) has posted about.
 
 ---
+<div class="about-groups-box mt-3 mb-3">
 ### Groups I take part of:
 - [Math4DL](https://maths4dl.ac.uk/)
 - [DERI](https://www.qmul.ac.uk/deri/)
 - [Phi-ML meets Engineering](https://www.turing.ac.uk/events/phi-ml-meets-engineering)
 - [London Mathematical Finance Group](https://www.londonmathfinance.org.uk/)
 - QMUL internal groups: Probability and Applications & Stats & Data Science. 
+</div>
 
 
 ### Leadership:
