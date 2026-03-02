@@ -26,14 +26,13 @@
     {% if site.enable_darkmode %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/{{ site.highlight_theme_dark | append: '.css' }}" media="none" id="highlight_theme_dark" />
 
+    {% if site.enable_galaxy_math_theme %}
+    <script>
+      localStorage.setItem('theme', 'dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    </script>
+    {% endif %}
+
     <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/dark_mode.js' | relative_url }}"></script>
-        {% if site.enable_galaxy_math_theme %}
-        <script>
-            document.documentElement.setAttribute('data-theme', 'dark');
-            if (typeof setHighlight === 'function') {
-                setHighlight('dark');
-            }
-        </script>
-        {% endif %}
     {% endif %}
