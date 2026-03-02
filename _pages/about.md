@@ -27,13 +27,15 @@ I’m a final-year PhD student at **QMUL**, researching deep learning methods fo
 - **Neural approaches**: [PINNs](https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125), [DGM](https://arxiv.org/abs/2305.06000), [DeepONets](https://arxiv.org/abs/1910.03193). Basically anything that [Steve Brunton](https://youtu.be/JoFW2uSd3Uo?si=zGf7Pws30vOg64rf) has posted about.
 
 ---
-<div class="about-groups-box mt-3 mb-3" markdown="1">
-### Groups I take part of:
-- [Math4DL](https://maths4dl.ac.uk/)
-- [DERI](https://www.qmul.ac.uk/deri/)
-- [Phi-ML meets Engineering](https://www.turing.ac.uk/events/phi-ml-meets-engineering)
-- [London Mathematical Finance Group](https://www.londonmathfinance.org.uk/)
-- QMUL internal groups: Probability and Applications & Stats & Data Science. 
+<div class="about-groups-box mt-3 mb-3">
+  <p><strong>Groups I take part of:</strong></p>
+  <ul>
+    <li><a href="https://maths4dl.ac.uk/">Math4DL</a></li>
+    <li><a href="https://www.qmul.ac.uk/deri/">DERI</a></li>
+    <li><a href="https://www.turing.ac.uk/events/phi-ml-meets-engineering">Phi-ML meets Engineering</a></li>
+    <li><a href="https://www.londonmathfinance.org.uk/">London Mathematical Finance Group</a></li>
+    <li>QMUL internal groups: Probability and Applications &amp; Stats &amp; Data Science.</li>
+  </ul>
 </div>
 
 
