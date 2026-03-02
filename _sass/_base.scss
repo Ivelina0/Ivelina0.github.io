@@ -1031,3 +1031,23 @@ footer {
   color: var(--global-text-color-light);
   font-size: 0.85rem;
 }
+
+.cv-download-box {
+  border: 1px solid rgba(255, 66, 208, 0.28);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  background: rgba(12, 8, 20, 0.62);
+  box-shadow: 0 0 20px rgba(255, 66, 208, 0.14);
+  color: var(--global-text-color);
+}
+
+.cv-download-link {
+  color: #ff9aea;
+  font-weight: 500;
+}
+
+.cv-download-link:hover {
+  color: #ffc4f2;
+  text-decoration: none;
+  text-shadow: 0 0 9px rgba(255, 90, 225, 0.55);
+}
