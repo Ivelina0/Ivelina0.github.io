@@ -126,16 +126,16 @@
     let state = fitCanvas(canvas);
     const walkers = [];
     const isOverlay = canvas.id === 'brownian-overlay';
-    const nWalkers = isOverlay ? 56 : 22;
+    const nWalkers = isOverlay ? 34 : 16;
     const dt = 1;
-    const sigma = isOverlay ? 0.95 : 1.5;
+    const sigma = isOverlay ? 0.85 : 1.35;
 
     for (let i = 0; i < nWalkers; i++) {
       walkers.push({
         x: state.width * (0.2 + Math.random() * 0.6),
         y: state.height * (0.2 + Math.random() * 0.6),
         trail: [],
-        glow: 0.55 + Math.random() * 0.25,
+        sparklePhase: Math.random() * Math.PI * 2,
       });
     }
 
@@ -145,6 +145,7 @@
       ctx.fillRect(0, 0, state.width, state.height);
 
       walkers.forEach((w) => {
+        const sparkle = 0.72 + 0.28 * Math.sin(performance.now() * 0.002 + w.sparklePhase);
         const dx = sigma * Math.sqrt(dt) * (Math.random() - 0.5) * 2;
         const dy = sigma * Math.sqrt(dt) * (Math.random() - 0.5) * 2;
 
@@ -155,16 +156,16 @@
         if (w.y < 0 || w.y > state.height) w.y = Math.max(0, Math.min(state.height, w.y));
 
         w.trail.push({ x: w.x, y: w.y });
-        if (w.trail.length > (isOverlay ? 16 : 28)) w.trail.shift();
+        if (w.trail.length > (isOverlay ? 12 : 22)) w.trail.shift();
 
         for (let i = 1; i < w.trail.length; i++) {
           const p0 = w.trail[i - 1];
           const p1 = w.trail[i];
           const alpha = i / w.trail.length;
-          ctx.strokeStyle = `rgba(255, 82, 224, ${(isOverlay ? 0.015 + alpha * 0.12 : 0.03 + alpha * 0.3) * w.glow})`;
-          ctx.lineWidth = isOverlay ? 0.6 : 0.95;
-          ctx.shadowBlur = isOverlay ? 3 : 6;
-          ctx.shadowColor = 'rgba(255, 66, 208, 0.35)';
+          ctx.strokeStyle = `rgba(205, 128, 195, ${(isOverlay ? 0.008 + alpha * 0.065 : 0.018 + alpha * 0.16) * sparkle})`;
+          ctx.lineWidth = isOverlay ? 0.42 : 0.72;
+          ctx.shadowBlur = 0;
+          ctx.shadowColor = 'transparent';
           ctx.beginPath();
           ctx.moveTo(p0.x, p0.y);
           ctx.lineTo(p1.x, p1.y);
@@ -172,10 +173,10 @@
         }
 
         ctx.beginPath();
-        ctx.fillStyle = `rgba(255, 112, 236, ${(isOverlay ? 0.45 : 0.65) * w.glow})`;
-        ctx.shadowBlur = isOverlay ? 4 : 7;
-        ctx.shadowColor = 'rgba(255, 78, 220, 0.5)';
-        ctx.arc(w.x, w.y, isOverlay ? 0.7 : 1.05, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(230, 155, 220, ${(isOverlay ? 0.2 : 0.35) * sparkle})`;
+        ctx.shadowBlur = isOverlay ? 1.2 : 2;
+        ctx.shadowColor = 'rgba(245, 165, 235, 0.15)';
+        ctx.arc(w.x, w.y, isOverlay ? 0.56 : 0.9, 0, Math.PI * 2);
         ctx.fill();
       });
 
