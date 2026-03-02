@@ -24,7 +24,7 @@ I’m a final-year PhD student at *QMUL*, researching deep learning methods for 
 - **Probability & Stochastic Processes**. I prefer the heavenly world of simulated data over messy real-world datasets. But we live in a non-simulation. Or do we?
 - **Stochastic Volatility**: Heston & Wishart models
 - **Monte Carlo, Fourier pricing, and PDE methods**
-- **Neural approaches**: [PINNs](https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125), [DGM](https://arxiv.org/abs/2305.06000), [DeepONets](https://arxiv.org/abs/1910.03193). Basically anything that [Steve Brunton](https://youtu.be/JoFW2uSd3Uo?si=zGf7Pws30vOg64rf) has posted about.
+- **Neural approaches**: [PINNs](https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125), [DGM](https://arxiv.org/abs/2305.06000), [DeepONets](https://arxiv.org/abs/1910.03193), [Fourier-DeepONet](https://arxiv.org/abs/2305.17289). Basically anything that [Steve Brunton](https://youtu.be/JoFW2uSd3Uo?si=zGf7Pws30vOg64rf) has posted about.
 
 ---
 <div class="about-groups-box mt-3 mb-3">
