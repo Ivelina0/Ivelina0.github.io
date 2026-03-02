@@ -18,7 +18,7 @@
     let stars = [];
 
     function createStars() {
-      const count = Math.max(130, Math.floor((state.width * state.height) / 8500));
+      const count = Math.max(70, Math.floor((state.width * state.height) / 14000));
       const shades = [
         [255, 66, 208],
         [255, 92, 222],
@@ -29,9 +29,9 @@
       stars = Array.from({ length: count }, () => ({
         x: Math.random() * state.width,
         y: Math.random() * state.height,
-        r: Math.random() * 1.7 + 0.3,
-        alpha: Math.random() * 0.55 + 0.2,
-        twinkle: Math.random() * 0.03 + 0.006,
+        r: Math.random() * 1.35 + 0.25,
+        alpha: Math.random() * 0.35 + 0.08,
+        twinkle: Math.random() * 0.02 + 0.004,
         driftX: (Math.random() - 0.5) * 0.05,
         driftY: (Math.random() - 0.5) * 0.06,
         pulse: Math.random() * Math.PI * 2,
@@ -46,8 +46,8 @@
       const pulseScale = 0.7 + 0.45 * Math.sin(s.pulse);
       const radius = Math.max(0.22, s.r * pulseScale);
 
-      ctx.shadowBlur = 7 + radius * 5;
-      ctx.shadowColor = `rgba(255, 66, 208, ${Math.min(0.95, s.alpha + 0.15)})`;
+      ctx.shadowBlur = 4 + radius * 3;
+      ctx.shadowColor = `rgba(255, 66, 208, ${Math.min(0.5, s.alpha + 0.06)})`;
 
       if (s.shape === 'diamond') {
         ctx.beginPath();
@@ -94,7 +94,7 @@
 
       for (const s of stars) {
         s.alpha += s.twinkle * (Math.random() > 0.5 ? 1 : -1);
-        s.alpha = Math.max(0.06, Math.min(0.96, s.alpha));
+        s.alpha = Math.max(0.03, Math.min(0.48, s.alpha));
         s.pulse += s.pulseSpeed;
         s.x += s.driftX;
         s.y += s.driftY;
@@ -126,22 +126,22 @@
     let state = fitCanvas(canvas);
     const walkers = [];
     const isOverlay = canvas.id === 'brownian-overlay';
-    const nWalkers = isOverlay ? 120 : 26;
+    const nWalkers = isOverlay ? 56 : 22;
     const dt = 1;
-    const sigma = isOverlay ? 1.1 : 1.75;
+    const sigma = isOverlay ? 0.95 : 1.5;
 
     for (let i = 0; i < nWalkers; i++) {
       walkers.push({
         x: state.width * (0.2 + Math.random() * 0.6),
         y: state.height * (0.2 + Math.random() * 0.6),
         trail: [],
-        glow: 0.75 + Math.random() * 0.35,
+        glow: 0.55 + Math.random() * 0.25,
       });
     }
 
     function step() {
       const ctx = state.ctx;
-      ctx.fillStyle = isOverlay ? 'rgba(6, 4, 10, 0.04)' : 'rgba(6, 4, 10, 0.12)';
+      ctx.fillStyle = isOverlay ? 'rgba(4, 3, 8, 0.07)' : 'rgba(6, 4, 10, 0.16)';
       ctx.fillRect(0, 0, state.width, state.height);
 
       walkers.forEach((w) => {
@@ -155,16 +155,16 @@
         if (w.y < 0 || w.y > state.height) w.y = Math.max(0, Math.min(state.height, w.y));
 
         w.trail.push({ x: w.x, y: w.y });
-        if (w.trail.length > (isOverlay ? 20 : 34)) w.trail.shift();
+        if (w.trail.length > (isOverlay ? 16 : 28)) w.trail.shift();
 
         for (let i = 1; i < w.trail.length; i++) {
           const p0 = w.trail[i - 1];
           const p1 = w.trail[i];
           const alpha = i / w.trail.length;
-          ctx.strokeStyle = `rgba(255, 82, 224, ${(isOverlay ? 0.03 + alpha * 0.2 : 0.05 + alpha * 0.45) * w.glow})`;
-          ctx.lineWidth = isOverlay ? 0.72 : 1.2;
-          ctx.shadowBlur = isOverlay ? 5 : 9;
-          ctx.shadowColor = 'rgba(255, 66, 208, 0.5)';
+          ctx.strokeStyle = `rgba(255, 82, 224, ${(isOverlay ? 0.015 + alpha * 0.12 : 0.03 + alpha * 0.3) * w.glow})`;
+          ctx.lineWidth = isOverlay ? 0.6 : 0.95;
+          ctx.shadowBlur = isOverlay ? 3 : 6;
+          ctx.shadowColor = 'rgba(255, 66, 208, 0.35)';
           ctx.beginPath();
           ctx.moveTo(p0.x, p0.y);
           ctx.lineTo(p1.x, p1.y);
@@ -172,10 +172,10 @@
         }
 
         ctx.beginPath();
-        ctx.fillStyle = `rgba(255, 112, 236, ${(isOverlay ? 0.78 : 0.9) * w.glow})`;
-        ctx.shadowBlur = isOverlay ? 8 : 10;
-        ctx.shadowColor = 'rgba(255, 78, 220, 0.85)';
-        ctx.arc(w.x, w.y, isOverlay ? 0.9 : 1.35, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 112, 236, ${(isOverlay ? 0.45 : 0.65) * w.glow})`;
+        ctx.shadowBlur = isOverlay ? 4 : 7;
+        ctx.shadowColor = 'rgba(255, 78, 220, 0.5)';
+        ctx.arc(w.x, w.y, isOverlay ? 0.7 : 1.05, 0, Math.PI * 2);
         ctx.fill();
       });
 
