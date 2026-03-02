@@ -1017,6 +1017,25 @@ footer {
   border-color: var(--global-theme-color);
 }
 
+.fractal-controls button[aria-pressed='true'] {
+  border-color: var(--global-theme-color);
+  box-shadow: 0 0 0 1px rgba(158, 169, 221, 0.35);
+}
+
+.fractal-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3rem;
+  padding: 0.14rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(158, 169, 221, 0.32);
+  background: rgba(20, 26, 44, 0.72);
+  color: #cfd5ef;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+}
+
 #fractal-canvas {
   width: 100%;
   height: 480px;

@@ -6,9 +6,13 @@
   const iterInput = document.getElementById('fractal-iterations');
   const iterValue = document.getElementById('fractal-iterations-value');
   const resetBtn = document.getElementById('fractal-reset');
+  const turboBtn = document.getElementById('fractal-turbo');
+  const statusEl = document.getElementById('fractal-render-status');
 
   const dpr = Math.max(1, window.devicePixelRatio || 1);
   const ctx = canvas.getContext('2d', { alpha: false });
+  const bufferCanvas = document.createElement('canvas');
+  const bufferCtx = bufferCanvas.getContext('2d', { alpha: false });
 
   let width = 0;
   let height = 0;
@@ -21,7 +25,10 @@
     scale: 3.2,
     juliaCx: -0.79,
     juliaCy: 0.15,
+    fastMode: false,
   };
+
+  let hqTimer = null;
 
   let isDragging = false;
   let dragStartX = 0;
@@ -36,14 +43,32 @@
     canvas.width = Math.max(1, Math.floor(width * dpr));
     canvas.height = Math.max(1, Math.floor(height * dpr));
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    render();
+    render(1, false);
   }
 
   function resetView() {
     state.centerX = state.type === 'mandelbrot' ? -0.55 : 0;
     state.centerY = 0;
     state.scale = state.type === 'mandelbrot' ? 3.2 : 3.0;
-    render();
+    render(1, false);
+  }
+
+  function setStatus(text) {
+    if (!statusEl) return;
+    statusEl.textContent = text;
+  }
+
+  function scheduleHQ(delay = 120) {
+    if (hqTimer) clearTimeout(hqTimer);
+    hqTimer = setTimeout(() => {
+      render(1, false);
+    }, delay);
+  }
+
+  function renderInteractive() {
+    const previewScale = state.fastMode ? 0.34 : 0.46;
+    render(previewScale, true);
+    scheduleHQ(state.fastMode ? 80 : 130);
   }
 
   function pixelToComplex(px, py) {
@@ -53,41 +78,70 @@
     return { x, y };
   }
 
+  const fractalPalette = [
+    [0, 128, 128],   // #008080
+    [128, 128, 0],   // #808000
+    [128, 0, 128],   // #800080
+    [230, 0, 230],   // #e600e6
+    [128, 0, 64],    // #800040
+    [64, 0, 128],    // #400080
+    [184, 188, 224], // soft highlight
+  ];
+
+  function lerp(a, b, t) {
+    return a + (b - a) * t;
+  }
+
   function getColor(iter, x, y) {
     if (iter >= state.maxIter) return [5, 3, 10];
 
     const smooth = iter + 1 - Math.log(Math.log(Math.sqrt(x * x + y * y))) / Math.log(2);
     const t = Math.max(0, Math.min(1, smooth / state.maxIter));
+    const mapped = Math.pow(t, 0.85) * (fractalPalette.length - 1);
 
-    const r = Math.floor(20 + 235 * Math.pow(t, 0.75));
-    const g = Math.floor(8 + 90 * Math.pow(t, 1.6));
-    const b = Math.floor(35 + 220 * Math.pow(t, 0.9));
+    const i0 = Math.floor(mapped);
+    const i1 = Math.min(fractalPalette.length - 1, i0 + 1);
+    const f = mapped - i0;
 
-    return [r, g, b];
+    const c0 = fractalPalette[i0];
+    const c1 = fractalPalette[i1];
+
+    return [
+      Math.floor(lerp(c0[0], c1[0], f)),
+      Math.floor(lerp(c0[1], c1[1], f)),
+      Math.floor(lerp(c0[2], c1[2], f)),
+    ];
   }
 
   let renderToken = 0;
 
-  function render() {
+  function render(sampleScale = 1, isPreview = false) {
     renderToken += 1;
     const token = renderToken;
 
-    const image = ctx.createImageData(width, height);
+    const rw = Math.max(1, Math.floor(width * sampleScale));
+    const rh = Math.max(1, Math.floor(height * sampleScale));
+    bufferCanvas.width = rw;
+    bufferCanvas.height = rh;
+
+    const image = bufferCtx.createImageData(rw, rh);
     const data = image.data;
 
     let y = 0;
     const aspect = width / height;
 
+    setStatus(isPreview ? 'Preview' : 'HQ');
+
     function drawChunk() {
       if (token !== renderToken) return;
 
-      const rowsPerFrame = 14;
-      const yEnd = Math.min(height, y + rowsPerFrame);
+      const rowsPerFrame = isPreview ? (state.fastMode ? 56 : 42) : 18;
+      const yEnd = Math.min(rh, y + rowsPerFrame);
 
       for (; y < yEnd; y++) {
-        for (let x = 0; x < width; x++) {
-          const cx = state.centerX + ((x / width) - 0.5) * state.scale * aspect;
-          const cy = state.centerY + ((y / height) - 0.5) * state.scale;
+        for (let x = 0; x < rw; x++) {
+          const cx = state.centerX + ((x / rw) - 0.5) * state.scale * aspect;
+          const cy = state.centerY + ((y / rh) - 0.5) * state.scale;
 
           let zx;
           let zy;
@@ -118,7 +172,7 @@
           }
 
           const [r, g, b] = getColor(iter, zx, zy);
-          const idx = (y * width + x) * 4;
+          const idx = (y * rw + x) * 4;
           data[idx] = r;
           data[idx + 1] = g;
           data[idx + 2] = b;
@@ -126,9 +180,12 @@
         }
       }
 
-      ctx.putImageData(image, 0, 0);
+      bufferCtx.putImageData(image, 0, 0);
+      ctx.imageSmoothingEnabled = !isPreview;
+      ctx.clearRect(0, 0, width, height);
+      ctx.drawImage(bufferCanvas, 0, 0, rw, rh, 0, 0, width, height);
 
-      if (y < height) {
+      if (y < rh) {
         requestAnimationFrame(drawChunk);
       }
     }
@@ -151,7 +208,7 @@
     state.centerX += before.x - after.x;
     state.centerY += before.y - after.y;
 
-    render();
+    renderInteractive();
   }, { passive: false });
 
   canvas.addEventListener('mousedown', (e) => {
@@ -172,11 +229,12 @@
     state.centerX = dragStartCenterX - (dx / width) * state.scale * aspect;
     state.centerY = dragStartCenterY - (dy / height) * state.scale;
 
-    render();
+    renderInteractive();
   });
 
   window.addEventListener('mouseup', () => {
     isDragging = false;
+    scheduleHQ(60);
   });
 
   canvas.addEventListener('click', (e) => {
@@ -185,7 +243,7 @@
     const p = pixelToComplex(e.clientX - rect.left, e.clientY - rect.top);
     state.juliaCx = p.x;
     state.juliaCy = p.y;
-    render();
+    renderInteractive();
   });
 
   typeSelect.addEventListener('change', () => {
@@ -196,8 +254,17 @@
   iterInput.addEventListener('input', () => {
     state.maxIter = Number(iterInput.value);
     iterValue.textContent = String(state.maxIter);
-    render();
+    renderInteractive();
   });
+
+  if (turboBtn) {
+    turboBtn.addEventListener('click', () => {
+      state.fastMode = !state.fastMode;
+      turboBtn.textContent = `Realtime: ${state.fastMode ? 'ON' : 'OFF'}`;
+      turboBtn.setAttribute('aria-pressed', state.fastMode ? 'true' : 'false');
+      renderInteractive();
+    });
+  }
 
   resetBtn.addEventListener('click', resetView);
   window.addEventListener('resize', resize);

@@ -158,10 +158,11 @@
       [0, 128, 128], // #008080
       [128, 128, 0], // #808000
       [128, 0, 128], // #800080
+      [230, 0, 230], // #e600e6
       [128, 0, 64],  // #800040
       [64, 0, 128],  // #400080
     ];
-    const nWalkers = isOverlay ? 148 : 20;
+    const nWalkers = isOverlay ? 444 : 60;
     const nStatic = isOverlay ? 52 : 0;
     const dt = 1;
     const sigma = isOverlay ? 0.9 : 1.35;

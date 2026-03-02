@@ -27,7 +27,9 @@ Use your mouse wheel to zoom, drag to pan, and switch between Mandelbrot/Julia s
     <input id="fractal-iterations" type="range" min="60" max="500" value="180" step="10">
     <span id="fractal-iterations-value">180</span>
 
+    <button id="fractal-turbo" type="button" aria-pressed="false">Realtime: OFF</button>
     <button id="fractal-reset" type="button">Reset view</button>
+    <span id="fractal-render-status" class="fractal-status">HQ</span>
   </div>
 
   <canvas id="fractal-canvas" role="img" aria-label="Interactive fractal simulation"></canvas>
