@@ -5,7 +5,6 @@ permalink: /beyond-the-academia/
 description: Interests and activities beyond my PhD research.
 nav: true
 nav_order: 5
-brownian_background: true
 hide_footer: true
 ---
 

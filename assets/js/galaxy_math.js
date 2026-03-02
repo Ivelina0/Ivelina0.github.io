@@ -135,7 +135,7 @@
         x: state.width * (0.2 + Math.random() * 0.6),
         y: state.height * (0.2 + Math.random() * 0.6),
         trail: [],
-        hueShift: Math.random() * 35,
+        glow: 0.75 + Math.random() * 0.35,
       });
     }
 
@@ -161,7 +161,7 @@
           const p0 = w.trail[i - 1];
           const p1 = w.trail[i];
           const alpha = i / w.trail.length;
-          ctx.strokeStyle = `rgba(${255}, ${70 + w.hueShift}, ${205 + w.hueShift / 2}, ${isOverlay ? 0.03 + alpha * 0.2 : 0.05 + alpha * 0.45})`;
+          ctx.strokeStyle = `rgba(255, 82, 224, ${(isOverlay ? 0.03 + alpha * 0.2 : 0.05 + alpha * 0.45) * w.glow})`;
           ctx.lineWidth = isOverlay ? 0.72 : 1.2;
           ctx.shadowBlur = isOverlay ? 5 : 9;
           ctx.shadowColor = 'rgba(255, 66, 208, 0.5)';
@@ -172,9 +172,9 @@
         }
 
         ctx.beginPath();
-        ctx.fillStyle = `rgba(255, ${85 + w.hueShift * 0.6}, ${220 + w.hueShift * 0.2}, ${isOverlay ? 0.8 : 0.9})`;
+        ctx.fillStyle = `rgba(255, 112, 236, ${(isOverlay ? 0.78 : 0.9) * w.glow})`;
         ctx.shadowBlur = isOverlay ? 8 : 10;
-        ctx.shadowColor = 'rgba(255, 66, 208, 0.7)';
+        ctx.shadowColor = 'rgba(255, 78, 220, 0.85)';
         ctx.arc(w.x, w.y, isOverlay ? 0.9 : 1.35, 0, Math.PI * 2);
         ctx.fill();
       });
