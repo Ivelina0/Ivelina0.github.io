@@ -94,7 +94,7 @@
               {%- endif -%}
               {%- endif -%}
               {% endfor -%}
-              {%- if site.enable_darkmode and not site.enable_galaxy_math_theme %}
+              {%- if site.enable_darkmode and site.enable_galaxy_math_theme != true %}
 
               <!-- Toogle theme mode -->
               <li class="toggle-container">
