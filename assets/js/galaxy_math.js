@@ -61,15 +61,16 @@
     draw();
   }
 
-  function initBrownianHero() {
-    const canvas = document.getElementById('brownian-canvas');
+  function initBrownianLayer() {
+    const canvas = document.getElementById('brownian-overlay') || document.getElementById('brownian-canvas');
     if (!canvas) return;
 
     let state = fitCanvas(canvas);
     const walkers = [];
-    const nWalkers = 26;
+    const isOverlay = canvas.id === 'brownian-overlay';
+    const nWalkers = isOverlay ? 44 : 26;
     const dt = 1;
-    const sigma = 1.75;
+    const sigma = isOverlay ? 1.35 : 1.75;
 
     for (let i = 0; i < nWalkers; i++) {
       walkers.push({
@@ -82,7 +83,7 @@
 
     function step() {
       const ctx = state.ctx;
-      ctx.fillStyle = 'rgba(6, 4, 10, 0.12)';
+      ctx.fillStyle = isOverlay ? 'rgba(6, 4, 10, 0.04)' : 'rgba(6, 4, 10, 0.12)';
       ctx.fillRect(0, 0, state.width, state.height);
 
       walkers.forEach((w) => {
@@ -96,15 +97,15 @@
         if (w.y < 0 || w.y > state.height) w.y = Math.max(0, Math.min(state.height, w.y));
 
         w.trail.push({ x: w.x, y: w.y });
-        if (w.trail.length > 34) w.trail.shift();
+        if (w.trail.length > (isOverlay ? 42 : 34)) w.trail.shift();
 
         for (let i = 1; i < w.trail.length; i++) {
           const p0 = w.trail[i - 1];
           const p1 = w.trail[i];
           const alpha = i / w.trail.length;
           ctx.strokeStyle = `rgba(${255}, ${70 + w.hueShift}, ${205 + w.hueShift / 2}, ${0.05 + alpha * 0.45})`;
-          ctx.lineWidth = 1.2;
-          ctx.shadowBlur = 9;
+          ctx.lineWidth = isOverlay ? 1.0 : 1.2;
+          ctx.shadowBlur = isOverlay ? 7 : 9;
           ctx.shadowColor = 'rgba(255, 66, 208, 0.5)';
           ctx.beginPath();
           ctx.moveTo(p0.x, p0.y);
@@ -132,6 +133,6 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     initSparkleOverlay();
-    initBrownianHero();
+    initBrownianLayer();
   });
 })();

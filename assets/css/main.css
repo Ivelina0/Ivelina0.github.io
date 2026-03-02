@@ -824,6 +824,20 @@ html[data-theme=dark] body.galaxy-math a:hover {
   opacity: 0.85;
 }
 
+#brownian-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+html:not([data-theme=dark]) #brownian-overlay {
+  display: none;
+}
+
 header,
 .container,
 footer {

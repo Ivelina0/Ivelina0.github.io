@@ -42,12 +42,20 @@
 
     <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/dark_mode.js"></script>
+        
+        <script>
+            document.documentElement.setAttribute('data-theme', 'dark');
+            if (typeof setHighlight === 'function') {
+                setHighlight('dark');
+            }
+        </script>
+        
     
 
   </head>
 
   <!-- Body -->
-  <body class="fixed-top-nav  galaxy-math">
+  <body class="fixed-top-nav  galaxy-math brownian-background-page">
 
     <!-- Header -->
     <header>
@@ -90,14 +98,6 @@
               <li class="nav-item ">
                 <a class="nav-link" href="/fractal-lab/">Fractal Lab</a>
               </li>
-
-              <!-- Toogle theme mode -->
-              <li class="toggle-container">
-                <button id="light-toggle" title="Change theme">
-                  <i class="fas fa-moon"></i>
-                  <i class="fas fa-sun"></i>
-                </button>
-              </li>
             </ul>
           </div>
         </div>
@@ -114,6 +114,9 @@
 
     
     <canvas id="sparkle-overlay" aria-hidden="true"></canvas>
+    
+    
+    <canvas id="brownian-overlay" aria-hidden="true"></canvas>
     
 
     <!-- Content -->
@@ -156,11 +159,6 @@
             <p>Hi you! I’m <strong>Ivelina</strong>, but most people call me <strong>Eve</strong>.</p>
 
 <p>I’m a final-year PhD student at <strong>QMUL</strong>, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. I not solving  Black–Scholes all day, promise!.</p>
-
-<div class="brownian-hero mt-4 mb-4">
-  <canvas id="brownian-canvas" role="img" aria-label="Brownian motion simulation"></canvas>
-  <div class="brownian-caption">Brownian motion playground: stochastic paths dancing in magenta.</div>
-</div>
 
 <hr>
 
