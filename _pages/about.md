@@ -15,7 +15,7 @@ hide_footer: true
 Hi you! I’m **Ivelina**, but most people call me **Eve**.  
 
 <div class="about-intro-box mt-3 mb-3">
-I’m a final-year PhD student at **QMUL**, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. I am not experimenting with Black–Scholes all day, I promise!.
+I’m a final-year PhD student at *QMUL*, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. I am not experimenting with Black–Scholes all day, I promise!.
 </div>
 
 ---

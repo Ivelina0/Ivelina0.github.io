@@ -11,7 +11,7 @@ magenta_starfield: true
 
 {% if site.enable_fractal_lab %}
 
-A tiny interactive playground for complex dynamics.
+*"We need to understand, in much closer fidelity to reality, how different kinds of prices move, how risk is measured and how money is made and lost. Without that knowledge, we ar doomerd to crashes, again and again."* 
 
 Use your mouse wheel to zoom, drag to pan, and switch between Mandelbrot/Julia sets.
 
