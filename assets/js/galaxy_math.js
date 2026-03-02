@@ -159,7 +159,7 @@
       staticParticles.push({
         xr: 0.04 + Math.random() * 0.92,
         yr: 0.06 + Math.random() * 0.88,
-        r: 0.55 + Math.random() * 1.2,
+        r: 1.0 + Math.random() * 1.8,
         phase: Math.random() * Math.PI * 2,
         speed: 0.003 + Math.random() * 0.005,
         color: palette[Math.floor(Math.random() * palette.length)],
@@ -175,12 +175,12 @@
         const t = performance.now();
         staticParticles.forEach((p) => {
           const twinkle = 0.45 + 0.55 * Math.sin(t * p.speed + p.phase);
-          const alpha = 0.06 + twinkle * 0.18;
+          const alpha = 0.09 + twinkle * 0.22;
           const [r, g, b] = p.color;
           ctx.beginPath();
           ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
-          ctx.shadowBlur = 1.5;
-          ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.2)`;
+          ctx.shadowBlur = 1.2;
+          ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.16)`;
           ctx.arc(p.xr * state.width, p.yr * state.height, p.r, 0, Math.PI * 2);
           ctx.fill();
         });
@@ -205,8 +205,8 @@
           const p1 = w.trail[i];
           const alpha = i / w.trail.length;
           const [r, g, b] = w.color;
-          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${(isOverlay ? 0.018 + alpha * 0.095 : 0.018 + alpha * 0.16) * sparkle})`;
-          ctx.lineWidth = isOverlay ? 0.68 : 0.72;
+          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${(isOverlay ? 0.025 + alpha * 0.11 : 0.018 + alpha * 0.16) * sparkle})`;
+          ctx.lineWidth = isOverlay ? 0.9 : 0.72;
           ctx.shadowBlur = 0;
           ctx.shadowColor = 'transparent';
           ctx.beginPath();
@@ -217,10 +217,10 @@
 
         ctx.beginPath();
         const [r, g, b] = w.color;
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${(isOverlay ? 0.34 : 0.35) * sparkle})`;
-        ctx.shadowBlur = isOverlay ? 0.8 : 2;
-        ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.12)`;
-        ctx.arc(w.x, w.y, isOverlay ? 1.02 : 0.9, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${(isOverlay ? 0.5 : 0.35) * sparkle})`;
+        ctx.shadowBlur = isOverlay ? 1.0 : 2;
+        ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.15)`;
+        ctx.arc(w.x, w.y, isOverlay ? 1.55 : 0.9, 0, Math.PI * 2);
         ctx.fill();
       });
 
