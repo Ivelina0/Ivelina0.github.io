@@ -36,6 +36,34 @@ Use your mouse wheel to zoom, drag to pan, and switch between Mandelbrot/Julia s
   </p>
 </div>
 
+---
+
+### Mathematical definitions
+
+For both sets, the core iteration is:
+
+$$
+z_{n+1}=z_n^2+c,
+$$
+
+where $z, c \in \mathbb{C}$.
+
+- **Mandelbrot set** ($M$):
+
+  $$
+  M=\left\{c\in\mathbb{C}:\{z_n\}_{n\ge 0}\text{ stays bounded with }z_0=0\right\}.
+  $$
+
+  Reference: [Mandelbrot set (Wikipedia)](https://en.wikipedia.org/wiki/Mandelbrot_set).
+
+- **Julia set** ($J_c$) for a fixed parameter $c$:
+
+  $$
+  J_c=\partial K_c,\qquad K_c=\left\{z\in\mathbb{C}:\{f_c^{\,n}(z)\}_{n\ge 0}\text{ is bounded}\right\},\quad f_c(z)=z^2+c.
+  $$
+
+  Reference: [Julia set (Wikipedia)](https://en.wikipedia.org/wiki/Julia_set).
+
 {% else %}
 
 Fractal Lab is currently disabled in site configuration.
