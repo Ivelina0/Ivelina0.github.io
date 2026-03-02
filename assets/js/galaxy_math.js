@@ -18,27 +18,28 @@
     let stars = [];
 
     function createStars() {
-      const count = Math.max(130, Math.floor((state.width * state.height) / 9000));
+      const count = Math.max(210, Math.floor((state.width * state.height) / 6000));
       const shades = [
-        [132, 142, 194],
-        [116, 124, 176],
-        [94, 106, 164],
-        [170, 176, 214],
-        [206, 210, 236],
+        [148, 138, 196],
+        [122, 126, 186],
+        [100, 108, 168],
+        [184, 188, 224],
+        [226, 230, 248],
       ];
       const shapes = ['dot', 'diamond', 'cross', 'ring'];
       stars = Array.from({ length: count }, () => ({
         x: Math.random() * state.width,
         y: Math.random() * state.height,
-        r: Math.random() * 1.15 + 0.2,
-        alpha: Math.random() * 0.24 + 0.05,
-        twinkle: Math.random() * 0.014 + 0.0025,
-        driftX: (Math.random() - 0.5) * 0.035,
-        driftY: (Math.random() - 0.5) * 0.042,
+        r: Math.random() * 0.95 + 0.12,
+        alpha: Math.random() * 0.26 + 0.08,
+        twinkle: Math.random() * 0.018 + 0.004,
+        driftX: (Math.random() - 0.5) * 0.024,
+        driftY: (Math.random() - 0.5) * 0.03,
         pulse: Math.random() * Math.PI * 2,
-        pulseSpeed: Math.random() * 0.03 + 0.006,
+        pulseSpeed: Math.random() * 0.024 + 0.006,
         color: shades[Math.floor(Math.random() * shades.length)],
         shape: shapes[Math.floor(Math.random() * shapes.length)],
+        glow: Math.random() < 0.16,
       }));
     }
 
@@ -47,8 +48,13 @@
       const pulseScale = 0.7 + 0.45 * Math.sin(s.pulse);
       const radius = Math.max(0.22, s.r * pulseScale);
 
-      ctx.shadowBlur = 0;
-      ctx.shadowColor = 'transparent';
+      if (s.glow) {
+        ctx.shadowBlur = 1.4 + radius * 1.6;
+        ctx.shadowColor = `rgba(210, 214, 242, ${Math.min(0.28, s.alpha + 0.03)})`;
+      } else {
+        ctx.shadowBlur = 0;
+        ctx.shadowColor = 'transparent';
+      }
 
       if (s.shape === 'diamond') {
         ctx.beginPath();
@@ -95,7 +101,7 @@
 
       for (const s of stars) {
         s.alpha += s.twinkle * (Math.random() > 0.5 ? 1 : -1);
-        s.alpha = Math.max(0.025, Math.min(0.34, s.alpha));
+        s.alpha = Math.max(0.05, Math.min(0.42, s.alpha));
         s.pulse += s.pulseSpeed;
         s.x += s.driftX;
         s.y += s.driftY;
