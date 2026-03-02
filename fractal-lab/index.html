@@ -10,10 +10,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>sample-posts | Ivelina  Mladenova</title>
+    <title>Fractal Lab | Ivelina  Mladenova</title>
     <meta name="author" content="Ivelina  Mladenova">
-    <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
-">
+    <meta name="description" content="Interactive Mandelbrot &amp; Julia explorer in Galaxy Math style.">
     <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website">
 
 
@@ -34,7 +33,7 @@
     <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://ivelina0.github.io/blog/category/sample-posts/">
+    <link rel="canonical" href="https://ivelina0.github.io/fractal-lab/">
     
     <!-- Dark Mode -->
     
@@ -73,8 +72,8 @@
               </li>
               
               <!-- Blog -->
-              <li class="nav-item active">
-                <a class="nav-link" href="/blog/">Blog<span class="sr-only">(current)</span></a>
+              <li class="nav-item ">
+                <a class="nav-link" href="/blog/">Blog</a>
               </li>
 
               <!-- Other pages -->
@@ -87,8 +86,8 @@
               <li class="nav-item ">
                 <a class="nav-link" href="/beyond-the-academia/">Beyond the Academia</a>
               </li>
-              <li class="nav-item ">
-                <a class="nav-link" href="/fractal-lab/">Fractal Lab</a>
+              <li class="nav-item active">
+                <a class="nav-link" href="/fractal-lab/">Fractal Lab<span class="sr-only">(current)</span></a>
               </li>
 
               <!-- Toogle theme mode -->
@@ -118,71 +117,46 @@
 
     <!-- Content -->
     <div class="container mt-5">
-      <div class="post">
+      <!-- page.html -->
+        <div class="post">
 
-  <header class="post-header">
-    <h1 class="post-title"> <i class="fas fa-tag fa-sm"></i> sample-posts </h1>
-    <p class="post-description"> an archive of posts in this category </p>
-  </header>
+          <header class="post-header">
+            <h1 class="post-title">Fractal Lab</h1>
+            <p class="post-description">Interactive Mandelbrot &amp; Julia explorer in Galaxy Math style.</p>
+          </header>
 
-  <article>
-    <div class="table-responsive">
-      <table class="table table-sm table-borderless">
-        
-        <tr>
-          <th scope="row">Dec 10, 2022</th>
-          <td>
-              <a class="post-link" href="/blog/2022/giscus-comments/">a post with giscus comments</a>
-          </td>
-        </tr>
-      
-        <tr>
-          <th scope="row">Sep 28, 2020</th>
-          <td>
-              <a class="post-link" href="/blog/2020/github-metadata/">a post with github metadata</a>
-          </td>
-        </tr>
-      
-        <tr>
-          <th scope="row">Oct 20, 2015</th>
-          <td>
-              <a class="post-link" href="/blog/2015/disqus-comments/">a post with disqus comments</a>
-          </td>
-        </tr>
-      
-        <tr>
-          <th scope="row">Oct 20, 2015</th>
-          <td>
-              <a class="post-link" href="/blog/2015/math/">a post with math</a>
-          </td>
-        </tr>
-      
-        <tr>
-          <th scope="row">Jul 15, 2015</th>
-          <td>
-              <a class="post-link" href="/blog/2015/code/">a post with code</a>
-          </td>
-        </tr>
-      
-        <tr>
-          <th scope="row">May 15, 2015</th>
-          <td>
-              <a class="post-link" href="/blog/2015/images/">a post with images</a>
-          </td>
-        </tr>
-      
-        <tr>
-          <th scope="row">Mar 15, 2015</th>
-          <td>
-              <a class="post-link" href="/blog/2015/formatting-and-links/">a post with formatting and links</a>
-          </td>
-        </tr>
-      
-      </table>
-    </div>
-  </article>
+          <article>
+            
+<p>A tiny interactive playground for complex dynamics.</p>
 
+<p>Use your mouse wheel to zoom, drag to pan, and switch between Mandelbrot/Julia sets.</p>
+
+<div class="fractal-lab">
+  <div class="fractal-controls">
+    <label for="fractal-type">Set</label>
+    <select id="fractal-type">
+      <option value="mandelbrot" selected>Mandelbrot</option>
+      <option value="julia">Julia</option>
+    </select>
+
+    <label for="fractal-iterations">Iterations</label>
+    <input id="fractal-iterations" type="range" min="60" max="500" value="180" step="10">
+    <span id="fractal-iterations-value">180</span>
+
+    <button id="fractal-reset" type="button">Reset view</button>
+  </div>
+
+  <canvas id="fractal-canvas" role="img" aria-label="Interactive fractal simulation"></canvas>
+
+  <p class="fractal-help">
+    Tip: in Julia mode, click the canvas to change parameter $c$.
+  </p>
 </div>
+
+
+          </article>
+
+        </div>
 
     </div>
 
@@ -211,7 +185,7 @@ Last updated: March 02, 2026.
   <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
   <script defer src="/assets/js/zoom.js"></script><!-- Load Common JS -->
   <script defer src="/assets/js/common.js"></script>
-  <script defer src="/assets/js/copy_code.js" type="text/javascript"></script><script defer src="/assets/js/galaxy_math.js"></script>
+  <script defer src="/assets/js/copy_code.js" type="text/javascript"></script><script defer src="/assets/js/galaxy_math.js"></script><script defer src="/assets/js/fractal_lab.js"></script>
     
 
     <!-- MathJax -->

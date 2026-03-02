@@ -47,7 +47,7 @@
   </head>
 
   <!-- Body -->
-  <body class="fixed-top-nav ">
+  <body class="fixed-top-nav  galaxy-math">
 
     <!-- Header -->
     <header>
@@ -84,6 +84,12 @@
               <li class="nav-item ">
                 <a class="nav-link" href="/cv/">CV</a>
               </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/beyond-the-academia/">Beyond the Academia</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/fractal-lab/">Fractal Lab</a>
+              </li>
 
               <!-- Toogle theme mode -->
               <li class="toggle-container">
@@ -105,6 +111,10 @@
       </progress>
     </header>
 
+
+    
+    <canvas id="sparkle-overlay" aria-hidden="true"></canvas>
+    
 
     <!-- Content -->
     <div class="container mt-5">
@@ -147,6 +157,11 @@
 
 <p>I’m a final-year PhD student at <strong>QMUL</strong>, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. I not solving  Black–Scholes all day, promise!.</p>
 
+<div class="brownian-hero mt-4 mb-4">
+  <canvas id="brownian-canvas" role="img" aria-label="Brownian motion simulation"></canvas>
+  <div class="brownian-caption">Brownian motion playground: stochastic paths dancing in magenta.</div>
+</div>
+
 <hr>
 
 <h3 id="what-i-have-specialised-in">What I have specialised in:</h3>
@@ -180,128 +195,6 @@
 
 <hr>
 
-<h3 id="beyond-the-phd">Beyond the PhD</h3>
-<p>I also like to ponder random behavioural and economics questions about human decision-making. I then try to answer them through data-science projects and write about them on my blog.</p>
-
-<p>Sometimes I write <strong>sci-fi stories</strong>, and I might post those too. Who knows.</p>
-
-<hr>
-
-<h4 id="books">Books.</h4>
-<p>Beyond the realm of Mathematics textbooks, I like to read non-fiction, econ, politics and behavioural science books.</p>
-
-<p><strong>My current top 5 favourites:</strong></p>
-<ul>
-  <li>
-<a href="https://www.goodreads.com/book/show/128429.Against_the_Gods" rel="external nofollow noopener" target="_blank"><strong>Against the Gods</strong></a>: The Remarkable Story of Risk by Peter L. Bernstein</li>
-  <li>
-<a href="https://www.goodreads.com/book/show/11468377-thinking-fast-and-slow?from_search=true&amp;from_srp=true&amp;qid=s4YJFNSE1v&amp;rank=1" rel="external nofollow noopener" target="_blank"><strong>Thinking, Fast and Slow</strong></a> by Daniel Kahneman</li>
-  <li>
-<a href="https://www.goodreads.com/book/show/48930266-seven-and-a-half-lessons-about-the-brain?from_search=true&amp;from_srp=true&amp;qid=NHBaFWZy7U&amp;rank=1" rel="external nofollow noopener" target="_blank"><strong>Seven and a Half Lessons About the Brain</strong></a> by Lisa Feldman Barrett</li>
-  <li>
-<a href="https://www.goodreads.com/book/show/6046141-the-mis-behaviour-of-markets?ref=nav_sb_ss_1_29" rel="external nofollow noopener" target="_blank"><strong>The (Mis)Behaviour of Markets</strong></a> by (the legend) Benoit Mandelbrot and Richard L. Hudson</li>
-  <li>
-<a href="https://www.goodreads.com/book/show/49455.Notes_from_Underground?from_search=true&amp;from_srp=true&amp;qid=cAbCQNjj2v&amp;rank=2" rel="external nofollow noopener" target="_blank"><strong>Notes from Underground</strong></a> by Fyodor Dostoevsky (another legend!).</li>
-</ul>
-
-<p>I also love philosophy, sci-fi and classic novels. What draws me in the most is the contrast between the dark, existential focus of Russian classic literature and the class-conscious, conversational tone of English classics. Reading literature feels like immersing myself in the history, culture, and emotional world of the people of that time — something you can never fully find in history books. However, as time is a scarce resource, I’ve put these on hold until we get through the PhD.</p>
-
-<hr>
-
-<h4 id="sports">Sports</h4>
-
-<div class="float-right ml-3 mb-3" style="max-width: 40%;">
-  <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/marathon-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/marathon-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/marathon-1400.webp"></source>
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/marathon.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" alt="Marathon, Malta 2025" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
-
-  </picture>
-
-</figure>
-
-</div>
-
-<p>I’m a lifelong learner, and that curiosity extends well beyond academics. I genuinely love picking up new sports and physical skills!</p>
-
-<p>My personal rule is to take on a new sport every one to two years and stick with it long enough to become “not too bad” at it. For me, that means learning the fundamentals properly and building consistency, or until my brain doesn’t overthink every move my body has to make.</p>
-
-<p>While curiosity is what draws me to new sports, many of these pursuits have also been competitive rather than purely recreational - not because I “have to win”, but because I enjoy the challenge. You will never see me sulk after a bad game!</p>
-
-<p>Over the years, I’ve competed for multiple <strong>volleyball</strong> teams, <strong>rowed</strong> for QMUL — including racing at HORR 2024 (not WeHORR, but HORR), <strong>ran a marathon</strong> in 2025, won first place in regional <strong>high jump</strong> and a <strong>gymnastics</strong> competition in Bulgaria before moving to the UK, and performed as part of a <strong>dance</strong> crew at the London Paralympic Games (2012).</p>
-
-<p>These experiences have shaped how I approach life and education: with commitment, discipline, and a genuine enjoyment of long-term progression.</p>
-
-<p>More recently, I’ve been tackling <strong>Yoga</strong> and <strong>Wild Thing</strong> has quickly become one of my favourite things to do during work breaks.</p>
-
-<h3 id="more-moments">More moments</h3>
-
-<div class="row">
-  <div class="col-sm-4 mb-3">
-    <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/marathon_2025-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/marathon_2025-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/marathon_2025-1400.webp"></source>
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/marathon_2025.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" alt="Marathon, Malta 2025" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
-
-  </picture>
-
-</figure>
-
-  </div>
-
-  <div class="col-sm-4 mb-3">
-    <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/rowing_2024-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/rowing_2024-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/rowing_2024-1400.webp"></source>
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/rowing_2024.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" alt="Regatta 2024, Nottingham " onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
-
-  </picture>
-
-</figure>
-
-  </div>
-
-  <div class="col-sm-4 mb-3">
-    <figure>
-
-  <picture>
-    
-    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/volley_2024-480.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/volley_2024-800.webp"></source>
-    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/volley_2024-1400.webp"></source>
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/img/volley_2024.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" alt="Volleyball 2024, London" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
-
-  </picture>
-
-</figure>
-
-  </div>
-</div>
-
 
           </div>
 
@@ -325,7 +218,7 @@
     <footer class="fixed-bottom">
       <div class="container mt-0">
         © Copyright 2026 Ivelina  Mladenova. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="external nofollow noopener">Unsplash</a>.
-Last updated: February 10, 2026.
+Last updated: March 02, 2026.
       </div>
     </footer>
 
@@ -346,8 +239,7 @@ Last updated: February 10, 2026.
   <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
   <script defer src="/assets/js/zoom.js"></script><!-- Load Common JS -->
   <script defer src="/assets/js/common.js"></script>
-  <script defer src="/assets/js/copy_code.js" type="text/javascript"></script>
-
+  <script defer src="/assets/js/copy_code.js" type="text/javascript"></script><script defer src="/assets/js/galaxy_math.js"></script>
     
 
     <!-- MathJax -->
