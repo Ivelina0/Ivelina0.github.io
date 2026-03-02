@@ -167,21 +167,35 @@
     const dt = 1;
     const sigma = isOverlay ? 0.9 : 1.35;
 
+    function randomEdgeBiasedCoordinate(max) {
+      if (Math.random() < 0.36) {
+        const edgeBand = max * 0.12;
+        return Math.random() < 0.5
+          ? Math.random() * edgeBand
+          : max - Math.random() * edgeBand;
+      }
+      return Math.random() * max;
+    }
+
     for (let i = 0; i < nWalkers; i++) {
       const color = palette[Math.floor(Math.random() * palette.length)];
       walkers.push({
-        x: state.width * (0.2 + Math.random() * 0.6),
-        y: state.height * (0.2 + Math.random() * 0.6),
+        x: randomEdgeBiasedCoordinate(state.width),
+        y: randomEdgeBiasedCoordinate(state.height),
         trail: [],
         sparklePhase: Math.random() * Math.PI * 2,
+        speed: 0.55 + Math.random() * 1.95,
+        size: 0.7 + Math.random() * 1.65,
+        trailMax: isOverlay ? (7 + Math.floor(Math.random() * 16)) : (12 + Math.floor(Math.random() * 16)),
+        alphaBoost: 0.72 + Math.random() * 0.7,
         color,
       });
     }
 
     for (let i = 0; i < nStatic; i++) {
       staticParticles.push({
-        xr: 0.04 + Math.random() * 0.92,
-        yr: 0.06 + Math.random() * 0.88,
+        xr: Math.random(),
+        yr: Math.random(),
         r: 1.0 + Math.random() * 1.8,
         phase: Math.random() * Math.PI * 2,
         speed: 0.003 + Math.random() * 0.005,
@@ -211,25 +225,39 @@
 
       walkers.forEach((w) => {
         const sparkle = 0.72 + 0.28 * Math.sin(performance.now() * 0.002 + w.sparklePhase);
-        const dx = sigma * Math.sqrt(dt) * (Math.random() - 0.5) * 2;
-        const dy = sigma * Math.sqrt(dt) * (Math.random() - 0.5) * 2;
+        const dx = sigma * w.speed * Math.sqrt(dt) * (Math.random() - 0.5) * 2;
+        const dy = sigma * w.speed * Math.sqrt(dt) * (Math.random() - 0.5) * 2;
 
         w.x += dx;
         w.y += dy;
 
-        if (w.x < 0 || w.x > state.width) w.x = Math.max(0, Math.min(state.width, w.x));
-        if (w.y < 0 || w.y > state.height) w.y = Math.max(0, Math.min(state.height, w.y));
+        if (w.x < -2) {
+          w.x = state.width + 2;
+          w.trail = [];
+        }
+        if (w.x > state.width + 2) {
+          w.x = -2;
+          w.trail = [];
+        }
+        if (w.y < -2) {
+          w.y = state.height + 2;
+          w.trail = [];
+        }
+        if (w.y > state.height + 2) {
+          w.y = -2;
+          w.trail = [];
+        }
 
         w.trail.push({ x: w.x, y: w.y });
-        if (w.trail.length > (isOverlay ? 12 : 22)) w.trail.shift();
+        if (w.trail.length > w.trailMax) w.trail.shift();
 
         for (let i = 1; i < w.trail.length; i++) {
           const p0 = w.trail[i - 1];
           const p1 = w.trail[i];
           const alpha = i / w.trail.length;
           const [r, g, b] = w.color;
-          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${(isOverlay ? 0.025 + alpha * 0.11 : 0.018 + alpha * 0.16) * sparkle})`;
-          ctx.lineWidth = isOverlay ? 0.9 : 0.72;
+          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${(isOverlay ? 0.025 + alpha * 0.11 : 0.018 + alpha * 0.16) * sparkle * w.alphaBoost})`;
+          ctx.lineWidth = (isOverlay ? 0.9 : 0.72) * w.size;
           ctx.shadowBlur = 0;
           ctx.shadowColor = 'transparent';
           ctx.beginPath();
@@ -240,10 +268,10 @@
 
         ctx.beginPath();
         const [r, g, b] = w.color;
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${(isOverlay ? 0.5 : 0.35) * sparkle})`;
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${(isOverlay ? 0.5 : 0.35) * sparkle * w.alphaBoost})`;
         ctx.shadowBlur = isOverlay ? 1.0 : 2;
         ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.15)`;
-        ctx.arc(w.x, w.y, isOverlay ? 1.55 : 0.9, 0, Math.PI * 2);
+        ctx.arc(w.x, w.y, (isOverlay ? 1.55 : 0.9) * w.size, 0, Math.PI * 2);
         ctx.fill();
       });
 
@@ -253,8 +281,8 @@
     window.addEventListener('resize', () => {
       state = fitCanvas(canvas);
       walkers.forEach((w) => {
-        w.x = state.width * (0.2 + Math.random() * 0.6);
-        w.y = state.height * (0.2 + Math.random() * 0.6);
+        w.x = randomEdgeBiasedCoordinate(state.width);
+        w.y = randomEdgeBiasedCoordinate(state.height);
         w.trail = [];
       });
       state.ctx.clearRect(0, 0, state.width, state.height);

@@ -35,7 +35,7 @@ Use your mouse wheel to zoom, drag to pan, and switch between Mandelbrot/Julia s
   <canvas id="fractal-canvas" role="img" aria-label="Interactive fractal simulation"></canvas>
 
   <p class="fractal-help">
-    Tip: in Julia mode, click the canvas to change parameter $c$.
+    Tip: in Julia mode, click the canvas to change parameter \(c\).
   </p>
 </div>
 
@@ -49,9 +49,9 @@ $$
 z_{n+1}=z_n^2+c,
 $$
 
-where $z, c \in \mathbb{C}$.
+where \(z, c \in \mathbb{C}\).
 
-- **Mandelbrot set** ($M$):
+- **Mandelbrot set** (\(M\)):
 
   $$
   M=\left\{c\in\mathbb{C}:\{z_n\}_{n\ge 0}\text{ stays bounded with }z_0=0\right\}.
@@ -59,7 +59,7 @@ where $z, c \in \mathbb{C}$.
 
   Reference: [Mandelbrot set (Wikipedia)](https://en.wikipedia.org/wiki/Mandelbrot_set).
 
-- **Julia set** ($J_c$) for a fixed parameter $c$:
+- **Julia set** (\(J_c\)) for a fixed parameter \(c\):
 
   $$
   J_c=\partial K_c,\qquad K_c=\left\{z\in\mathbb{C}:\{f_c^{\,n}(z)\}_{n\ge 0}\text{ is bounded}\right\},\quad f_c(z)=z^2+c.
