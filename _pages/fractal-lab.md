@@ -6,6 +6,7 @@ description: Interactive Mandelbrot & Julia explorer in Galaxy Math style.
 nav: true
 nav_order: 6
 fractal_lab: true
+magenta_starfield: true
 ---
 
 {% if site.enable_fractal_lab %}
