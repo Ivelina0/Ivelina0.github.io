@@ -139,7 +139,7 @@
       [128, 0, 64],  // #800040
       [64, 0, 128],  // #400080
     ];
-    const nWalkers = isOverlay ? 74 : 20;
+    const nWalkers = isOverlay ? 148 : 20;
     const nStatic = isOverlay ? 52 : 0;
     const dt = 1;
     const sigma = isOverlay ? 0.9 : 1.35;
