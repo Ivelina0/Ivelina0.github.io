@@ -28,4 +28,12 @@
 
     <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/dark_mode.js' | relative_url }}"></script>
+        {% if page.brownian_background and site.enable_brownian_about %}
+        <script>
+            document.documentElement.setAttribute('data-theme', 'dark');
+            if (typeof setHighlight === 'function') {
+                setHighlight('dark');
+            }
+        </script>
+        {% endif %}
     {% endif %}

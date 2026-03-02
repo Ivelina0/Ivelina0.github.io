@@ -10,13 +10,16 @@
   </head>
 
   <!-- Body -->
-  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %} {% if site.enable_galaxy_math_theme %}galaxy-math{% endif %}">
+  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %} {% if site.enable_galaxy_math_theme %}galaxy-math{% endif %} {% if page.brownian_background and site.enable_brownian_about %}brownian-background-page{% endif %}">
 
     <!-- Header -->
     {%- include header.html %}
 
     {% if site.enable_sparkle_overlay %}
     <canvas id="sparkle-overlay" aria-hidden="true"></canvas>
+    {% endif %}
+    {% if page.brownian_background and site.enable_brownian_about %}
+    <canvas id="brownian-overlay" aria-hidden="true"></canvas>
     {% endif %}
 
     <!-- Content -->

@@ -367,7 +367,7 @@ enable_progressbar:         true   # enables a horizontal progress bar linked to
 # Custom visual mode (Galaxy Math)
 enable_galaxy_math_theme:   true   # enables magenta-glow dark styling
 enable_sparkle_overlay:     true   # enables full-page sparkle animation overlay
-enable_brownian_about:      true   # enables Brownian motion animation on the about page
+enable_brownian_about:      true   # enables Brownian motion animation where brownian_background: true is set
 enable_fractal_lab:         true   # enables interactive Mandelbrot/Julia fractal lab page
 
 # -----------------------------------------------------------------------------

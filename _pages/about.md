@@ -16,18 +16,12 @@ news: false  # includes a list of news items
 latest_posts: false  # includes a list of the newest posts
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false  # includes social icons at the bottom of the page
+brownian_background: true
 ---
 
 Hi you! I’m **Ivelina**, but most people call me **Eve**.  
 
 I’m a final-year PhD student at **QMUL**, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. I not solving  Black–Scholes all day, promise!.
-
-{% if site.enable_brownian_about %}
-<div class="brownian-hero mt-4 mb-4">
-  <canvas id="brownian-canvas" role="img" aria-label="Brownian motion simulation"></canvas>
-  <div class="brownian-caption">Brownian motion playground: stochastic paths dancing in magenta.</div>
-</div>
-{% endif %}
 
 ---
 
