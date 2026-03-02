@@ -132,17 +132,37 @@
 
     let state = fitCanvas(canvas);
     const walkers = [];
+    const staticParticles = [];
     const isOverlay = canvas.id === 'brownian-overlay';
-    const nWalkers = isOverlay ? 34 : 16;
+    const palette = [
+      [128, 0, 128], // #800080
+      [128, 0, 64],  // #800040
+      [64, 0, 128],  // #400080
+    ];
+    const nWalkers = isOverlay ? 74 : 20;
+    const nStatic = isOverlay ? 52 : 0;
     const dt = 1;
-    const sigma = isOverlay ? 0.85 : 1.35;
+    const sigma = isOverlay ? 0.9 : 1.35;
 
     for (let i = 0; i < nWalkers; i++) {
+      const color = palette[Math.floor(Math.random() * palette.length)];
       walkers.push({
         x: state.width * (0.2 + Math.random() * 0.6),
         y: state.height * (0.2 + Math.random() * 0.6),
         trail: [],
         sparklePhase: Math.random() * Math.PI * 2,
+        color,
+      });
+    }
+
+    for (let i = 0; i < nStatic; i++) {
+      staticParticles.push({
+        xr: 0.04 + Math.random() * 0.92,
+        yr: 0.06 + Math.random() * 0.88,
+        r: 0.55 + Math.random() * 1.2,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.003 + Math.random() * 0.005,
+        color: palette[Math.floor(Math.random() * palette.length)],
       });
     }
 
@@ -150,6 +170,21 @@
       const ctx = state.ctx;
       ctx.fillStyle = isOverlay ? 'rgba(4, 3, 8, 0.07)' : 'rgba(6, 4, 10, 0.16)';
       ctx.fillRect(0, 0, state.width, state.height);
+
+      if (isOverlay) {
+        const t = performance.now();
+        staticParticles.forEach((p) => {
+          const twinkle = 0.45 + 0.55 * Math.sin(t * p.speed + p.phase);
+          const alpha = 0.06 + twinkle * 0.18;
+          const [r, g, b] = p.color;
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+          ctx.shadowBlur = 1.5;
+          ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.2)`;
+          ctx.arc(p.xr * state.width, p.yr * state.height, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
 
       walkers.forEach((w) => {
         const sparkle = 0.72 + 0.28 * Math.sin(performance.now() * 0.002 + w.sparklePhase);
@@ -169,8 +204,9 @@
           const p0 = w.trail[i - 1];
           const p1 = w.trail[i];
           const alpha = i / w.trail.length;
-          ctx.strokeStyle = `rgba(205, 128, 195, ${(isOverlay ? 0.008 + alpha * 0.065 : 0.018 + alpha * 0.16) * sparkle})`;
-          ctx.lineWidth = isOverlay ? 0.42 : 0.72;
+          const [r, g, b] = w.color;
+          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${(isOverlay ? 0.018 + alpha * 0.095 : 0.018 + alpha * 0.16) * sparkle})`;
+          ctx.lineWidth = isOverlay ? 0.68 : 0.72;
           ctx.shadowBlur = 0;
           ctx.shadowColor = 'transparent';
           ctx.beginPath();
@@ -180,10 +216,11 @@
         }
 
         ctx.beginPath();
-        ctx.fillStyle = `rgba(230, 155, 220, ${(isOverlay ? 0.2 : 0.35) * sparkle})`;
-        ctx.shadowBlur = isOverlay ? 1.2 : 2;
-        ctx.shadowColor = 'rgba(245, 165, 235, 0.15)';
-        ctx.arc(w.x, w.y, isOverlay ? 0.56 : 0.9, 0, Math.PI * 2);
+        const [r, g, b] = w.color;
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${(isOverlay ? 0.34 : 0.35) * sparkle})`;
+        ctx.shadowBlur = isOverlay ? 0.8 : 2;
+        ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.12)`;
+        ctx.arc(w.x, w.y, isOverlay ? 1.02 : 0.9, 0, Math.PI * 2);
         ctx.fill();
       });
 
