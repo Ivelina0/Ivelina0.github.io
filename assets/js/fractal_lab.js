@@ -454,25 +454,19 @@ function initMandelbrot() {
     dragCenterY: 0,
   };
 
-  function render() {
-    startProgressiveEscapeRender(canvas, state, "mandelbrot", {
-      passes: [4, 2, 1],
-      iterScale: 1,
-      budget: 22000,
-    });
-  }
-
   function renderPreview() {
-    startProgressiveEscapeRender(canvas, state, "mandelbrot", {
-      passes: [10, 5],
-      iterScale: 0.5,
-      budget: 15000,
+    renderEscapePreview(canvas, state, "mandelbrot", {
+      previewScale: 0.46,
+      iterScale: 0.52,
     });
   }
 
-  const scheduleRender = createRenderScheduler(render);
+  function renderHQ() {
+    renderEscapeHQ(canvas, state, "mandelbrot");
+  }
+
+  const scheduleRender = createRenderScheduler(renderHQ);
   const schedulePreview = createRenderScheduler(renderPreview);
-  const debouncedRender = debounce(scheduleRender, 110);
   let hqTimer = 0;
   let animRaf = 0;
 
@@ -549,6 +543,7 @@ function initMandelbrot() {
     state.centerX = -0.55;
     state.centerY = 0;
     state.scale = 3.2;
+    schedulePreview();
     queueHQ(20);
   }
 
@@ -559,10 +554,10 @@ function initMandelbrot() {
     state.maxIter = Number(iterInput.value);
     iterValue.textContent = String(state.maxIter);
     schedulePreview();
-    debouncedRender();
+    queueHQ(150);
   });
 
-  iterInput?.addEventListener("change", scheduleRender);
+  iterInput?.addEventListener("change", () => queueHQ(20));
 
   resetBtn?.addEventListener("click", resetView);
   animateBtn?.addEventListener("click", animateTour);
@@ -570,11 +565,15 @@ function initMandelbrot() {
   bindPanZoom(canvas, state, () => {
     if (animRaf) stopAnimation();
     schedulePreview();
-    queueHQ(140);
+    queueHQ(160);
   });
 
-  window.addEventListener("resize", scheduleRender);
-  scheduleRender();
+  window.addEventListener("resize", () => {
+    schedulePreview();
+    queueHQ(120);
+  });
+  schedulePreview();
+  queueHQ(120);
 }
 
 function initJulia() {
@@ -602,25 +601,19 @@ function initJulia() {
     dragCenterY: 0,
   };
 
-  function render() {
-    startProgressiveEscapeRender(canvas, state, "julia", {
-      passes: [4, 2, 1],
-      iterScale: 1,
-      budget: 22000,
-    });
-  }
-
   function renderPreview() {
-    startProgressiveEscapeRender(canvas, state, "julia", {
-      passes: [10, 5],
-      iterScale: 0.5,
-      budget: 15000,
+    renderEscapePreview(canvas, state, "julia", {
+      previewScale: 0.46,
+      iterScale: 0.54,
     });
   }
 
-  const scheduleRender = createRenderScheduler(render);
+  function renderHQ() {
+    renderEscapeHQ(canvas, state, "julia");
+  }
+
+  const scheduleRender = createRenderScheduler(renderHQ);
   const schedulePreview = createRenderScheduler(renderPreview);
-  const debouncedRender = debounce(scheduleRender, 110);
   let hqTimer = 0;
   let animRaf = 0;
   let animStart = 0;
@@ -638,6 +631,7 @@ function initJulia() {
     animRaf = 0;
     animStart = 0;
     if (animateBtn) animateBtn.textContent = "Animate";
+    queueHQ(40);
   }
 
   function syncInputs() {
@@ -648,7 +642,6 @@ function initJulia() {
   function animateJulia() {
     if (animRaf) {
       stopAnimation();
-      queueHQ(20);
       return;
     }
 
@@ -684,6 +677,7 @@ function initJulia() {
     state.centerX = 0;
     state.centerY = 0;
     state.scale = 3;
+    schedulePreview();
     queueHQ(20);
   }
 
@@ -692,7 +686,7 @@ function initJulia() {
     state.cRe = Number(reInput.value);
     syncLabels();
     schedulePreview();
-    debouncedRender();
+    queueHQ(150);
   });
 
   imInput?.addEventListener("input", () => {
@@ -700,11 +694,11 @@ function initJulia() {
     state.cIm = Number(imInput.value);
     syncLabels();
     schedulePreview();
-    debouncedRender();
+    queueHQ(150);
   });
 
-  reInput?.addEventListener("change", scheduleRender);
-  imInput?.addEventListener("change", scheduleRender);
+  reInput?.addEventListener("change", () => queueHQ(20));
+  imInput?.addEventListener("change", () => queueHQ(20));
 
   resetBtn?.addEventListener("click", resetView);
   animateBtn?.addEventListener("click", animateJulia);
@@ -712,12 +706,16 @@ function initJulia() {
   bindPanZoom(canvas, state, () => {
     if (animRaf) stopAnimation();
     schedulePreview();
-    queueHQ(140);
+    queueHQ(160);
   });
 
-  window.addEventListener("resize", scheduleRender);
+  window.addEventListener("resize", () => {
+    schedulePreview();
+    queueHQ(120);
+  });
   syncLabels();
-  scheduleRender();
+  schedulePreview();
+  queueHQ(120);
 }
 
 function initKoch() {
