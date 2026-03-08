@@ -2,7 +2,7 @@
 layout: page
 title: Fractal Lab
 permalink: /fractal-lab/
-description: Interactive Mandelbrot & Julia explorer in Galaxy Math style.
+description: Interactive Fractals Explorer in Magenta-Galaxy style.
 nav: true
 nav_order: 6
 fractal_lab: true
@@ -53,7 +53,9 @@ magenta_starfield: true
           <label for="julia-im">Im(c)</label>
           <input id="julia-im" type="range" min="-1.2" max="1.2" value="0.15" step="0.01">
           <span id="julia-im-value">0.15</span>
+          <button id="julia-reset" type="button">Reset View</button>
         </div>
+        <p class="fractal-note">Tip: wheel to zoom, drag to pan.</p>
       </div>
       <div class="fractal-view">
         <canvas id="julia-canvas" role="img" aria-label="Julia set fractal canvas"></canvas>
@@ -91,6 +93,12 @@ magenta_starfield: true
         <p><a href="https://en.wikipedia.org/wiki/Barnsley_fern" target="_blank" rel="noopener">Wikipedia: Barnsley Fern</a></p>
         <div class="fractal-controls">
           <button id="barnsley-regenerate" type="button">Regenerate</button>
+          <label for="barnsley-points">Points</label>
+          <input id="barnsley-points" type="range" min="12000" max="120000" value="50000" step="2000">
+          <span id="barnsley-points-value">50000</span>
+          <label for="barnsley-zoom">Zoom</label>
+          <input id="barnsley-zoom" type="range" min="0.7" max="1.8" value="1" step="0.05">
+          <span id="barnsley-zoom-value">1.00</span>
         </div>
       </div>
       <div class="fractal-view">
@@ -108,6 +116,12 @@ magenta_starfield: true
         <p>A stochastic path visualisation showing random trajectories with softly glowing, galaxy-math styling.</p>
         <div class="fractal-controls">
           <button id="brownian-redraw" type="button">Redraw</button>
+          <label for="brownian-steps">Steps</label>
+          <input id="brownian-steps" type="range" min="250" max="3000" value="1200" step="50">
+          <span id="brownian-steps-value">1200</span>
+          <label for="brownian-step-size">Step size</label>
+          <input id="brownian-step-size" type="range" min="0.6" max="4" value="1.7" step="0.1">
+          <span id="brownian-step-size-value">1.7</span>
         </div>
       </div>
       <div class="fractal-view">
