@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Started a 6-month internship at Blue Raven AI, Singapore.
+Started a 6-month internship at Blue Raven AI.
