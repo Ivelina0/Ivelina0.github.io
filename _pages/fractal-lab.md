@@ -14,7 +14,7 @@ magenta_starfield: true
 <!-- markdownlint-disable MD033 -->
 
 <div class="fractal-family-intro">
-  <p><strong>Fractal Lab</strong> is my playground for the fractals I really like and keep returning to.</p>
+  <p><strong>Fractal Lab</strong> is my playground for the fractals I really like. I remember the first time I saw the Mandelbrot Set in school and I asked my teacher "What is the point of this?". He replied "It just shows the beautify in Mathematics, Ivelina.".</p>
   <p>Some sections are rooted in complex dynamics, others in recursive geometry, stochastic ideas, and iterated systems.</p>
 </div>
 
