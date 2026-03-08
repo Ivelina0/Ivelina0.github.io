@@ -116,7 +116,23 @@ function fitPointsToCanvas(points, width, height, padding = 24) {
   };
 }
 
-function bindPanZoom(canvas, state, scheduleRender) {
+function bindPanZoom(canvas, state, handlers = {}) {
+  let onStart;
+  let onMove;
+  let onEnd;
+
+  if (typeof handlers === "function") {
+    onStart = handlers;
+    onMove = handlers;
+    onEnd = handlers;
+  } else {
+    onStart = handlers.onStart || (() => {});
+    onMove = handlers.onMove || (() => {});
+    onEnd = handlers.onEnd || (() => {});
+  }
+
+  let wheelEndTimer = 0;
+
   function pixelToComplex(px, py, width, height) {
     const aspect = width / height;
     return {
@@ -127,6 +143,7 @@ function bindPanZoom(canvas, state, scheduleRender) {
 
   canvas.addEventListener("wheel", (e) => {
     e.preventDefault();
+    onStart();
     const rect = canvas.getBoundingClientRect();
     const px = e.clientX - rect.left;
     const py = e.clientY - rect.top;
@@ -138,10 +155,16 @@ function bindPanZoom(canvas, state, scheduleRender) {
     const after = pixelToComplex(px, py, rect.width, rect.height);
     state.centerX += before.x - after.x;
     state.centerY += before.y - after.y;
-    scheduleRender();
+
+    onMove();
+    clearTimeout(wheelEndTimer);
+    wheelEndTimer = window.setTimeout(() => {
+      onEnd();
+    }, 150);
   }, { passive: false });
 
   canvas.addEventListener("mousedown", (e) => {
+    onStart();
     state.dragging = true;
     state.dragStartX = e.clientX;
     state.dragStartY = e.clientY;
@@ -159,13 +182,76 @@ function bindPanZoom(canvas, state, scheduleRender) {
 
     state.centerX = state.dragCenterX - (dx / rect.width) * state.scale * aspect;
     state.centerY = state.dragCenterY - (dy / rect.height) * state.scale;
-    scheduleRender();
+    onMove();
   });
 
   window.addEventListener("mouseup", () => {
     if (!state.dragging) return;
     state.dragging = false;
     canvas.classList.remove("is-dragging");
+    onEnd();
+  });
+}
+
+function renderEscapePreview(canvas, state, mode = "mandelbrot", options = {}) {
+  const token = (canvas.__renderToken || 0) + 1;
+  canvas.__renderToken = token;
+
+  const { ctx, width, height } = resizeCanvasForDPR(canvas, 330);
+  const previewScale = clamp(options.previewScale ?? 0.45, 0.18, 1);
+  const iterScale = clamp(options.iterScale ?? 0.55, 0.2, 1);
+  const sampleW = Math.max(120, Math.floor(width * previewScale));
+  const sampleH = Math.max(90, Math.floor(height * previewScale));
+  const maxIter = Math.max(36, Math.floor(state.maxIter * iterScale));
+  const aspect = width / height;
+
+  const buffer = canvas.__previewBuffer || (canvas.__previewBuffer = document.createElement("canvas"));
+  buffer.width = sampleW;
+  buffer.height = sampleH;
+  const bctx = buffer.getContext("2d", { alpha: false });
+  const image = bctx.createImageData(sampleW, sampleH);
+  const data = image.data;
+
+  for (let y = 0; y < sampleH; y++) {
+    for (let x = 0; x < sampleW; x++) {
+      const re = state.centerX + ((x / sampleW) - 0.5) * state.scale * aspect;
+      const im = state.centerY + ((y / sampleH) - 0.5) * state.scale;
+
+      let zx = mode === "mandelbrot" ? 0 : re;
+      let zy = mode === "mandelbrot" ? 0 : im;
+      const cRe = mode === "mandelbrot" ? re : state.cRe;
+      const cIm = mode === "mandelbrot" ? im : state.cIm;
+
+      let iter = 0;
+      while (iter < maxIter) {
+        const zx2 = zx * zx - zy * zy + cRe;
+        const zy2 = 2 * zx * zy + cIm;
+        zx = zx2;
+        zy = zy2;
+        if (zx * zx + zy * zy > 4) break;
+        iter++;
+      }
+
+      const [r, g, b] = getEscapeColor(iter, maxIter, zx, zy);
+      const idx = (y * sampleW + x) * 4;
+      data[idx] = r;
+      data[idx + 1] = g;
+      data[idx + 2] = b;
+      data[idx + 3] = 255;
+    }
+  }
+
+  bctx.putImageData(image, 0, 0);
+  ctx.imageSmoothingEnabled = true;
+  ctx.clearRect(0, 0, width, height);
+  ctx.drawImage(buffer, 0, 0, sampleW, sampleH, 0, 0, width, height);
+}
+
+function renderEscapeHQ(canvas, state, mode = "mandelbrot") {
+  startProgressiveEscapeRender(canvas, state, mode, {
+    passes: [6, 3, 1],
+    iterScale: 1,
+    budget: 24000,
   });
 }
 
