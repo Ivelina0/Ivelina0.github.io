@@ -26,33 +26,29 @@ function debounce(fn, delay = 100) {
 
 function paletteColor(t) {
   const tt = clamp(t, 0, 1);
-  const curved = Math.pow(tt, 0.82);
-  const n = FRACTAL_PALETTE.length - 1;
-  const idx = curved * n;
-  const i0 = Math.floor(idx);
-  const i1 = Math.min(n, i0 + 1);
-  const f = idx - i0;
-  const c0 = FRACTAL_PALETTE[i0];
-  const c1 = FRACTAL_PALETTE[i1];
+  const x = Math.pow(tt, 0.78);
 
-  let r = lerp(c0[0], c1[0], f);
-  let g = lerp(c0[1], c1[1], f);
-  let b = lerp(c0[2], c1[2], f);
+  const r = 0.52 + 0.48 * Math.cos(6.28318 * (x + 0.02));
+  const g = 0.45 + 0.55 * Math.cos(6.28318 * (x + 0.23));
+  const b = 0.52 + 0.48 * Math.cos(6.28318 * (x + 0.47));
 
-  const glow = 0.12 * (1 - Math.cos(Math.PI * tt));
-  r = r + (255 - r) * glow * 0.24;
-  g = g + (255 - g) * glow * 0.16;
-  b = b + (255 - b) * glow * 0.3;
+  const boost = 0.12 + 0.2 * (1 - tt);
 
-  return [Math.floor(r), Math.floor(g), Math.floor(b)];
+  return [
+    Math.floor(255 * clamp(r + boost * 0.25, 0, 1)),
+    Math.floor(255 * clamp(g + boost * 0.12, 0, 1)),
+    Math.floor(255 * clamp(b + boost * 0.35, 0, 1)),
+  ];
 }
 
 function getEscapeColor(iter, maxIter, zx, zy) {
-  if (iter >= maxIter) return [5, 3, 10];
+  if (iter >= maxIter) return [17, 10, 30];
 
-  const abs2 = zx * zx + zy * zy;
-  const nu = iter + 1 - Math.log2(Math.max(1e-9, Math.log(Math.max(abs2, 1.000001))));
-  const t = clamp(nu / maxIter, 0, 1);
+  const abs2 = Math.max(1.000001, zx * zx + zy * zy);
+  const logZn = Math.log(abs2) * 0.5;
+  const nu = Math.log(Math.max(logZn / Math.log(2), 1e-9)) / Math.log(2);
+  const smoothIter = iter + 1 - nu;
+  const t = clamp(smoothIter / maxIter, 0, 1);
   return paletteColor(t);
 }
 
@@ -132,7 +128,7 @@ function bindPanZoom(canvas, state, scheduleRender) {
     const py = e.clientY - rect.top;
     const before = pixelToComplex(px, py, rect.width, rect.height);
 
-    const zoom = e.deltaY < 0 ? 0.86 : 1.16;
+    const zoom = e.deltaY < 0 ? 0.92 : 1.09;
     state.scale = clamp(state.scale * zoom, 0.000001, 10);
 
     const after = pixelToComplex(px, py, rect.width, rect.height);
@@ -215,7 +211,7 @@ function bindScreenPanZoom(canvas, state, scheduleRender, options = {}) {
   });
 }
 
-function startProgressiveEscapeRender(canvas, state, mode = "mandelbrot") {
+function startProgressiveEscapeRender(canvas, state, mode = "mandelbrot", options = {}) {
   const token = (canvas.__renderToken || 0) + 1;
   canvas.__renderToken = token;
 
@@ -224,7 +220,10 @@ function startProgressiveEscapeRender(canvas, state, mode = "mandelbrot") {
   const data = image.data;
   const aspect = width / height;
 
-  const passBlocks = [8, 4, 2, 1];
+  const passBlocks = options.passes || [8, 4, 2, 1];
+  const iterScale = options.iterScale || 1;
+  const effectiveMaxIter = Math.max(40, Math.floor(state.maxIter * iterScale));
+  const budget = options.budget || 26000;
   let passIndex = 0;
   let y = 0;
   let x = 0;
@@ -239,7 +238,7 @@ function startProgressiveEscapeRender(canvas, state, mode = "mandelbrot") {
     const cIm = mode === "mandelbrot" ? im : state.cIm;
 
     let iter = 0;
-    while (iter < state.maxIter) {
+    while (iter < effectiveMaxIter) {
       const zx2 = zx * zx - zy * zy + cRe;
       const zy2 = 2 * zx * zy + cIm;
       zx = zx2;
@@ -248,7 +247,7 @@ function startProgressiveEscapeRender(canvas, state, mode = "mandelbrot") {
       iter++;
     }
 
-    return getEscapeColor(iter, state.maxIter, zx, zy);
+    return getEscapeColor(iter, effectiveMaxIter, zx, zy);
   }
 
   function paintBlock(px, py, block, color) {
@@ -271,7 +270,6 @@ function startProgressiveEscapeRender(canvas, state, mode = "mandelbrot") {
     if (canvas.__renderToken !== token) return;
 
     const block = passBlocks[passIndex];
-    const budget = 26000;
     let work = 0;
 
     while (y < height && work < budget) {
@@ -366,17 +364,38 @@ function initMandelbrot() {
   };
 
   function render() {
-    startProgressiveEscapeRender(canvas, state, "mandelbrot");
+    startProgressiveEscapeRender(canvas, state, "mandelbrot", {
+      passes: [6, 3, 1],
+      iterScale: 1,
+      budget: 42000,
+    });
+  }
+
+  function renderPreview() {
+    startProgressiveEscapeRender(canvas, state, "mandelbrot", {
+      passes: [12, 6, 3],
+      iterScale: 0.58,
+      budget: 52000,
+    });
   }
 
   const scheduleRender = createRenderScheduler(render);
+  const schedulePreview = createRenderScheduler(renderPreview);
   const debouncedRender = debounce(scheduleRender, 80);
+  let hqTimer = 0;
+
+  function queueHQ(delay = 130) {
+    clearTimeout(hqTimer);
+    hqTimer = window.setTimeout(() => {
+      scheduleRender();
+    }, delay);
+  }
 
   function resetView() {
     state.centerX = -0.55;
     state.centerY = 0;
     state.scale = 3.2;
-    scheduleRender();
+    queueHQ(20);
   }
 
   iterValue.textContent = String(state.maxIter);
@@ -384,6 +403,7 @@ function initMandelbrot() {
   iterInput?.addEventListener("input", () => {
     state.maxIter = Number(iterInput.value);
     iterValue.textContent = String(state.maxIter);
+    schedulePreview();
     debouncedRender();
   });
 
@@ -391,7 +411,10 @@ function initMandelbrot() {
 
   resetBtn?.addEventListener("click", resetView);
 
-  bindPanZoom(canvas, state, scheduleRender);
+  bindPanZoom(canvas, state, () => {
+    schedulePreview();
+    queueHQ(140);
+  });
 
   window.addEventListener("resize", scheduleRender);
   scheduleRender();
@@ -422,11 +445,32 @@ function initJulia() {
   };
 
   function render() {
-    startProgressiveEscapeRender(canvas, state, "julia");
+    startProgressiveEscapeRender(canvas, state, "julia", {
+      passes: [6, 3, 1],
+      iterScale: 1,
+      budget: 42000,
+    });
+  }
+
+  function renderPreview() {
+    startProgressiveEscapeRender(canvas, state, "julia", {
+      passes: [12, 6, 3],
+      iterScale: 0.6,
+      budget: 52000,
+    });
   }
 
   const scheduleRender = createRenderScheduler(render);
+  const schedulePreview = createRenderScheduler(renderPreview);
   const debouncedRender = debounce(scheduleRender, 80);
+  let hqTimer = 0;
+
+  function queueHQ(delay = 130) {
+    clearTimeout(hqTimer);
+    hqTimer = window.setTimeout(() => {
+      scheduleRender();
+    }, delay);
+  }
 
   function syncLabels() {
     reValue.textContent = state.cRe.toFixed(2);
@@ -437,18 +481,20 @@ function initJulia() {
     state.centerX = 0;
     state.centerY = 0;
     state.scale = 3;
-    scheduleRender();
+    queueHQ(20);
   }
 
   reInput?.addEventListener("input", () => {
     state.cRe = Number(reInput.value);
     syncLabels();
+    schedulePreview();
     debouncedRender();
   });
 
   imInput?.addEventListener("input", () => {
     state.cIm = Number(imInput.value);
     syncLabels();
+    schedulePreview();
     debouncedRender();
   });
 
@@ -457,7 +503,10 @@ function initJulia() {
 
   resetBtn?.addEventListener("click", resetView);
 
-  bindPanZoom(canvas, state, scheduleRender);
+  bindPanZoom(canvas, state, () => {
+    schedulePreview();
+    queueHQ(140);
+  });
 
   window.addEventListener("resize", scheduleRender);
   syncLabels();
@@ -555,6 +604,299 @@ function initKoch() {
   depthInput?.addEventListener("change", scheduleRender);
 
   window.addEventListener("resize", scheduleRender);
+  scheduleRender();
+}
+
+function initDragon() {
+  const canvas = document.getElementById("dragon-canvas");
+  if (!canvas) return;
+
+  const depthInput = document.getElementById("dragon-depth");
+  const depthValue = document.getElementById("dragon-depth-value");
+  const resetBtn = document.getElementById("dragon-reset");
+  const animateBtn = document.getElementById("dragon-animate");
+
+  const state = {
+    depth: Number(depthInput?.value || 11),
+  };
+
+  let animationTimer = 0;
+  const curveCache = new Map();
+
+  function buildDragon(depth) {
+    if (curveCache.has(depth)) return curveCache.get(depth);
+
+    let points = [{ x: 0, y: 0 }, { x: 1, y: 0 }];
+
+    for (let d = 1; d <= depth; d++) {
+      const pivot = points[points.length - 1];
+      const next = points.slice();
+
+      for (let i = points.length - 2; i >= 0; i--) {
+        const p = points[i];
+        const dx = p.x - pivot.x;
+        const dy = p.y - pivot.y;
+        next.push({
+          x: pivot.x - dy,
+          y: pivot.y + dx,
+        });
+      }
+
+      points = next;
+    }
+
+    curveCache.set(depth, points);
+    return points;
+  }
+
+  function drawCurve(points) {
+    const { ctx, width, height } = resizeCanvasForDPR(canvas, 330);
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = "#050308";
+    ctx.fillRect(0, 0, width, height);
+
+    const fit = fitPointsToCanvas(points, width, height, 28);
+
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "rgba(224, 138, 230, 0.9)";
+    ctx.lineWidth = 1.2;
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = "rgba(224, 138, 230, 0.24)";
+
+    ctx.beginPath();
+    const first = fit.map(points[0]);
+    ctx.moveTo(first.x, first.y);
+
+    for (let i = 1; i < points.length; i++) {
+      const p = fit.map(points[i]);
+      ctx.lineTo(p.x, p.y);
+    }
+    ctx.stroke();
+  }
+
+  function render() {
+    drawCurve(buildDragon(state.depth));
+  }
+
+  const scheduleRender = createRenderScheduler(render);
+  const debouncedRender = debounce(scheduleRender, 70);
+
+  function syncLabel() {
+    if (depthValue) depthValue.textContent = String(state.depth);
+  }
+
+  function stopAnimation() {
+    if (animationTimer) {
+      clearInterval(animationTimer);
+      animationTimer = 0;
+      if (animateBtn) animateBtn.textContent = "Animate";
+    }
+  }
+
+  function animateToTarget() {
+    stopAnimation();
+    const target = state.depth;
+    let current = 1;
+    state.depth = current;
+    if (depthInput) depthInput.value = String(current);
+    syncLabel();
+    scheduleRender();
+
+    if (animateBtn) animateBtn.textContent = "Animating...";
+    animationTimer = window.setInterval(() => {
+      current += 1;
+      if (current > target) {
+        stopAnimation();
+        return;
+      }
+      state.depth = current;
+      if (depthInput) depthInput.value = String(current);
+      syncLabel();
+      scheduleRender();
+    }, 130);
+  }
+
+  depthInput?.addEventListener("input", () => {
+    state.depth = Number(depthInput.value);
+    syncLabel();
+    debouncedRender();
+  });
+
+  depthInput?.addEventListener("change", scheduleRender);
+
+  resetBtn?.addEventListener("click", () => {
+    stopAnimation();
+    state.depth = 11;
+    if (depthInput) depthInput.value = "11";
+    syncLabel();
+    scheduleRender();
+  });
+
+  animateBtn?.addEventListener("click", animateToTarget);
+
+  window.addEventListener("resize", scheduleRender);
+  syncLabel();
+  scheduleRender();
+}
+
+function initHilbert() {
+  const canvas = document.getElementById("hilbert-canvas");
+  if (!canvas) return;
+
+  const orderInput = document.getElementById("hilbert-order");
+  const orderValue = document.getElementById("hilbert-order-value");
+  const resetBtn = document.getElementById("hilbert-reset");
+  const animateBtn = document.getElementById("hilbert-animate");
+
+  const state = {
+    order: Number(orderInput?.value || 5),
+  };
+
+  let animationTimer = 0;
+  const curveCache = new Map();
+
+  function buildHilbert(order) {
+    if (curveCache.has(order)) return curveCache.get(order);
+
+    const points = [{ x: 0, y: 0 }];
+    let dir = 0;
+    let x = 0;
+    let y = 0;
+
+    function forward() {
+      x += Math.cos(dir);
+      y += Math.sin(dir);
+      points.push({ x, y });
+    }
+
+    function turnLeft() {
+      dir -= Math.PI / 2;
+    }
+
+    function turnRight() {
+      dir += Math.PI / 2;
+    }
+
+    function hilbert(level, sign) {
+      if (level === 0) return;
+
+      if (sign > 0) turnRight();
+      else turnLeft();
+
+      hilbert(level - 1, -sign);
+      forward();
+
+      if (sign > 0) turnLeft();
+      else turnRight();
+
+      hilbert(level - 1, sign);
+      forward();
+      hilbert(level - 1, sign);
+
+      if (sign > 0) turnLeft();
+      else turnRight();
+
+      forward();
+      hilbert(level - 1, -sign);
+
+      if (sign > 0) turnRight();
+      else turnLeft();
+    }
+
+    hilbert(order, 1);
+    curveCache.set(order, points);
+    return points;
+  }
+
+  function drawCurve(points) {
+    const { ctx, width, height } = resizeCanvasForDPR(canvas, 330);
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = "#050308";
+    ctx.fillRect(0, 0, width, height);
+
+    const fit = fitPointsToCanvas(points, width, height, 30);
+
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "rgba(132, 220, 234, 0.9)";
+    ctx.lineWidth = 1.1;
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = "rgba(132, 220, 234, 0.22)";
+
+    ctx.beginPath();
+    const first = fit.map(points[0]);
+    ctx.moveTo(first.x, first.y);
+
+    for (let i = 1; i < points.length; i++) {
+      const p = fit.map(points[i]);
+      ctx.lineTo(p.x, p.y);
+    }
+    ctx.stroke();
+  }
+
+  function render() {
+    drawCurve(buildHilbert(state.order));
+  }
+
+  const scheduleRender = createRenderScheduler(render);
+  const debouncedRender = debounce(scheduleRender, 70);
+
+  function syncLabel() {
+    if (orderValue) orderValue.textContent = String(state.order);
+  }
+
+  function stopAnimation() {
+    if (animationTimer) {
+      clearInterval(animationTimer);
+      animationTimer = 0;
+      if (animateBtn) animateBtn.textContent = "Animate";
+    }
+  }
+
+  function animateToTarget() {
+    stopAnimation();
+    const target = state.order;
+    let current = 1;
+    state.order = current;
+    if (orderInput) orderInput.value = String(current);
+    syncLabel();
+    scheduleRender();
+
+    if (animateBtn) animateBtn.textContent = "Animating...";
+    animationTimer = window.setInterval(() => {
+      current += 1;
+      if (current > target) {
+        stopAnimation();
+        return;
+      }
+      state.order = current;
+      if (orderInput) orderInput.value = String(current);
+      syncLabel();
+      scheduleRender();
+    }, 180);
+  }
+
+  orderInput?.addEventListener("input", () => {
+    state.order = Number(orderInput.value);
+    syncLabel();
+    debouncedRender();
+  });
+
+  orderInput?.addEventListener("change", scheduleRender);
+
+  resetBtn?.addEventListener("click", () => {
+    stopAnimation();
+    state.order = 5;
+    if (orderInput) orderInput.value = "5";
+    syncLabel();
+    scheduleRender();
+  });
+
+  animateBtn?.addEventListener("click", animateToTarget);
+
+  window.addEventListener("resize", scheduleRender);
+  syncLabel();
   scheduleRender();
 }
 
@@ -890,6 +1232,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initMandelbrot();
   initJulia();
   initKoch();
+  initDragon();
+  initHilbert();
   initBarnsley();
   initBrownian();
 });
