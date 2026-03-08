@@ -31,6 +31,7 @@ magenta_starfield: true
         <p><a href="https://en.wikipedia.org/wiki/Mandelbrot_set" target="_blank" rel="noopener">Wikipedia: Mandelbrot Set</a></p>
         <div class="fractal-controls">
           <button id="mandelbrot-reset" type="button">Reset</button>
+          <button id="mandelbrot-animate" type="button">Animate</button>
           <label for="mandelbrot-iterations">Iterations</label>
           <input id="mandelbrot-iterations" type="range" min="60" max="500" value="220" step="10">
           <span id="mandelbrot-iterations-value">220</span>
@@ -54,6 +55,7 @@ magenta_starfield: true
           <input id="julia-im" type="range" min="-1.2" max="1.2" value="0.15" step="0.01">
           <span id="julia-im-value">0.15</span>
           <button id="julia-reset" type="button">Reset View</button>
+          <button id="julia-animate" type="button">Animate</button>
         </div>
         <p class="fractal-note">Tip: wheel to zoom, drag to pan.</p>
       </div>
@@ -72,6 +74,7 @@ magenta_starfield: true
         <p>A recursive boundary construction where each segment is replaced by a four-segment motif.</p>
         <p><a href="https://en.wikipedia.org/wiki/Koch_snowflake" target="_blank" rel="noopener">Wikipedia: Koch Snowflake</a></p>
         <div class="fractal-controls">
+          <button id="koch-animate" type="button">Animate</button>
           <label for="koch-depth">Depth</label>
           <input id="koch-depth" type="range" min="0" max="6" value="4" step="1">
           <span id="koch-depth-value">4</span>
@@ -129,6 +132,7 @@ magenta_starfield: true
         <p><a href="https://en.wikipedia.org/wiki/Barnsley_fern" target="_blank" rel="noopener">Wikipedia: Barnsley Fern</a></p>
         <div class="fractal-controls">
           <button id="barnsley-regenerate" type="button">Regenerate</button>
+          <button id="barnsley-animate" type="button">Animate</button>
           <label for="barnsley-points">Points</label>
           <input id="barnsley-points" type="range" min="12000" max="120000" value="50000" step="2000">
           <span id="barnsley-points-value">50000</span>
@@ -152,6 +156,7 @@ magenta_starfield: true
         <p>A stochastic path visualisation showing random trajectories with softly glowing, galaxy-math styling.</p>
         <div class="fractal-controls">
           <button id="brownian-redraw" type="button">Redraw</button>
+          <button id="brownian-animate" type="button">Animate</button>
           <label for="brownian-steps">Steps</label>
           <input id="brownian-steps" type="range" min="250" max="3000" value="1200" step="50">
           <span id="brownian-steps-value">1200</span>

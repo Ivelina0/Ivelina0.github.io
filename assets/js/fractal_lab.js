@@ -58,13 +58,17 @@ function resizeCanvasForDPR(canvas, targetHeight = 320) {
   const cssHeight = canvas.clientHeight > 0 ? canvas.clientHeight : targetHeight;
   const height = Math.max(1, Math.floor(cssHeight));
 
-  canvas.width = Math.floor(width * dpr);
-  canvas.height = Math.floor(height * dpr);
+  const nextWidth = Math.floor(width * dpr);
+  const nextHeight = Math.floor(height * dpr);
+  if (canvas.width !== nextWidth || canvas.height !== nextHeight) {
+    canvas.width = nextWidth;
+    canvas.height = nextHeight;
+  }
 
   const ctx = canvas.getContext("2d", { alpha: false });
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  return { ctx, width, height };
+  return { ctx, width, height, dpr };
 }
 
 function createRenderScheduler(renderFn) {
@@ -350,6 +354,7 @@ function initMandelbrot() {
   const iterInput = document.getElementById("mandelbrot-iterations");
   const iterValue = document.getElementById("mandelbrot-iterations-value");
   const resetBtn = document.getElementById("mandelbrot-reset");
+  const animateBtn = document.getElementById("mandelbrot-animate");
 
   const state = {
     centerX: -0.55,
@@ -365,24 +370,33 @@ function initMandelbrot() {
 
   function render() {
     startProgressiveEscapeRender(canvas, state, "mandelbrot", {
-      passes: [6, 3, 1],
+      passes: [4, 2, 1],
       iterScale: 1,
-      budget: 42000,
+      budget: 22000,
     });
   }
 
   function renderPreview() {
     startProgressiveEscapeRender(canvas, state, "mandelbrot", {
-      passes: [12, 6, 3],
-      iterScale: 0.58,
-      budget: 52000,
+      passes: [10, 5],
+      iterScale: 0.5,
+      budget: 15000,
     });
   }
 
   const scheduleRender = createRenderScheduler(render);
   const schedulePreview = createRenderScheduler(renderPreview);
-  const debouncedRender = debounce(scheduleRender, 80);
+  const debouncedRender = debounce(scheduleRender, 110);
   let hqTimer = 0;
+  let animRaf = 0;
+
+  const presets = [
+    { centerX: -0.55, centerY: 0, scale: 3.2 },
+    { centerX: -0.7436438870371587, centerY: 0.13182590420531197, scale: 0.015 },
+    { centerX: -0.748, centerY: 0.1, scale: 0.008 },
+    { centerX: -0.1011, centerY: 0.9563, scale: 0.04 },
+    { centerX: -0.55, centerY: 0, scale: 3.2 },
+  ];
 
   function queueHQ(delay = 130) {
     clearTimeout(hqTimer);
@@ -391,7 +405,61 @@ function initMandelbrot() {
     }, delay);
   }
 
+  function stopAnimation() {
+    if (!animRaf) return;
+    cancelAnimationFrame(animRaf);
+    animRaf = 0;
+    if (animateBtn) animateBtn.textContent = "Animate";
+  }
+
+  function easeInOut(t) {
+    return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  }
+
+  function animateTour() {
+    if (animRaf) {
+      stopAnimation();
+      queueHQ(20);
+      return;
+    }
+
+    let segment = 0;
+    let start = 0;
+    if (animateBtn) animateBtn.textContent = "Stop";
+
+    const duration = 2600;
+
+    function frame(ts) {
+      if (!start) start = ts;
+      const a = presets[segment];
+      const b = presets[segment + 1];
+      const t = clamp((ts - start) / duration, 0, 1);
+      const e = easeInOut(t);
+
+      state.centerX = lerp(a.centerX, b.centerX, e);
+      state.centerY = lerp(a.centerY, b.centerY, e);
+      state.scale = lerp(a.scale, b.scale, e);
+
+      schedulePreview();
+
+      if (t >= 1) {
+        segment += 1;
+        start = ts;
+        if (segment >= presets.length - 1) {
+          stopAnimation();
+          queueHQ(10);
+          return;
+        }
+      }
+
+      animRaf = requestAnimationFrame(frame);
+    }
+
+    animRaf = requestAnimationFrame(frame);
+  }
+
   function resetView() {
+    stopAnimation();
     state.centerX = -0.55;
     state.centerY = 0;
     state.scale = 3.2;
@@ -401,6 +469,7 @@ function initMandelbrot() {
   iterValue.textContent = String(state.maxIter);
 
   iterInput?.addEventListener("input", () => {
+    stopAnimation();
     state.maxIter = Number(iterInput.value);
     iterValue.textContent = String(state.maxIter);
     schedulePreview();
@@ -410,8 +479,10 @@ function initMandelbrot() {
   iterInput?.addEventListener("change", scheduleRender);
 
   resetBtn?.addEventListener("click", resetView);
+  animateBtn?.addEventListener("click", animateTour);
 
   bindPanZoom(canvas, state, () => {
+    if (animRaf) stopAnimation();
     schedulePreview();
     queueHQ(140);
   });
@@ -427,6 +498,7 @@ function initJulia() {
   const reInput = document.getElementById("julia-re");
   const imInput = document.getElementById("julia-im");
   const resetBtn = document.getElementById("julia-reset");
+  const animateBtn = document.getElementById("julia-animate");
   const reValue = document.getElementById("julia-re-value");
   const imValue = document.getElementById("julia-im-value");
 
@@ -446,24 +518,26 @@ function initJulia() {
 
   function render() {
     startProgressiveEscapeRender(canvas, state, "julia", {
-      passes: [6, 3, 1],
+      passes: [4, 2, 1],
       iterScale: 1,
-      budget: 42000,
+      budget: 22000,
     });
   }
 
   function renderPreview() {
     startProgressiveEscapeRender(canvas, state, "julia", {
-      passes: [12, 6, 3],
-      iterScale: 0.6,
-      budget: 52000,
+      passes: [10, 5],
+      iterScale: 0.5,
+      budget: 15000,
     });
   }
 
   const scheduleRender = createRenderScheduler(render);
   const schedulePreview = createRenderScheduler(renderPreview);
-  const debouncedRender = debounce(scheduleRender, 80);
+  const debouncedRender = debounce(scheduleRender, 110);
   let hqTimer = 0;
+  let animRaf = 0;
+  let animStart = 0;
 
   function queueHQ(delay = 130) {
     clearTimeout(hqTimer);
@@ -472,12 +546,55 @@ function initJulia() {
     }, delay);
   }
 
+  function stopAnimation() {
+    if (!animRaf) return;
+    cancelAnimationFrame(animRaf);
+    animRaf = 0;
+    animStart = 0;
+    if (animateBtn) animateBtn.textContent = "Animate";
+  }
+
+  function syncInputs() {
+    if (reInput) reInput.value = state.cRe.toFixed(2);
+    if (imInput) imInput.value = state.cIm.toFixed(2);
+  }
+
+  function animateJulia() {
+    if (animRaf) {
+      stopAnimation();
+      queueHQ(20);
+      return;
+    }
+
+    const baseRe = state.cRe;
+    const baseIm = state.cIm;
+    const baseScale = state.scale;
+    if (animateBtn) animateBtn.textContent = "Stop";
+
+    function frame(ts) {
+      if (!animStart) animStart = ts;
+      const t = (ts - animStart) * 0.001;
+
+      state.cRe = clamp(baseRe + 0.09 * Math.cos(0.8 * t), -1.2, 1.2);
+      state.cIm = clamp(baseIm + 0.09 * Math.sin(0.8 * t), -1.2, 1.2);
+      state.scale = clamp(baseScale * (1 - 0.08 * Math.sin(0.45 * t)), 0.05, 10);
+
+      syncLabels();
+      syncInputs();
+      schedulePreview();
+      animRaf = requestAnimationFrame(frame);
+    }
+
+    animRaf = requestAnimationFrame(frame);
+  }
+
   function syncLabels() {
     reValue.textContent = state.cRe.toFixed(2);
     imValue.textContent = state.cIm.toFixed(2);
   }
 
   function resetView() {
+    stopAnimation();
     state.centerX = 0;
     state.centerY = 0;
     state.scale = 3;
@@ -485,6 +602,7 @@ function initJulia() {
   }
 
   reInput?.addEventListener("input", () => {
+    stopAnimation();
     state.cRe = Number(reInput.value);
     syncLabels();
     schedulePreview();
@@ -492,6 +610,7 @@ function initJulia() {
   });
 
   imInput?.addEventListener("input", () => {
+    stopAnimation();
     state.cIm = Number(imInput.value);
     syncLabels();
     schedulePreview();
@@ -502,8 +621,10 @@ function initJulia() {
   imInput?.addEventListener("change", scheduleRender);
 
   resetBtn?.addEventListener("click", resetView);
+  animateBtn?.addEventListener("click", animateJulia);
 
   bindPanZoom(canvas, state, () => {
+    if (animRaf) stopAnimation();
     schedulePreview();
     queueHQ(140);
   });
@@ -519,8 +640,11 @@ function initKoch() {
 
   const depthInput = document.getElementById("koch-depth");
   const depthValue = document.getElementById("koch-depth-value");
+  const animateBtn = document.getElementById("koch-animate");
 
   let depth = Number(depthInput?.value || 4);
+  let animRaf = 0;
+  let stepTimer = 0;
 
   function subdivide(a, b, level, outSegments) {
     if (level === 0) {
@@ -593,15 +717,57 @@ function initKoch() {
   const scheduleRender = createRenderScheduler(render);
   const debouncedRender = debounce(scheduleRender, 70);
 
+  function stopAnimation() {
+    if (!animRaf) return;
+    cancelAnimationFrame(animRaf);
+    animRaf = 0;
+    if (animateBtn) animateBtn.textContent = "Animate";
+  }
+
+  function animateToTarget() {
+    if (animRaf) {
+      stopAnimation();
+      return;
+    }
+
+    const target = depth;
+    let current = 0;
+    if (animateBtn) animateBtn.textContent = "Stop";
+
+    function frame(ts) {
+      if (!stepTimer) stepTimer = ts;
+      if (ts - stepTimer >= 190) {
+        stepTimer = ts;
+        current += 1;
+        depth = Math.min(current, target);
+        if (depthInput) depthInput.value = String(depth);
+        depthValue.textContent = String(depth);
+        scheduleRender();
+      }
+
+      if (current >= target) {
+        stopAnimation();
+        stepTimer = 0;
+        return;
+      }
+
+      animRaf = requestAnimationFrame(frame);
+    }
+
+    animRaf = requestAnimationFrame(frame);
+  }
+
   depthValue.textContent = String(depth);
 
   depthInput?.addEventListener("input", () => {
+    stopAnimation();
     depth = Number(depthInput.value);
     depthValue.textContent = String(depth);
     debouncedRender();
   });
 
   depthInput?.addEventListener("change", scheduleRender);
+  animateBtn?.addEventListener("click", animateToTarget);
 
   window.addEventListener("resize", scheduleRender);
   scheduleRender();
@@ -695,7 +861,10 @@ function initDragon() {
   }
 
   function animateToTarget() {
-    stopAnimation();
+    if (animationTimer) {
+      stopAnimation();
+      return;
+    }
     const target = state.depth;
     let current = 1;
     state.depth = current;
@@ -703,7 +872,7 @@ function initDragon() {
     syncLabel();
     scheduleRender();
 
-    if (animateBtn) animateBtn.textContent = "Animating...";
+    if (animateBtn) animateBtn.textContent = "Stop";
     animationTimer = window.setInterval(() => {
       current += 1;
       if (current > target) {
@@ -855,7 +1024,10 @@ function initHilbert() {
   }
 
   function animateToTarget() {
-    stopAnimation();
+    if (animationTimer) {
+      stopAnimation();
+      return;
+    }
     const target = state.order;
     let current = 1;
     state.order = current;
@@ -863,7 +1035,7 @@ function initHilbert() {
     syncLabel();
     scheduleRender();
 
-    if (animateBtn) animateBtn.textContent = "Animating...";
+    if (animateBtn) animateBtn.textContent = "Stop";
     animationTimer = window.setInterval(() => {
       current += 1;
       if (current > target) {
@@ -905,6 +1077,7 @@ function initBarnsley() {
   if (!canvas) return;
 
   const regenerateBtn = document.getElementById("barnsley-regenerate");
+  const animateBtn = document.getElementById("barnsley-animate");
   const pointsInput = document.getElementById("barnsley-points");
   const pointsValue = document.getElementById("barnsley-points-value");
   const zoomInput = document.getElementById("barnsley-zoom");
@@ -922,7 +1095,10 @@ function initBarnsley() {
     dragPanX: 0,
     dragPanY: 0,
     points: [],
+    isAnimating: false,
+    revealCount: 0,
   };
+  let animRaf = 0;
 
   function generatePoints() {
     let x = (Math.random() - 0.5) * 0.4;
@@ -984,7 +1160,10 @@ function initBarnsley() {
     const image = ctx.createImageData(width, height);
     const data = image.data;
 
-    for (const p of state.points) {
+    const drawCount = state.isAnimating ? Math.min(state.revealCount, state.points.length) : state.points.length;
+
+    for (let i = 0; i < drawCount; i++) {
+      const p = state.points[i];
       const mapped = fit.map(p);
       const px = centerX + (mapped.x - centerX) * localZoom + state.panX;
       const py = centerY + (mapped.y - centerY) * localZoom + state.panY;
@@ -1027,18 +1206,60 @@ function initBarnsley() {
     zoomValue.textContent = state.zoom.toFixed(2);
   }
 
+  function stopAnimation() {
+    if (!animRaf) return;
+    cancelAnimationFrame(animRaf);
+    animRaf = 0;
+    state.isAnimating = false;
+    state.revealCount = state.points.length;
+    if (animateBtn) animateBtn.textContent = "Animate";
+    scheduleDraw();
+  }
+
+  function startAnimation() {
+    if (animRaf) {
+      stopAnimation();
+      return;
+    }
+
+    state.isAnimating = true;
+    state.revealCount = 50;
+    if (animateBtn) animateBtn.textContent = "Stop";
+
+    const step = Math.max(120, Math.floor(state.pointCount / 120));
+
+    function frame() {
+      state.revealCount = Math.min(state.revealCount + step, state.points.length);
+      scheduleDraw();
+
+      if (state.revealCount >= state.points.length) {
+        state.isAnimating = false;
+        animRaf = 0;
+        if (animateBtn) animateBtn.textContent = "Animate";
+        return;
+      }
+
+      animRaf = requestAnimationFrame(frame);
+    }
+
+    animRaf = requestAnimationFrame(frame);
+  }
+
   regenerateBtn?.addEventListener("click", () => {
+    stopAnimation();
     generatePoints();
     scheduleDraw();
   });
 
   pointsInput?.addEventListener("input", () => {
+    stopAnimation();
     state.pointCount = Number(pointsInput.value);
     syncLabels();
     debouncedRegenerate();
   });
 
   pointsInput?.addEventListener("change", () => {
+    stopAnimation();
     state.pointCount = Number(pointsInput.value);
     syncLabels();
     generatePoints();
@@ -1050,6 +1271,8 @@ function initBarnsley() {
     syncLabels();
     scheduleDraw();
   });
+
+  animateBtn?.addEventListener("click", startAnimation);
 
   bindScreenPanZoom(canvas, state, scheduleDraw, { minZoom: 0.55, maxZoom: 8 });
 
@@ -1071,6 +1294,7 @@ function initBrownian() {
   if (!canvas) return;
 
   const redrawBtn = document.getElementById("brownian-redraw");
+  const animateBtn = document.getElementById("brownian-animate");
   const stepsInput = document.getElementById("brownian-steps");
   const stepsValue = document.getElementById("brownian-steps-value");
   const stepSizeInput = document.getElementById("brownian-step-size");
@@ -1088,7 +1312,10 @@ function initBrownian() {
     dragPanX: 0,
     dragPanY: 0,
     paths: [],
+    isAnimating: false,
+    revealRatio: 1,
   };
+  let animRaf = 0;
 
   function generatePaths() {
     const nPaths = 9;
@@ -1145,11 +1372,14 @@ function initBrownian() {
     state.paths.forEach((path, index) => {
       const [r, g, b] = FRACTAL_PALETTE[index % FRACTAL_PALETTE.length];
       const start = transform(path[0]);
+      const maxIdx = state.isAnimating
+        ? Math.max(2, Math.floor((path.length - 1) * state.revealRatio))
+        : path.length - 1;
 
       ctx.beginPath();
       ctx.moveTo(start.x, start.y);
 
-      for (let i = 1; i < path.length; i++) {
+      for (let i = 1; i <= maxIdx; i++) {
         const mapped = transform(path[i]);
         ctx.lineTo(mapped.x, mapped.y);
       }
@@ -1162,7 +1392,7 @@ function initBrownian() {
 
       ctx.beginPath();
       ctx.moveTo(start.x, start.y);
-      for (let i = 1; i < path.length; i++) {
+      for (let i = 1; i <= maxIdx; i++) {
         const mapped = transform(path[i]);
         ctx.lineTo(mapped.x, mapped.y);
       }
@@ -1192,13 +1422,54 @@ function initBrownian() {
   }
 
   function regenerate() {
+    stopAnimation();
     generatePaths();
+    state.revealRatio = 1;
     scheduleDraw();
   }
 
+  function stopAnimation() {
+    if (!animRaf) return;
+    cancelAnimationFrame(animRaf);
+    animRaf = 0;
+    state.isAnimating = false;
+    state.revealRatio = 1;
+    if (animateBtn) animateBtn.textContent = "Animate";
+    scheduleDraw();
+  }
+
+  function startAnimation() {
+    if (animRaf) {
+      stopAnimation();
+      return;
+    }
+
+    state.isAnimating = true;
+    state.revealRatio = 0.02;
+    if (animateBtn) animateBtn.textContent = "Stop";
+
+    function frame() {
+      state.revealRatio = Math.min(1, state.revealRatio + 0.012);
+      scheduleDraw();
+
+      if (state.revealRatio >= 1) {
+        state.isAnimating = false;
+        animRaf = 0;
+        if (animateBtn) animateBtn.textContent = "Animate";
+        return;
+      }
+
+      animRaf = requestAnimationFrame(frame);
+    }
+
+    animRaf = requestAnimationFrame(frame);
+  }
+
   redrawBtn?.addEventListener("click", regenerate);
+  animateBtn?.addEventListener("click", startAnimation);
 
   stepsInput?.addEventListener("input", () => {
+    stopAnimation();
     state.steps = Number(stepsInput.value);
     syncLabels();
     debouncedRegenerate();
@@ -1207,6 +1478,7 @@ function initBrownian() {
   stepsInput?.addEventListener("change", regenerate);
 
   stepSizeInput?.addEventListener("input", () => {
+    stopAnimation();
     state.stepSize = Number(stepSizeInput.value);
     syncLabels();
     debouncedRegenerate();
