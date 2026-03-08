@@ -49,7 +49,7 @@ I’m a final-year PhD student at *QMUL*, researching deep learning methods for 
   A particularly challenge is the **curse of dimensionality** in particle filtering: as the dimension of the state space increases, particle weights tend to collapse (a phenomenon often called **particle degeneracy**), effectively leaving only one particle with significant weight. I’m curious about current research directions that combine **probabilistic modelling with machine learning** to address these issues.
 
 - **Optimisation & Parameter Inference**  
-  During my undergraduate studies I worked on optimisation-based parameter inference: simulating a simple stochastic process and then estimating its parameters using the **[Expectation–Maximisation (EM) algorithm](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)**.
+  During my undergraduate studies I worked on optimisation-based parameter inference: simulating a simple **[Hawkes process](https://en.wikipedia.org/wiki/Hawkes_process)** and then estimating its parameters using the **[Expectation–Maximisation (EM) algorithm](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)**.
 
 - **Macroeconomic Time-Series Modelling**  
   For my MSc project I tested the **[Generalised Network Autoregressive (GNAR) time series model](https://cran.r-project.org/web/packages/GNAR/index.html)** on a network of interacting macroeconomic variables. The goal was to model relationships between different nodes in the network and use these dynamics to forecast inflation rates. 
