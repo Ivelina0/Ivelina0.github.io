@@ -967,7 +967,7 @@ footer {
   padding: 0.8rem;
 }
 
-#brownian-canvas {
+.brownian-hero #brownian-canvas {
   width: 100%;
   height: 230px;
   border-radius: 10px;
@@ -982,8 +982,66 @@ footer {
   color: var(--global-text-color-light);
 }
 
-.fractal-lab {
-  margin-top: 1rem;
+.fractal-family-intro {
+  border: 1px solid rgba(255, 126, 227, 0.24);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(145deg, rgba(18, 12, 28, 0.78), rgba(10, 8, 16, 0.6));
+  box-shadow:
+    0 12px 30px rgba(12, 7, 19, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.fractal-family-intro p {
+  margin-bottom: 0.6rem;
+}
+
+.fractal-family-intro p:last-child {
+  margin-bottom: 0;
+}
+
+.fractal-stack {
+  display: grid;
+  gap: 1.6rem;
+}
+
+.fractal-stack > section > h2 {
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.01em;
+}
+
+.fractal-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  border: 1px solid rgba(255, 126, 227, 0.2);
+  border-radius: 16px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(155deg, rgba(17, 11, 26, 0.82), rgba(10, 8, 17, 0.6));
+  backdrop-filter: blur(6px);
+  box-shadow:
+    0 12px 30px rgba(12, 7, 19, 0.35),
+    0 0 0 1px rgba(255, 126, 227, 0.05) inset;
+}
+
+.fractal-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fractal-meta h3 {
+  margin-bottom: 0.15rem;
+}
+
+.fractal-meta p {
+  margin: 0;
+}
+
+.fractal-view {
+  min-width: 0;
 }
 
 .fractal-controls {
@@ -991,22 +1049,33 @@ footer {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.55rem;
-  margin-bottom: 0.8rem;
+  margin-top: 0.3rem;
 }
 
 .fractal-controls label {
   margin: 0;
-  font-size: 0.86rem;
+  font-size: 0.85rem;
+  color: var(--global-text-color-light);
 }
 
-.fractal-controls select,
+.fractal-controls input[type='range'] {
+  min-width: 140px;
+}
+
 .fractal-controls input,
-.fractal-controls button {
-  border: 1px solid var(--global-divider-color);
-  border-radius: 8px;
-  background: var(--global-card-bg-color);
+.fractal-controls button,
+.fractal-controls select,
+.fractal-controls span {
+  border-radius: 10px;
+}
+
+.fractal-controls input,
+.fractal-controls button,
+.fractal-controls select {
+  border: 1px solid rgba(158, 169, 221, 0.35);
+  background: rgba(19, 13, 28, 0.75);
   color: var(--global-text-color);
-  padding: 0.2rem 0.5rem;
+  padding: 0.25rem 0.55rem;
 }
 
 .fractal-controls button {
@@ -1014,42 +1083,46 @@ footer {
 }
 
 .fractal-controls button:hover {
-  border-color: var(--global-theme-color);
+  border-color: rgba(236, 126, 220, 0.8);
+  box-shadow: 0 0 0 1px rgba(236, 126, 220, 0.18);
 }
 
-.fractal-controls button[aria-pressed='true'] {
-  border-color: var(--global-theme-color);
-  box-shadow: 0 0 0 1px rgba(158, 169, 221, 0.35);
-}
-
-.fractal-status {
+.fractal-controls span {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 3rem;
-  padding: 0.14rem 0.5rem;
-  border-radius: 999px;
+  min-width: 2.6rem;
+  padding: 0.16rem 0.45rem;
   border: 1px solid rgba(158, 169, 221, 0.32);
   background: rgba(20, 26, 44, 0.72);
-  color: #cfd5ef;
-  font-size: 0.76rem;
-  letter-spacing: 0.02em;
+  font-size: 0.78rem;
 }
 
-#fractal-canvas {
+#mandelbrot-canvas,
+#julia-canvas,
+#koch-canvas,
+#barnsley-canvas,
+#brownian-canvas {
   width: 100%;
-  height: 480px;
+  height: 320px;
   display: block;
   border-radius: 12px;
   border: 1px solid rgba(255, 66, 208, 0.24);
-  box-shadow: 0 0 18px rgba(255, 66, 208, 0.18);
   background: #050308;
+  box-shadow: 0 0 20px rgba(255, 66, 208, 0.14);
 }
 
-.fractal-help {
-  margin-top: 0.65rem;
-  color: var(--global-text-color-light);
-  font-size: 0.85rem;
+@media (min-width: 980px) {
+  .fractal-section {
+    grid-template-columns: minmax(260px, 0.95fr) minmax(0, 1.6fr);
+    align-items: stretch;
+    padding: 1.1rem;
+  }
+
+  .fractal-view {
+    display: flex;
+    align-items: stretch;
+  }
 }
 
 .cv-download-box {
