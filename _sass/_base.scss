@@ -1118,6 +1118,14 @@ footer {
   background: #050308;
   box-shadow: 0 0 20px rgba(255, 66, 208, 0.14);
   touch-action: none;
+  cursor: grab;
+}
+
+#mandelbrot-canvas.is-dragging,
+#julia-canvas.is-dragging,
+#barnsley-canvas.is-dragging,
+#brownian-canvas.is-dragging {
+  cursor: grabbing;
 }
 
 @media (min-width: 980px) {

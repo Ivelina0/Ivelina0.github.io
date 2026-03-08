@@ -16,25 +16,44 @@ function clamp(v, lo, hi) {
   return Math.max(lo, Math.min(hi, v));
 }
 
-function getFractalColor(iter, maxIter, x, y) {
-  if (iter >= maxIter) return [5, 3, 10];
+function debounce(fn, delay = 100) {
+  let timer = 0;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = window.setTimeout(() => fn(...args), delay);
+  };
+}
 
-  const abs = Math.max(1.000001, Math.sqrt(x * x + y * y));
-  const smooth = iter + 1 - Math.log(Math.log(abs)) / Math.log(2);
-  const t = Math.max(0, Math.min(1, smooth / maxIter));
-  const mapped = Math.pow(t, 0.85) * (FRACTAL_PALETTE.length - 1);
-
-  const i0 = Math.floor(mapped);
-  const i1 = Math.min(FRACTAL_PALETTE.length - 1, i0 + 1);
-  const f = mapped - i0;
+function paletteColor(t) {
+  const tt = clamp(t, 0, 1);
+  const curved = Math.pow(tt, 0.82);
+  const n = FRACTAL_PALETTE.length - 1;
+  const idx = curved * n;
+  const i0 = Math.floor(idx);
+  const i1 = Math.min(n, i0 + 1);
+  const f = idx - i0;
   const c0 = FRACTAL_PALETTE[i0];
   const c1 = FRACTAL_PALETTE[i1];
 
-  return [
-    Math.floor(lerp(c0[0], c1[0], f)),
-    Math.floor(lerp(c0[1], c1[1], f)),
-    Math.floor(lerp(c0[2], c1[2], f)),
-  ];
+  let r = lerp(c0[0], c1[0], f);
+  let g = lerp(c0[1], c1[1], f);
+  let b = lerp(c0[2], c1[2], f);
+
+  const glow = 0.12 * (1 - Math.cos(Math.PI * tt));
+  r = r + (255 - r) * glow * 0.24;
+  g = g + (255 - g) * glow * 0.16;
+  b = b + (255 - b) * glow * 0.3;
+
+  return [Math.floor(r), Math.floor(g), Math.floor(b)];
+}
+
+function getEscapeColor(iter, maxIter, zx, zy) {
+  if (iter >= maxIter) return [5, 3, 10];
+
+  const abs2 = zx * zx + zy * zy;
+  const nu = iter + 1 - Math.log2(Math.max(1e-9, Math.log(Math.max(abs2, 1.000001))));
+  const t = clamp(nu / maxIter, 0, 1);
+  return paletteColor(t);
 }
 
 function resizeCanvasForDPR(canvas, targetHeight = 320) {
@@ -128,6 +147,7 @@ function bindPanZoom(canvas, state, scheduleRender) {
     state.dragStartY = e.clientY;
     state.dragCenterX = state.centerX;
     state.dragCenterY = state.centerY;
+    canvas.classList.add("is-dragging");
   });
 
   window.addEventListener("mousemove", (e) => {
@@ -143,11 +163,151 @@ function bindPanZoom(canvas, state, scheduleRender) {
   });
 
   window.addEventListener("mouseup", () => {
+    if (!state.dragging) return;
     state.dragging = false;
+    canvas.classList.remove("is-dragging");
   });
 }
 
+function bindScreenPanZoom(canvas, state, scheduleRender, options = {}) {
+  const minZoom = options.minZoom ?? 0.6;
+  const maxZoom = options.maxZoom ?? 8;
+
+  canvas.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const cx = rect.width * 0.5;
+    const cy = rect.height * 0.5;
+
+    const oldZoom = state.userZoom;
+    const nextZoom = clamp(oldZoom * (e.deltaY < 0 ? 1.1 : 0.91), minZoom, maxZoom);
+    const ratio = nextZoom / oldZoom;
+
+    state.panX = (mx - cx) - ((mx - cx - state.panX) * ratio);
+    state.panY = (my - cy) - ((my - cy - state.panY) * ratio);
+    state.userZoom = nextZoom;
+
+    scheduleRender();
+  }, { passive: false });
+
+  canvas.addEventListener("mousedown", (e) => {
+    state.dragging = true;
+    state.dragStartX = e.clientX;
+    state.dragStartY = e.clientY;
+    state.dragPanX = state.panX;
+    state.dragPanY = state.panY;
+    canvas.classList.add("is-dragging");
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (!state.dragging) return;
+    state.panX = state.dragPanX + (e.clientX - state.dragStartX);
+    state.panY = state.dragPanY + (e.clientY - state.dragStartY);
+    scheduleRender();
+  });
+
+  window.addEventListener("mouseup", () => {
+    if (!state.dragging) return;
+    state.dragging = false;
+    canvas.classList.remove("is-dragging");
+  });
+}
+
+function startProgressiveEscapeRender(canvas, state, mode = "mandelbrot") {
+  const token = (canvas.__renderToken || 0) + 1;
+  canvas.__renderToken = token;
+
+  const { ctx, width, height } = resizeCanvasForDPR(canvas, 330);
+  const image = ctx.createImageData(width, height);
+  const data = image.data;
+  const aspect = width / height;
+
+  const passBlocks = [8, 4, 2, 1];
+  let passIndex = 0;
+  let y = 0;
+  let x = 0;
+
+  function samplePixel(px, py) {
+    const re = state.centerX + ((px / width) - 0.5) * state.scale * aspect;
+    const im = state.centerY + ((py / height) - 0.5) * state.scale;
+
+    let zx = mode === "mandelbrot" ? 0 : re;
+    let zy = mode === "mandelbrot" ? 0 : im;
+    const cRe = mode === "mandelbrot" ? re : state.cRe;
+    const cIm = mode === "mandelbrot" ? im : state.cIm;
+
+    let iter = 0;
+    while (iter < state.maxIter) {
+      const zx2 = zx * zx - zy * zy + cRe;
+      const zy2 = 2 * zx * zy + cIm;
+      zx = zx2;
+      zy = zy2;
+      if (zx * zx + zy * zy > 4) break;
+      iter++;
+    }
+
+    return getEscapeColor(iter, state.maxIter, zx, zy);
+  }
+
+  function paintBlock(px, py, block, color) {
+    const xEnd = Math.min(width, px + block);
+    const yEnd = Math.min(height, py + block);
+
+    for (let yy = py; yy < yEnd; yy++) {
+      const rowOffset = yy * width * 4;
+      for (let xx = px; xx < xEnd; xx++) {
+        const idx = rowOffset + xx * 4;
+        data[idx] = color[0];
+        data[idx + 1] = color[1];
+        data[idx + 2] = color[2];
+        data[idx + 3] = 255;
+      }
+    }
+  }
+
+  function step() {
+    if (canvas.__renderToken !== token) return;
+
+    const block = passBlocks[passIndex];
+    const budget = 26000;
+    let work = 0;
+
+    while (y < height && work < budget) {
+      const color = samplePixel(x, y);
+      paintBlock(x, y, block, color);
+      work += block * block;
+
+      x += block;
+      if (x >= width) {
+        x = 0;
+        y += block;
+      }
+    }
+
+    ctx.putImageData(image, 0, 0);
+
+    if (y < height) {
+      requestAnimationFrame(step);
+      return;
+    }
+
+    passIndex += 1;
+    if (passIndex < passBlocks.length) {
+      x = 0;
+      y = 0;
+      requestAnimationFrame(step);
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
 function renderEscapeFractal(canvas, state, mode = "mandelbrot") {
+  const token = (canvas.__renderToken || 0) + 1;
+  canvas.__renderToken = token;
+
   const { ctx, width, height } = resizeCanvasForDPR(canvas, 330);
   const image = ctx.createImageData(width, height);
   const data = image.data;
@@ -173,7 +333,7 @@ function renderEscapeFractal(canvas, state, mode = "mandelbrot") {
         iter++;
       }
 
-      const [r, g, b] = getFractalColor(iter, state.maxIter, zx, zy);
+      const [r, g, b] = getEscapeColor(iter, state.maxIter, zx, zy);
       const idx = (y * width + x) * 4;
       data[idx] = r;
       data[idx + 1] = g;
@@ -206,10 +366,11 @@ function initMandelbrot() {
   };
 
   function render() {
-    renderEscapeFractal(canvas, state, "mandelbrot");
+    startProgressiveEscapeRender(canvas, state, "mandelbrot");
   }
 
   const scheduleRender = createRenderScheduler(render);
+  const debouncedRender = debounce(scheduleRender, 80);
 
   function resetView() {
     state.centerX = -0.55;
@@ -223,8 +384,10 @@ function initMandelbrot() {
   iterInput?.addEventListener("input", () => {
     state.maxIter = Number(iterInput.value);
     iterValue.textContent = String(state.maxIter);
-    scheduleRender();
+    debouncedRender();
   });
+
+  iterInput?.addEventListener("change", scheduleRender);
 
   resetBtn?.addEventListener("click", resetView);
 
@@ -259,10 +422,11 @@ function initJulia() {
   };
 
   function render() {
-    renderEscapeFractal(canvas, state, "julia");
+    startProgressiveEscapeRender(canvas, state, "julia");
   }
 
   const scheduleRender = createRenderScheduler(render);
+  const debouncedRender = debounce(scheduleRender, 80);
 
   function syncLabels() {
     reValue.textContent = state.cRe.toFixed(2);
@@ -279,14 +443,17 @@ function initJulia() {
   reInput?.addEventListener("input", () => {
     state.cRe = Number(reInput.value);
     syncLabels();
-    scheduleRender();
+    debouncedRender();
   });
 
   imInput?.addEventListener("input", () => {
     state.cIm = Number(imInput.value);
     syncLabels();
-    scheduleRender();
+    debouncedRender();
   });
+
+  reInput?.addEventListener("change", scheduleRender);
+  imInput?.addEventListener("change", scheduleRender);
 
   resetBtn?.addEventListener("click", resetView);
 
@@ -375,14 +542,17 @@ function initKoch() {
   }
 
   const scheduleRender = createRenderScheduler(render);
+  const debouncedRender = debounce(scheduleRender, 70);
 
   depthValue.textContent = String(depth);
 
   depthInput?.addEventListener("input", () => {
     depth = Number(depthInput.value);
     depthValue.textContent = String(depth);
-    scheduleRender();
+    debouncedRender();
   });
+
+  depthInput?.addEventListener("change", scheduleRender);
 
   window.addEventListener("resize", scheduleRender);
   scheduleRender();
@@ -401,6 +571,14 @@ function initBarnsley() {
   const state = {
     pointCount: Number(pointsInput?.value || 50000),
     zoom: Number(zoomInput?.value || 1),
+    userZoom: 1,
+    panX: 0,
+    panY: 0,
+    dragging: false,
+    dragStartX: 0,
+    dragStartY: 0,
+    dragPanX: 0,
+    dragPanY: 0,
     points: [],
   };
 
@@ -409,7 +587,7 @@ function initBarnsley() {
     let y = (Math.random() - 0.5) * 0.4;
     const out = [];
 
-    const burnIn = 80;
+    const burnIn = 90;
     const total = state.pointCount + burnIn;
 
     for (let i = 0; i < total; i++) {
@@ -444,23 +622,63 @@ function initBarnsley() {
 
     const { ctx, width, height } = resizeCanvasForDPR(canvas, 330);
     ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = "#050308";
+    const bgGrad = ctx.createRadialGradient(
+      width * 0.5,
+      height * 0.3,
+      20,
+      width * 0.5,
+      height * 0.5,
+      Math.max(width, height)
+    );
+    bgGrad.addColorStop(0, "rgba(20, 14, 33, 1)");
+    bgGrad.addColorStop(1, "rgba(5, 3, 8, 1)");
+    ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, width, height);
 
-    const fit = fitPointsToCanvas(state.points, width, height, 18);
+    const fit = fitPointsToCanvas(state.points, width, height, 22);
     const centerX = width * 0.5;
-    const centerY = height * 0.55;
+    const centerY = height * 0.5;
+    const localZoom = state.zoom * state.userZoom;
+    const image = ctx.createImageData(width, height);
+    const data = image.data;
 
     for (const p of state.points) {
       const mapped = fit.map(p);
-      const px = centerX + (mapped.x - centerX) * state.zoom;
-      const py = centerY + (mapped.y - centerY) * state.zoom;
-      ctx.fillStyle = "rgba(70, 218, 140, 0.6)";
-      ctx.fillRect(px, py, 1.05, 1.05);
+      const px = centerX + (mapped.x - centerX) * localZoom + state.panX;
+      const py = centerY + (mapped.y - centerY) * localZoom + state.panY;
+      const x = Math.round(px);
+      const y = Math.round(py);
+
+      if (x < 0 || x >= width || y < 0 || y >= height) continue;
+
+      const t = clamp(py / height, 0, 1);
+      const r = Math.floor(40 + 60 * (1 - t));
+      const g = Math.floor(165 + 75 * (1 - t));
+      const b = Math.floor(90 + 40 * t);
+      const idx = (y * width + x) * 4;
+
+      data[idx] = Math.min(255, data[idx] + r);
+      data[idx + 1] = Math.min(255, data[idx + 1] + g);
+      data[idx + 2] = Math.min(255, data[idx + 2] + b);
+      data[idx + 3] = 255;
     }
+
+    ctx.putImageData(image, 0, 0);
+
+    ctx.globalCompositeOperation = "screen";
+    ctx.strokeStyle = "rgba(92, 240, 162, 0.22)";
+    ctx.lineWidth = 1;
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = "rgba(96, 240, 168, 0.2)";
+    ctx.strokeRect(0.5, 0.5, width - 1, height - 1);
+    ctx.globalCompositeOperation = "source-over";
   }
 
   const scheduleDraw = createRenderScheduler(draw);
+  const debouncedRegenerate = debounce(() => {
+    generatePoints();
+    scheduleDraw();
+  }, 100);
 
   function syncLabels() {
     pointsValue.textContent = String(state.pointCount);
@@ -475,6 +693,12 @@ function initBarnsley() {
   pointsInput?.addEventListener("input", () => {
     state.pointCount = Number(pointsInput.value);
     syncLabels();
+    debouncedRegenerate();
+  });
+
+  pointsInput?.addEventListener("change", () => {
+    state.pointCount = Number(pointsInput.value);
+    syncLabels();
     generatePoints();
     scheduleDraw();
   });
@@ -482,6 +706,15 @@ function initBarnsley() {
   zoomInput?.addEventListener("input", () => {
     state.zoom = Number(zoomInput.value);
     syncLabels();
+    scheduleDraw();
+  });
+
+  bindScreenPanZoom(canvas, state, scheduleDraw, { minZoom: 0.55, maxZoom: 8 });
+
+  canvas.addEventListener("dblclick", () => {
+    state.userZoom = 1;
+    state.panX = 0;
+    state.panY = 0;
     scheduleDraw();
   });
 
@@ -504,20 +737,30 @@ function initBrownian() {
   const state = {
     steps: Number(stepsInput?.value || 1200),
     stepSize: Number(stepSizeInput?.value || 1.7),
+    userZoom: 1,
+    panX: 0,
+    panY: 0,
+    dragging: false,
+    dragStartX: 0,
+    dragStartY: 0,
+    dragPanX: 0,
+    dragPanY: 0,
     paths: [],
   };
 
   function generatePaths() {
-    const nPaths = 8;
+    const nPaths = 9;
     const paths = [];
     for (let p = 0; p < nPaths; p++) {
       const points = [{ x: 0, y: 0 }];
       let x = 0;
       let y = 0;
 
+      const localStep = state.stepSize * (0.82 + 0.36 * Math.random());
+
       for (let i = 0; i < state.steps; i++) {
-        x += (Math.random() - 0.5) * 2 * state.stepSize;
-        y += (Math.random() - 0.5) * 2 * state.stepSize;
+        x += (Math.random() - 0.5) * 2 * localStep;
+        y += (Math.random() - 0.5) * 2 * localStep;
         points.push({ x, y });
       }
 
@@ -531,7 +774,10 @@ function initBrownian() {
 
     const { ctx, width, height } = resizeCanvasForDPR(canvas, 330);
     ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = "#050308";
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, height);
+    bgGrad.addColorStop(0, "rgba(17, 11, 28, 1)");
+    bgGrad.addColorStop(1, "rgba(5, 3, 8, 1)");
+    ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, width, height);
 
     const all = [];
@@ -540,33 +786,63 @@ function initBrownian() {
     }
     const fit = fitPointsToCanvas(all, width, height, 24);
 
+    const cx = width * 0.5;
+    const cy = height * 0.5;
+
+    function transform(point) {
+      const base = fit.map(point);
+      return {
+        x: cx + (base.x - cx) * state.userZoom + state.panX,
+        y: cy + (base.y - cy) * state.userZoom + state.panY,
+      };
+    }
+
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+
     state.paths.forEach((path, index) => {
       const [r, g, b] = FRACTAL_PALETTE[index % FRACTAL_PALETTE.length];
-      ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.34)`;
-      ctx.lineWidth = 1;
-      ctx.shadowBlur = 3;
-      ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.18)`;
+      const start = transform(path[0]);
 
       ctx.beginPath();
-      const start = fit.map(path[0]);
       ctx.moveTo(start.x, start.y);
 
       for (let i = 1; i < path.length; i++) {
-        const mapped = fit.map(path[i]);
+        const mapped = transform(path[i]);
         ctx.lineTo(mapped.x, mapped.y);
       }
+
+      ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.14)`;
+      ctx.lineWidth = 2.6;
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.08)`;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(start.x, start.y);
+      for (let i = 1; i < path.length; i++) {
+        const mapped = transform(path[i]);
+        ctx.lineTo(mapped.x, mapped.y);
+      }
+      ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.34)`;
+      ctx.lineWidth = 0.9;
+      ctx.shadowBlur = 0;
       ctx.stroke();
     });
 
     const [rr, gg, bb] = FRACTAL_PALETTE[3];
-    const origin = fit.map({ x: 0, y: 0 });
+    const origin = transform({ x: 0, y: 0 });
     ctx.fillStyle = `rgba(${rr}, ${gg}, ${bb}, 0.7)`;
     ctx.beginPath();
-    ctx.arc(origin.x, origin.y, 2.3, 0, Math.PI * 2);
+    ctx.arc(origin.x, origin.y, 2.5, 0, Math.PI * 2);
     ctx.fill();
   }
 
   const scheduleDraw = createRenderScheduler(draw);
+  const debouncedRegenerate = debounce(() => {
+    generatePaths();
+    scheduleDraw();
+  }, 95);
 
   function syncLabels() {
     stepsValue.textContent = String(state.steps);
@@ -583,13 +859,26 @@ function initBrownian() {
   stepsInput?.addEventListener("input", () => {
     state.steps = Number(stepsInput.value);
     syncLabels();
-    regenerate();
+    debouncedRegenerate();
   });
+
+  stepsInput?.addEventListener("change", regenerate);
 
   stepSizeInput?.addEventListener("input", () => {
     state.stepSize = Number(stepSizeInput.value);
     syncLabels();
-    regenerate();
+    debouncedRegenerate();
+  });
+
+  stepSizeInput?.addEventListener("change", regenerate);
+
+  bindScreenPanZoom(canvas, state, scheduleDraw, { minZoom: 0.7, maxZoom: 5 });
+
+  canvas.addEventListener("dblclick", () => {
+    state.userZoom = 1;
+    state.panX = 0;
+    state.panY = 0;
+    scheduleDraw();
   });
 
   window.addEventListener("resize", scheduleDraw);
