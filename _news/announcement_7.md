@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I made a website for the hackathon. You can find it here: [Women in STEM Hackathon website](https://ivelina0.github.io/women_in_stem_hackathon.github.io/index.html).
+I made a website for the hackathon. You can find it here: [Women in STEM Hackathon website](https://ivelina0.github.io/women-in-stem-hackathon/).
