@@ -14,8 +14,8 @@ magenta_starfield: true
 <!-- markdownlint-disable MD033 -->
 
 <div class="fractal-family-intro">
-  <p><strong>Fractal Lab</strong> is my curated collection of interactive mathematical visuals — an interactive mathematical playground for the fractals I really like and keep returning to.</p>
-  <p>Some sections are rooted in complex dynamics, others in recursive geometry, stochastic ideas, and iterated systems. This page is intentionally simple and hands-on: each card gives a compact context and a live canvas to explore.</p>
+  <p><strong>Fractal Lab</strong> is my playground for the fractals I really like and keep returning to.</p>
+  <p>Some sections are rooted in complex dynamics, others in recursive geometry, stochastic ideas, and iterated systems.</p>
 </div>
 
 ---
