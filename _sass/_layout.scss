@@ -12,9 +12,15 @@ body {
   }
 }
 
-body.fixed-top-nav {
-  // Add some padding for the nav-bar.
+body.mobile-fixed-top-nav {
+  // Add padding only when the navbar is fixed on mobile.
   padding-top: 56px;
+}
+
+@media (min-width: 576px) {
+  body.mobile-fixed-top-nav {
+    padding-top: 0;
+  }
 }
 
 body.sticky-bottom-footer {

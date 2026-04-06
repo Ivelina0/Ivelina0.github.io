@@ -172,6 +172,22 @@ blockquote {
   opacity: 0.95;
 }
 
+.navbar.mobile-fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+@media (min-width: 576px) {
+  .navbar.mobile-fixed-top {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+  }
+}
+
 .navbar .dropdown-menu {
   background-color: var(--global-bg-color);
   border: 1px solid var(--global-divider-color);

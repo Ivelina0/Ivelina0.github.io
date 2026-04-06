@@ -10,7 +10,7 @@
   </head>
 
   <!-- Body -->
-  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %} {% if site.enable_galaxy_math_theme %}galaxy-math{% endif %} {% if site.enable_brownian_about %}brownian-background-page{% endif %} {% if page.magenta_starfield %}magenta-starfield-page{% endif %}">
+  <body class="{% if site.navbar_fixed %}mobile-fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %} {% if site.enable_galaxy_math_theme %}galaxy-math{% endif %} {% if site.enable_brownian_about %}brownian-background-page{% endif %} {% if page.magenta_starfield %}magenta-starfield-page{% endif %}">
 
     <!-- Header -->
     {%- include header.html %}
