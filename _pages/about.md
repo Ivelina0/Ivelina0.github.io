@@ -78,7 +78,7 @@ I’m a final-year PhD student at *QMUL*, researching deep learning methods for 
 
 <div class="cv-download-box mt-4">
   <strong>Download my CV here</strong> —
-  <a class="cv-download-link" href="{{ '/assets/pdf/Ivelina_Mladenova_CV.pdf' | relative_url }}" target="_blank" rel="noopener">Ivelina Mladenova CV (PDF)</a>
+  <a class="cv-download-link" href="{{ '/assets/pdf/Ivelina_Mladenova_CV_updated_06_04_2026.pdf' | relative_url }}" target="_blank" rel="noopener">Ivelina Mladenova CV (PDF)</a>
 </div>
 
 <div class="cv-download-box mt-3">
