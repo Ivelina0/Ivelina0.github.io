@@ -164,6 +164,8 @@ blockquote {
 // Navbar customization
 
 .navbar {
+  position: relative;
+  z-index: 20;
   box-shadow: none;
   border-bottom: 1px solid var(--global-divider-color);
   background-color: var(--global-bg-color);
@@ -777,6 +779,7 @@ progress {
   left: 0;
   top: 56px;
   z-index: 10;
+  pointer-events: none;
 
   /* Dimensions */
   width: 100%;
@@ -817,6 +820,7 @@ progress::-moz-progress-bar {
   left: 0;
   height: 5px;
   display: block;
+  pointer-events: none;
 }
 
 .progress-bar {
