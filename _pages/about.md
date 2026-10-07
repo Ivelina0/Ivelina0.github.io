@@ -15,7 +15,7 @@ hide_footer: true
 Hi you! I’m **Ivelina**, but most people call me **Eve**.  
 
 <div class="about-intro-box mt-3 mb-3">
-I’m a final-year PhD student at *QMUL*, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. I am not experimenting with Black–Scholes all day, I promise!.
+I’m a final-year PhD student at *QMUL*, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. I am not experimenting with Black–Scholes all day, I promise!
 </div>
 
 ---
@@ -36,7 +36,7 @@ I’m a final-year PhD student at *QMUL*, researching deep learning methods for 
   Since I need to solve high-dimensional problems, I have spent time learning and trying some modern machine-learning approaches to PDEs and operators, including [Physics-Informed Neural Networks (PINNs)](https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125), [Deep Galerkin Methods (DGM)](https://arxiv.org/abs/2305.06000), and operator-learning architectures such as [DeepONets](https://arxiv.org/abs/1910.03193) and [Fourier-DeepONets](https://arxiv.org/abs/2305.17289). These approaches combine ideas from **functional analysis**, numerical analysis, and machine learning to approximate solutions of complex dynamical systems.
 
 - **Mathematical Foundations**  
-  But theoretically seaking, many of these topics ultimately connect back to tools from [functional analysis](https://en.wikipedia.org/wiki/Functional_analysis), which provides the framework for studying operators, PDEs, and function spaces that arise in stochastic modelling.
+  But theoretically speaking, many of these topics ultimately connect back to tools from [functional analysis](https://en.wikipedia.org/wiki/Functional_analysis), which provides the framework for studying operators, PDEs, and function spaces that arise in stochastic modelling.
 
 #### 2. Personal interests 
 
@@ -46,7 +46,7 @@ I’m a final-year PhD student at *QMUL*, researching deep learning methods for 
 - **State-Space Models, Kalman Filtering & Particle Filtering**  
   Since my undergrad I have been interested in filtering and inference in **[state-space models](https://en.wikipedia.org/wiki/State-space_model)**, including methods such as the **[Kalman filter](https://en.wikipedia.org/wiki/Kalman_filter)** and **[particle filters](https://en.wikipedia.org/wiki/Particle_filter)**.  
 
-  A particularly challenge is the **curse of dimensionality** in particle filtering: as the dimension of the state space increases, particle weights tend to collapse (a phenomenon often called **particle degeneracy**), effectively leaving only one particle with significant weight. I’m curious about current research directions that combine **probabilistic modelling with machine learning** to address these issues.
+  A particular challenge is the **curse of dimensionality** in particle filtering: as the dimension of the state space increases, particle weights tend to collapse (a phenomenon often called **particle degeneracy**), effectively leaving only one particle with significant weight. I’m curious about current research directions that combine **probabilistic modelling with machine learning** to address these issues.
 
 - **Optimisation & Parameter Inference**  
   During my undergraduate studies I worked on optimisation-based parameter inference: simulating a simple **[Hawkes process](https://en.wikipedia.org/wiki/Hawkes_process)** and then estimating its parameters using the **[Expectation–Maximisation (EM) algorithm](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)**.
@@ -57,7 +57,7 @@ I’m a final-year PhD student at *QMUL*, researching deep learning methods for 
 
 ---
 <div class="about-groups-box mt-3 mb-3">
-  <p><strong>Groups I take part of:</strong></p>
+  <p><strong>Groups I take part in:</strong></p>
   <ul>
     <li><a href="https://maths4dl.ac.uk/">Math4DL</a></li>
     <li><a href="https://www.qmul.ac.uk/deri/">DERI</a></li>
