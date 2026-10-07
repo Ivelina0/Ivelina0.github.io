@@ -24,28 +24,31 @@ I’m a final-year PhD student at Queen Mary University of London (QMUL), using 
 My PhD sits where stochastic modelling meets machine learning. I work with correlated, high-dimensional volatility models such as **Heston** and **Wishart processes**, where the covariance structure itself evolves over time. Pricing under these models leads to high-dimensional **PDEs** and **Fourier-based pricing operators**, which classical tools (**Monte Carlo**, **Fourier pricing**, numerical PDE solvers) struggle to scale to. So I build neural approaches instead: [Physics-Informed Neural Networks (PINNs)](https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125) and [Deep Galerkin Methods (DGM)](https://arxiv.org/abs/2305.06000). Underneath it all is [functional analysis](https://en.wikipedia.org/wiki/Functional_analysis), the framework for the operators and function spaces these problems live in.
 
 ### Industry experience
+<small class="text-muted">(in ML, during the PhD)</small>
 
 - **Blue Raven AI** (Oct 2025 – Jun 2026: a 6-month internship, extended by 2 months)  
   Researched systematic equity trading strategies on 1-minute data (2015–2024). There was no existing infrastructure, so I built it from scratch: data pipelines (including SQL to load the data), feature engineering and a historical simulation framework, then researched and backtested strategies on top of it. *(Proprietary work, so no public code.)*
 
+<small class="text-muted">Outside ML: at 18 I completed an apprenticeship as an accountant at a startup, where I built a discounted cash flow (DCF) model for my apprenticeship provider. During my BSc sandwich year I then did a 1-year data placement at Sainsbury's, using statistical methods such as hypothesis testing to measure how promotions shifted customer behaviour and which customer characteristics drove the response.</small>
+
 ### Before the PhD
 
-Projects and coursework from my BSc, MSc and first internship. All written before ChatGPT existed: just me, the documentation and a lot of forum threads, and I enjoyed every bit of it.
-
-- **BSc dissertation: optimisation & parameter inference**  
-  MM and EM algorithms, including simulating a **[Hawkes process](https://en.wikipedia.org/wiki/Hawkes_process)** and estimating its parameters with the **[Expectation–Maximisation (EM) algorithm](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)**. [Code](https://github.com/Ivelina0/BSc-Dissertation-Numerical-Experiments)
-
-- **BSc coursework: time series analysis in R**  
-  [Code](https://github.com/Ivelina0/R-projects/tree/main)
-
-- **Earth-i internship (2021): earth observation**  
-  Gathered, cleaned and analysed Sentinel SAR radar images of copper smelters, trying my own clustering approaches (k-means) to detect changes in activity. [Code](https://github.com/Ivelina0/EarthI-Internship-Earth-Observation-Project)
+Projects and coursework from my BSc, MSc and Earth-i internship. All written before ChatGPT existed: just me, the documentation and a lot of forum threads, and I enjoyed every bit of it.
 
 - **MSc thesis (Imperial): network time series**  
   Tested the **[Generalised Network Autoregressive (GNAR) model](https://cran.r-project.org/web/packages/GNAR/index.html)** on a network of macroeconomic variables to forecast inflation, in R. [Code](https://github.com/Ivelina0/MSc-Imperial-Courseworks)
 
 - **MSc coursework: particle filtering for stochastic volatility**  
   [Notebook](https://github.com/Ivelina0/MSc-Imperial-Courseworks/blob/main/ASM_CW_code.ipynb). This is where I met the **curse of dimensionality**: as the state dimension grows, particle weights collapse onto a single particle (**particle degeneracy**). I’m still curious about work combining **probabilistic modelling with machine learning** to fix this.
+
+- **Earth-i internship (2021): earth observation**  
+  Gathered, cleaned and analysed Sentinel SAR radar images of copper smelters, trying my own clustering approaches (k-means) to detect changes in activity. [Code](https://github.com/Ivelina0/EarthI-Internship-Earth-Observation-Project)
+
+- **BSc dissertation: optimisation & parameter inference**  
+  MM and EM algorithms, including simulating a **[Hawkes process](https://en.wikipedia.org/wiki/Hawkes_process)** and estimating its parameters with the **[Expectation–Maximisation (EM) algorithm](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)**. [Code](https://github.com/Ivelina0/BSc-Dissertation-Numerical-Experiments)
+
+- **BSc coursework: time series analysis in R**  
+  [Code](https://github.com/Ivelina0/R-projects/tree/main)
 
 
 ---
