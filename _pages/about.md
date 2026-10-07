@@ -23,9 +23,6 @@ I’m a final-year PhD student at *QMUL*, researching deep learning methods for 
 
 #### 1. PhD Related 
 
-- **Probability & Stochastic Processes**  
-  I’m generally more interested in the *analysis* of stochastic systems than purely geometric constructions.
-
 - **Stochastic Volatility & High-Dimensional Models**  
   A central theme in my work is modelling **correlated stochastic systems**, particularly in finance. I’m interested in volatility models such as **Heston** and **Wishart processes**, where the covariance structure itself evolves dynamically. More broadly, I like working with models that capture **high-dimensional dependence**, for example through evolving covariance matrices or integrated covariance processes across multiple assets.
 
@@ -39,9 +36,6 @@ I’m a final-year PhD student at *QMUL*, researching deep learning methods for 
   But theoretically speaking, many of these topics ultimately connect back to tools from [functional analysis](https://en.wikipedia.org/wiki/Functional_analysis), which provides the framework for studying operators, PDEs, and function spaces that arise in stochastic modelling.
 
 #### 2. Personal interests 
-
-- **Fractal & Fractional Analysis**  
-  I’m also interested in fractal behaviour that appears in stochastic systems and time series. This includes topics such as [fractional calculus](https://en.wikipedia.org/wiki/Fractional_calculus), [fractal derivatives](https://en.wikipedia.org/wiki/Fractal_derivative), and processes with long-memory such as [fractional Brownian motion](https://en.wikipedia.org/wiki/Fractional_Brownian_motion). Since I like applied maths, these can be used for modelling rough signals, persistent correlations, and multi-scale phenomena.
 
 - **State-Space Models, Kalman Filtering & Particle Filtering**  
   Since my undergrad I have been interested in filtering and inference in **[state-space models](https://en.wikipedia.org/wiki/State-space_model)**, including methods such as the **[Kalman filter](https://en.wikipedia.org/wiki/Kalman_filter)** and **[particle filters](https://en.wikipedia.org/wiki/Particle_filter)**.  
@@ -71,7 +65,7 @@ I’m a final-year PhD student at *QMUL*, researching deep learning methods for 
 ### Leadership:
 - Part of [Piscopia's](https://piscopia.co.uk/queen-mary-university-of-london-committee/) Local Committee.
 - QMUL PhD Rep since Nov 2022.
-- Lead the *Laws, Limits, and Randomness* contribution to the [History of Maths QMUL](https://www.seresearch.qmul.ac.uk/content/pce/ediresources/files/History_of_Maths_QMUL_2025.pdf).
+- Led the *Laws, Limits, and Randomness* contribution to the [History of Maths QMUL](https://www.seresearch.qmul.ac.uk/content/pce/ediresources/files/History_of_Maths_QMUL_2025.pdf).
 - Various miscellaneous activities: organise Christmas dinners, social sec of rowing, helping organise the [QMUL Undergraduate Research Seminars](https://www.qmul.ac.uk/maths/undergraduate/ugresearchseminar/ugresearchseminar).
 
 ---
