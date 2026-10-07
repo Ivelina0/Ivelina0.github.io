@@ -15,45 +15,44 @@ hide_footer: true
 Hi you! I’m **Ivelina**, but most people call me **Eve**.  
 
 <div class="about-intro-box mt-3 mb-3">
-I’m a final-year PhD student at *QMUL*, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. I am not experimenting with Black–Scholes all day, I promise!
+I’m a final-year PhD student at *QMUL*, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. I am not experimenting with Black–Scholes all day, I promise! After my third-year review I spent eight months as an intern at Blue Raven AI, working on intraday trading research, and I’m now back on the PhD writing my first paper.
 </div>
 
 ---
-### Interested in
+### Research
 
-#### 1. PhD Related 
+My PhD sits where stochastic modelling meets machine learning. I work with correlated, high-dimensional volatility models such as **Heston** and **Wishart processes**, where the covariance structure itself evolves over time. Pricing under these models leads to high-dimensional **PDEs** and **Fourier-based pricing operators**, which classical tools (**Monte Carlo**, **Fourier pricing**, numerical PDE solvers) struggle to scale to. So I build neural approaches instead: [Physics-Informed Neural Networks (PINNs)](https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125), [Deep Galerkin Methods (DGM)](https://arxiv.org/abs/2305.06000), and operator-learning architectures such as [DeepONets](https://arxiv.org/abs/1910.03193) and [Fourier-DeepONets](https://arxiv.org/abs/2305.17289). Underneath it all is [functional analysis](https://en.wikipedia.org/wiki/Functional_analysis), the framework for the operators and function spaces these problems live in.
 
-- **Stochastic Volatility & High-Dimensional Models**  
-  A central theme in my work is modelling **correlated stochastic systems**, particularly in finance. I’m interested in volatility models such as **Heston** and **Wishart processes**, where the covariance structure itself evolves dynamically. More broadly, I like working with models that capture **high-dimensional dependence**, for example through evolving covariance matrices or integrated covariance processes across multiple assets.
+### Industry experience
 
-- **Numerical Methods for Stochastic PDEs**  
-  Many of these models lead naturally to **partial differential equations** under some conditions. And for my PhD work I use computational approaches for solving high-dimensional PDEs, including **Monte Carlo methods**, **Fourier pricing techniques**, and numerical PDE solvers.
+- **Blue Raven AI** (Oct 2025 – Jun 2026: a 6-month internship, extended by 2 months)  
+  Researched systematic equity trading strategies on 1-minute data (2015–2024). There was no existing infrastructure, so I built it from scratch: data pipelines (including SQL to load the data), feature engineering and a historical simulation framework, then researched and backtested strategies on top of it. *(Proprietary work, so no public code.)*
 
-- **Neural PDE Solvers & Operator Learning**  
-  Since I need to solve high-dimensional problems, I have spent time learning and trying some modern machine-learning approaches to PDEs and operators, including [Physics-Informed Neural Networks (PINNs)](https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125), [Deep Galerkin Methods (DGM)](https://arxiv.org/abs/2305.06000), and operator-learning architectures such as [DeepONets](https://arxiv.org/abs/1910.03193) and [Fourier-DeepONets](https://arxiv.org/abs/2305.17289). These approaches combine ideas from **functional analysis**, numerical analysis, and machine learning to approximate solutions of complex dynamical systems.
+### Before the PhD
 
-- **Mathematical Foundations**  
-  But theoretically speaking, many of these topics ultimately connect back to tools from [functional analysis](https://en.wikipedia.org/wiki/Functional_analysis), which provides the framework for studying operators, PDEs, and function spaces that arise in stochastic modelling.
+Projects and coursework from my BSc, MSc and first internship. All written before ChatGPT existed: just me, the documentation and a lot of forum threads, and I enjoyed every bit of it.
 
-#### 2. Personal interests 
+- **BSc dissertation: optimisation & parameter inference**  
+  MM and EM algorithms, including simulating a **[Hawkes process](https://en.wikipedia.org/wiki/Hawkes_process)** and estimating its parameters with the **[Expectation–Maximisation (EM) algorithm](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)**. [Code](https://github.com/Ivelina0/BSc-Dissertation-Numerical-Experiments)
 
-- **State-Space Models, Kalman Filtering & Particle Filtering**  
-  Since my undergrad I have been interested in filtering and inference in **[state-space models](https://en.wikipedia.org/wiki/State-space_model)**, including methods such as the **[Kalman filter](https://en.wikipedia.org/wiki/Kalman_filter)** and **[particle filters](https://en.wikipedia.org/wiki/Particle_filter)**.  
+- **BSc coursework: time series analysis in R**  
+  [Code](https://github.com/Ivelina0/R-projects/tree/main)
 
-  A particular challenge is the **curse of dimensionality** in particle filtering: as the dimension of the state space increases, particle weights tend to collapse (a phenomenon often called **particle degeneracy**), effectively leaving only one particle with significant weight. I’m curious about current research directions that combine **probabilistic modelling with machine learning** to address these issues.
+- **Earth-i internship (2021): earth observation**  
+  Gathered, cleaned and analysed Sentinel SAR radar images of copper smelters, trying my own clustering approaches (k-means) to detect changes in activity. [Code](https://github.com/Ivelina0/EarthI-Internship-Earth-Observation-Project)
 
-- **Optimisation & Parameter Inference**  
-  During my undergraduate studies I worked on optimisation-based parameter inference: simulating a simple **[Hawkes process](https://en.wikipedia.org/wiki/Hawkes_process)** and then estimating its parameters using the **[Expectation–Maximisation (EM) algorithm](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)**.
+- **MSc thesis (Imperial): network time series**  
+  Tested the **[Generalised Network Autoregressive (GNAR) model](https://cran.r-project.org/web/packages/GNAR/index.html)** on a network of macroeconomic variables to forecast inflation, in R. [Code](https://github.com/Ivelina0/MSc-Imperial-Courseworks)
 
-- **Macroeconomic Time-Series Modelling**  
-  For my MSc project I tested the **[Generalised Network Autoregressive (GNAR) time series model](https://cran.r-project.org/web/packages/GNAR/index.html)** on a network of interacting macroeconomic variables. The goal was to model relationships between different nodes in the network and use these dynamics to forecast inflation rates. 
+- **MSc coursework: particle filtering for stochastic volatility**  
+  [Notebook](https://github.com/Ivelina0/MSc-Imperial-Courseworks/blob/main/ASM_CW_code.ipynb). This is where I met the **curse of dimensionality**: as the state dimension grows, particle weights collapse onto a single particle (**particle degeneracy**). I’m still curious about work combining **probabilistic modelling with machine learning** to fix this.
 
 
 ---
 <div class="about-groups-box mt-3 mb-3">
   <p><strong>Groups I take part in:</strong></p>
   <ul>
-    <li><a href="https://maths4dl.ac.uk/">Math4DL</a></li>
+    <li><a href="https://maths4dl.ac.uk/">Maths4DL</a></li>
     <li><a href="https://www.qmul.ac.uk/deri/">DERI</a></li>
     <li><a href="https://www.turing.ac.uk/events/phi-ml-meets-engineering">Phi-ML meets Engineering</a></li>
     <li><a href="https://www.londonmathfinance.org.uk/">London Mathematical Finance Group</a></li>
@@ -62,11 +61,12 @@ I’m a final-year PhD student at *QMUL*, researching deep learning methods for 
 </div>
 
 
-### Leadership:
+### Leadership
+- Founded and ran the [Women in STEM Hackathon 2026](https://ivelina0.github.io/women-in-stem-hackathon/) with Piscopia: came up with the idea and projects, secured funding, and ran the two-day event. ([repo](https://github.com/Ivelina0/women-in-stem-hackathon))
 - Part of [Piscopia's](https://piscopia.co.uk/queen-mary-university-of-london-committee/) Local Committee.
 - QMUL PhD Rep since Nov 2022.
-- Led the *Laws, Limits, and Randomness* contribution to the [History of Maths QMUL](https://www.seresearch.qmul.ac.uk/content/pce/ediresources/files/History_of_Maths_QMUL_2025.pdf).
-- Various miscellaneous activities: organise Christmas dinners, social sec of rowing, helping organise the [QMUL Undergraduate Research Seminars](https://www.qmul.ac.uk/maths/undergraduate/ugresearchseminar/ugresearchseminar).
+- Contributed to the [History of Maths QMUL](https://www.seresearch.qmul.ac.uk/content/pce/schoolsedi/files/History_of_Maths_QMUL_2026.pdf): led Chapter 4, *Laws, Limits, and Randomness*, and solely wrote Chapter 7, *The Theory that would not die: Bayesian Probability*.
+- Other: organise Christmas dinners, social sec of rowing, help organise the [QMUL Undergraduate Research Seminars](https://www.qmul.ac.uk/maths/undergraduate/ugresearchseminar/ugresearchseminar).
 
 ---
 
