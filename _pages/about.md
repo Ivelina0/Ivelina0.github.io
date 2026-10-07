@@ -15,13 +15,13 @@ hide_footer: true
 Hi you! I’m **Ivelina**, but most people call me **Eve**.  
 
 <div class="about-intro-box mt-3 mb-3">
-I’m a final-year PhD student at *QMUL*, researching deep learning methods for computing arbitrage-free option prices. In particular, my work focuses on numerically approximating high-dimensional PDEs and Fourier-based pricing operators using neural networks. I am not experimenting with Black–Scholes all day, I promise! After my third-year review I spent eight months as an intern at Blue Raven AI, working on intraday trading research, and I’m now back on the PhD writing my first paper.
+I’m a final-year PhD student at Queen Mary University of London (QMUL), using deep learning to compute arbitrage-free option prices. I am not experimenting with Black–Scholes all day, I promise!
 </div>
 
 ---
 ### Research
 
-My PhD sits where stochastic modelling meets machine learning. I work with correlated, high-dimensional volatility models such as **Heston** and **Wishart processes**, where the covariance structure itself evolves over time. Pricing under these models leads to high-dimensional **PDEs** and **Fourier-based pricing operators**, which classical tools (**Monte Carlo**, **Fourier pricing**, numerical PDE solvers) struggle to scale to. So I build neural approaches instead: [Physics-Informed Neural Networks (PINNs)](https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125), [Deep Galerkin Methods (DGM)](https://arxiv.org/abs/2305.06000), and operator-learning architectures such as [DeepONets](https://arxiv.org/abs/1910.03193) and [Fourier-DeepONets](https://arxiv.org/abs/2305.17289). Underneath it all is [functional analysis](https://en.wikipedia.org/wiki/Functional_analysis), the framework for the operators and function spaces these problems live in.
+My PhD sits where stochastic modelling meets machine learning. I work with correlated, high-dimensional volatility models such as **Heston** and **Wishart processes**, where the covariance structure itself evolves over time. Pricing under these models leads to high-dimensional **PDEs** and **Fourier-based pricing operators**, which classical tools (**Monte Carlo**, **Fourier pricing**, numerical PDE solvers) struggle to scale to. So I build neural approaches instead: [Physics-Informed Neural Networks (PINNs)](https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125) and [Deep Galerkin Methods (DGM)](https://arxiv.org/abs/2305.06000). Underneath it all is [functional analysis](https://en.wikipedia.org/wiki/Functional_analysis), the framework for the operators and function spaces these problems live in.
 
 ### Industry experience
 
