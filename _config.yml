@@ -6,7 +6,7 @@ title: blank # the website title (if blank, full name will be used instead)
 first_name: Ivelina
 middle_name: 
 last_name: Mladenova
-email: ahw864@qmul.ac.uk
+email: # left blank so no email icon is shown on the site
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Ivelina (Eve) Mladenova, PhD student in Mathematics at Queen Mary University of London, working on deep learning methods for arbitrage-free option pricing, high-dimensional PDEs and stochastic volatility models.
 footer_text: ""
