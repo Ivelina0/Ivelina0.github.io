@@ -24,7 +24,7 @@ I’m a final-year PhD student at Queen Mary University of London (QMUL), using 
 My PhD sits where stochastic modelling meets machine learning. I work with correlated, high-dimensional volatility models such as **Heston** and **Wishart processes**, where the covariance structure itself evolves over time. Pricing under these models leads to high-dimensional **PDEs** and **Fourier-based pricing operators**, which classical tools (**Monte Carlo**, **Fourier pricing**, numerical PDE solvers) struggle to scale to. So I build neural approaches instead: [Physics-Informed Neural Networks (PINNs)](https://www.sciencedirect.com/science/article/abs/pii/S0021999118307125) and [Deep Galerkin Methods (DGM)](https://arxiv.org/abs/2305.06000). Underneath it all is [functional analysis](https://en.wikipedia.org/wiki/Functional_analysis), the framework for the operators and function spaces these problems live in.
 
 ### Industry experience
-<small class="text-muted">(in ML, during the PhD)</small>
+<small class="text-muted">Took an interruption from the PhD to complete the internship</small>
 
 - **Blue Raven AI** (Oct 2025 – Jun 2026: a 6-month internship, extended by 2 months)  
   Researched systematic equity trading strategies on 1-minute data (2015–2024). There was no existing infrastructure, so I built it from scratch: data pipelines (including SQL to load the data), feature engineering and a historical simulation framework, then researched and backtested strategies on top of it. *(Proprietary work, so no public code.)*
