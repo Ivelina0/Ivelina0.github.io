@@ -5,7 +5,7 @@ heading: News, Talks & Side Projects
 description: "Updates from beyond the thesis: talks I have given, events I have organised, small projects I have built, and milestones along the way."
 permalink: /news/
 nav: true
-nav_order: 4
+nav_order: 3
 ---
 
 <div class="news">
