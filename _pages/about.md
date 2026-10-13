@@ -32,7 +32,7 @@ My PhD sits where stochastic modelling meets machine learning. I work with corre
 ---
 ### Before the PhD
 
-Projects and coursework from my BSc, MSc and Earth-i internship. All written before ChatGPT existed: just me, the documentation and a lot of forum threads, and I enjoyed every bit of it.
+Projects and coursework from my BSc, MSc and Earth-i internship. All written before ChatGPT existed: just me, the documentation and a lot of StackOverflow, and I enjoyed every bit of it.
 
 - **MSc thesis (Imperial): network time series**  
   Tested the **[Generalised Network Autoregressive (GNAR) model](https://cran.r-project.org/web/packages/GNAR/index.html)** on a network of macroeconomic variables to forecast inflation, in R. [Code](https://github.com/Ivelina0/MSc-Imperial-Courseworks)
