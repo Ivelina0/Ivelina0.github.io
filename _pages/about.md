@@ -27,7 +27,7 @@ My PhD sits where stochastic modelling meets machine learning. I work with corre
 <small class="text-muted">Took an interruption from the PhD to complete the internship</small>
 
 - **Blue Raven AI** (Oct 2025 – Jun 2026: a 6-month internship, extended by 2 months)  
-  Researched systematic equity trading strategies on 1-minute data (2015–2024). There was no existing infrastructure, so I built it from scratch: data pipelines (including SQL to load the data), feature engineering and a historical simulation framework, then researched and backtested strategies on top of it. *(Proprietary work, so no public code.)*
+  Researched systematic equity trading strategies on 1-minute data (2015–2024). There was no existing infrastructure, so I built it from scratch: data pipelines (including SQL to load the data), feature engineering and a historical simulation framework, then researched and backtested strategies on top of it.
 
 ---
 ### Before the PhD
