@@ -2,12 +2,10 @@
 layout: page
 title: Puzzles
 permalink: /puzzles/
-description: Write-ups of logic puzzles I've solved, and how I approached them.
+description: In-progress writeups of puzzles and whatnots for fun.
 nav: true
 nav_order: 7
 ---
-
-I enjoy logic puzzles, and these are my write-ups of the ones I've worked through. I add more whenever I get the time.
 
 {% assign puzzles = site.puzzles | sort: "date" | reverse %}
 {% for puzzle in puzzles %}
