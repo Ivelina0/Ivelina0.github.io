@@ -170,6 +170,11 @@ collections:
   projects:
     output: true
     permalink: /projects/:path/
+  puzzles:
+    defaults:
+      layout: page
+    output: true
+    permalink: /puzzles/:path/
 
 news:
   enabled: true

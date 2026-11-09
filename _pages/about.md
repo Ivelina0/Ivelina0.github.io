@@ -82,3 +82,8 @@ Projects and coursework from my BSc, MSc and Earth-i internship. All written bef
   <a class="cv-download-link" href="{{ '/assets/pdf/2nd_year_Poster.pdf' | relative_url }}" target="_blank" rel="noopener">2nd Year Poster (PDF)</a>
 </div>
 
+<div class="cv-download-box mt-3">
+  <strong>View My Third Year Review</strong> —
+  <a class="cv-download-link" href="{{ '/assets/pdf/Third_Year_Review_24thSept_2025.pdf' | relative_url }}" target="_blank" rel="noopener">Third Year Review, 24 Sept 2025 (PDF)</a>
+</div>
+
